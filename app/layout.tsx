@@ -21,15 +21,16 @@ export default function RootLayout({ children }: Props) {
         <body>
             <section className="container mx-auto relative min-h-screen flex content-between justify-between flex-col">
             <Nav />
-            <main className="prose lg:prose-xl max-w-none px-4">{children}</main>
+            <main className="max-w-none px-4">{children}</main>
 
-            <aside className="prose fixed p-3 bottom-0 right-0 bg-white">
+            <aside className="prose fixed p-3 top-0 left-0 bg-white">
               <RollList/>
             </aside>
 
-            <footer className="prose lg:prose-xl max-w-none px-4">
+            <aside className="max-w-none px-4 fixed bottom-0 left-0">
             <Roll />
-            </footer>
+            </aside>
+            <footer className="max-w-none px-4"></footer>
           </section>
         </body>
       </html>
