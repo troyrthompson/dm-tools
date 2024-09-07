@@ -12,6 +12,8 @@ import type { Roller, RollerType } from "@/lib/features/rollers/rollersSlice";
 import { InputRoller } from "../rollers/InputRoller";
 import { ButtonRoller } from "../rollers/ButtonRoller";
 
+import { Button } from "../elements/Button";
+
 let rollerId = -1;
 
 export const Rollers = () => {
@@ -70,7 +72,7 @@ export const Rollers = () => {
         const updatedFormData = {
             type: roller.type,
             name: roller.name,
-            buttonText: 'Edit Roller',
+            buttonText: 'Update Roller',
             quantity: roller.dice.quantity,
             sides: roller.dice.sides,
             modifier: roller.dice.modifier
@@ -92,63 +94,64 @@ export const Rollers = () => {
 
     return (
         <>
-            <h1>Rollers</h1>
-                <form onSubmit={e => { e.preventDefault(); handleSubmit()}}>
-                    <div>
+                <form className="flex flex-wrap justify-center" onSubmit={e => { e.preventDefault(); handleSubmit()}}>
+                    <div className="mx-2 mb-4">
                         <label htmlFor="type">Type</label>
-                        <select onChange={handleChange} name="type" id="rollerType" value={formData.type}>
+                        <select className="mx-2 w-42 text-sm h-6 pl-1 border border-gray-300" onChange={handleChange} name="type" id="rollerType" value={formData.type}>
                             <option value="input">Input</option>
                             <option value="button">Button</option>
                         </select>
                     </div>
-                    <div>
+                    <div className="mx-2 mb-4">
                         <label htmlFor="name">Name</label>
-                        <input onChange={handleChange} type="text" name="name" value={formData.name} />
+                        <input className="mx-2 w-42 text-sm h-6 pl-1 py-1 border border-gray-300" onChange={handleChange} type="text" name="name" value={formData.name} />
                     </div>
-                    <div>
+                    <div className="mx-2 mb-4">
                         <label htmlFor="quantity">Dice</label>
-                        <input onChange={handleChange} type="number" name="quantity" value={formData.quantity} />
+                        <input className="mx-2 w-12 text-sm h-6 pl-1 py-1 border border-gray-300" onChange={handleChange} type="number" name="quantity" value={formData.quantity} />
                     </div>
-                    <div>
+                    <div className="mx-2 mb-4">
                         <label htmlFor="sides">Sides</label>
-                        <input onChange={handleChange} type="number" name="sides" value={formData.sides} />
+                        <input className="mx-2 w-12 text-sm h-6 pl-1 py-1 border border-gray-300" onChange={handleChange} type="number" name="sides" value={formData.sides} />
                     </div>
-                    <div>
+                    <div className="mx-2 mb-4">
                         <label htmlFor="modifier">Modifier</label>
-                        <input onChange={handleChange} type="number" name="modifier" value={formData.modifier} />
+                        <input className="mx-2 w-12 text-sm h-6 pl-1 py-1 border border-gray-300" onChange={handleChange} type="number" name="modifier" value={formData.modifier} />
                     </div>
-                    <div className="flex-2">
-                        <button type="submit">{formData.buttonText}</button>
+                    <div className="mx-2 mb-4">
+                        <Button text={formData.buttonText}></Button>
                     </div>
                 </form>
 
             <hr/>
             {editRoller ? (
-                <>
-                    <button onClick={() => {deleteCurrentRoller()}}>Delete Roller</button>
-                    <button onClick={() => {stopEditing()}}>Stop Editing Roller</button>
-                </>
+                <div class="flex flex-wrap justify-center mt-10">
+                    <div onClick={() => {deleteCurrentRoller()}}><Button text="Delete Roller"></Button></div>
+                    <div onClick={() => {stopEditing()}}><Button text="Stop Editing Roller"></Button></div>
+                </div>
             ) : (
                 <>
-                <h1>Rollers</h1>
-                {rollers.map((roller, index) => {
-                    return (
-                        <div key={index}>
-                            {roller.type === 'button' ? (
-                                <>
-                                    <ButtonRoller roller={roller} index={index}/>
-                                    <button onClick={() => {startEditing(index)}}>Edit Roller</button>
-                                </>
-                            ) : (
-                                <>
-                                    <InputRoller roller={roller} index={index}/>
-                                    <button onClick={() => {startEditing(index)}}>Edit Roller</button>
-                                </>
-                            )}
-                        </div>
-                    )
-                    })
-                }
+                <div className="flex flex-wrap justify-center mt-10">
+                
+                    {rollers.map((roller, index) => {
+                        return (
+                            <div key={index}>
+                                {roller.type === 'button' ? (
+                                    <>
+                                        <ButtonRoller roller={roller} index={index}/>
+                                        <button className="text-center w-full" onClick={() => {startEditing(index)}}>Edit</button>
+                                    </>
+                                ) : (
+                                    <>
+                                        <InputRoller roller={roller} index={index}/>
+                                        <button className="text-center w-full" onClick={() => {startEditing(index)}}>Edit</button>
+                                    </>
+                                )}
+                            </div>
+                        )
+                        })
+                    }
+                </div>
                 </>
             )}
             
