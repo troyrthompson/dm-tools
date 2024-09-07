@@ -46,7 +46,7 @@ export const RollList = () => {
         {rolls.map((roll, index) => {
             return (
                 <>
-                    <div className="leading-none">{roll.name}</div>
+                    <div className="leading-none italic">{roll.name}</div>
                     <div className="leading-none" key={index}><span className="font-bold">{roll.total}</span> : {outputQuantity(roll.quantity)}d{roll.sides} {outputModifier(roll.modifier)} {outputEachDieResult(roll.results)}</div>
                 </>
             )
