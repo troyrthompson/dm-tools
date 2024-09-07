@@ -6,6 +6,7 @@ import { Nav } from "./components/Nav";
 import { RollList } from "./components/dice/RollList";
 
 import "./styles/globals.css";
+import { Roll } from "./components/dice/Roll";
 import styles from "./styles/layout.module.css";
 
 interface Props {
@@ -27,7 +28,7 @@ export default function RootLayout({ children }: Props) {
             </aside>
 
             <footer className="prose lg:prose-xl max-w-none px-4">
-              
+            <Roll />
             </footer>
           </section>
         </body>
