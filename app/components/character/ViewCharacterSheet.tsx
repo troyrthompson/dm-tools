@@ -1,9 +1,12 @@
 'use client';
 
+import Link from 'next/link';
+
 import { recordDiceRoll, rollDice } from '@/lib/features/dice/diceSlice';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 
 import type { Dice } from '@/lib/features/dice/diceSlice';
+import { Button } from '../elements/Button';
 
 const skills = [
     ['Acrobatics', 'dexterity'],
@@ -94,26 +97,29 @@ export const ViewCharacterSheet = ({ character }) => {
 
   return (
     <>
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4 justify-center">
             <div className="p-8 rounded-xl shadow-lg">
-                <h2 className="mt-0">General</h2>
+                
+                <h2 className="text-2xl mb-2 mt-0">General</h2>
                 {Object.entries(character.general).map((data: any, i: number) => {
                     return (
                     <div key={`${i}-general`}>{getCapitalizedString(data[0])}: <span className="font-bold">{getCapitalizedString(data[1])}</span></div>
                     )
                 })}
+                <Link className="font-bold block mt-2" href={`/character/edit/?id=${character.id}`}><Button text='Edit Character'></Button></Link>
             </div>
             <div className="p-8 rounded-xl shadow-lg">
-                <h2 className="mt-0">Ability Scores</h2>
+                <h2 className="text-2xl mb-2 mt-0">Ability Scores</h2>
                 {Object.entries(character.abilityScores).map((data: any, i: number) => {
                     return (
-                        <div key={`${i}-ability-score`}><button className="text-white bg-gradient-to-r w-12 from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-2 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-small rounded-xl text-sm px-3 py-1 text-center me-1 mb-1" onClick={() => handleAbilityScoreClick(data)}>{getAbilityScoreModifierString(data[1])}</button> {getCapitalizedString(data[0])}: <span className="font-bold">{data[1]}</span></div>
+                        <div className="flex justify-between" key={`${i}-ability-score`}><button className="text-white bg-gradient-to-r w-12 from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-2 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-small rounded-xl text-sm px-3 py-1 text-center me-1 mb-1" onClick={() => handleAbilityScoreClick(data)}>{getAbilityScoreModifierString(data[1])}</button> <span className="px-4">{getCapitalizedString(data[0])}</span> <span className="font-bold">{data[1]}</span></div>
                     )
                 })}
             </div>
         </div>
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4 justify-center">
             <div className="p-8 rounded-xl shadow-lg">
+                <h2 className="text-2xl mb-2 mt-0">Skills</h2>
                 {buildSkillList()}
             </div>
         </div>
