@@ -6,29 +6,29 @@ import {
     selectCharacters,
 } from "@/lib/features/characters/charactersSlice";
 
+import { CharacterCard } from "./CharacterCard";
+
+import { Button } from "../elements/Button";
+
 import { useAppSelector } from "@/lib/hooks";
-// import styles from "./Counter.module.css";
 
 export const Characters = () => {
   const characters = useAppSelector(selectCharacters);
 
   return (
-    <div>
-        <ul>
+    <>
+        <div className="flex flex-wrap gap-2 justify-center">
             {characters.map((character) => {
                 return (
-                    <Link
-                        href={`./character/?id=${character.id}`}
-                        key={character.id}
-                    >
-                        <li>{character.general.name}, {character.general.race}, {character.general.class}</li>
-                    </Link>
+                    <CharacterCard linkUrl={`./character/?id=${character.id}`} key={character.id} name={character.general.name} race={character.general.race} characterClass={character.general.class} />
                 )
             })}
-        </ul>
-        <Link href="/character/add">
-            <button>Add Character</button>
-        </Link>
-    </div>
+        </div>
+        <div className="flex flex-wrap gap-2 justify-center mt-6 button">
+            <Link href="/character/add">
+                <Button text="Add Character" />
+            </Link>
+        </div>
+    </>
   );
 };
