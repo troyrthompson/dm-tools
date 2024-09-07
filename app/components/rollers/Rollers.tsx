@@ -9,13 +9,8 @@ import type { Dice } from "@/lib/features/dice/diceSlice";
 
 import type { Roller, RollerType } from "@/lib/features/rollers/rollersSlice";
 
-import { InputRoller } from "../rollers/inputRoller";
+import { InputRoller } from "../rollers/InputRoller";
 import { ButtonRoller } from "../rollers/ButtonRoller";
-
-import { RollList } from "../dice/RollList";
-
-import { HeadingOne } from "../typography";
-import Head from "next/head";
 
 let rollerId = -1;
 
@@ -38,7 +33,8 @@ export const Rollers = () => {
         const dice: Dice = {
             quantity: formData.quantity,
             sides: formData.sides,
-            modifier: formData.modifier
+            modifier: formData.modifier,
+            name: formData.name
         }
 
         const roller: Roller = {
@@ -86,7 +82,6 @@ export const Rollers = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prevData => {
-            console.log(prevData);
             const newData = {
                 ...prevData,
                 [name]: value
@@ -145,7 +140,10 @@ export const Rollers = () => {
                                     <button onClick={() => {startEditing(index)}}>Edit Roller</button>
                                 </>
                             ) : (
-                                <InputRoller roller={roller} index={index}/>
+                                <>
+                                    <InputRoller roller={roller} index={index}/>
+                                    <button onClick={() => {startEditing(index)}}>Edit Roller</button>
+                                </>
                             )}
                         </div>
                     )

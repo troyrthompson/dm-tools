@@ -9,6 +9,7 @@ export type Dice = {
   quantity: number;
   sides: number;
   modifier: number;
+  name?: string;
 };
 
 export type DiceRoll = {
@@ -17,6 +18,7 @@ export type DiceRoll = {
   modifier: number;
   results: Array<number>;
   total: number;
+  name?: string;
 };
 
 let initialState: DiceSlice = {
@@ -38,6 +40,7 @@ export function rollDice(dice: Dice): DiceRoll {
     modifier: dice.modifier,
     results: resultsArray,
     total: total + dice.modifier,
+    name: dice.name,
   }
 
   return diceRoll;

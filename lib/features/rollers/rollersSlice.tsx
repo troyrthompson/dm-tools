@@ -21,7 +21,7 @@ let initialState: RollersSlice = {
     rollers: [
         {
           id: 0,
-            name: 'input1',
+          name: 'input1',
           type: 'input',
           dice: {
               quantity: 1,

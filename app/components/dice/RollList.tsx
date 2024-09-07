@@ -8,6 +8,8 @@ export const RollList = () => {
 
     const rolls = useAppSelector(selectRollHistory).slice(-5);
 
+    console.log(rolls);
+
     function outputModifier(modifier: number) {
         if (modifier === 0) {
             return "";
@@ -40,12 +42,15 @@ export const RollList = () => {
     }
 
   return (
-    <ul>
+    <>
         {rolls.map((roll, index) => {
             return (
-                <li key={index}><span className="font-bold">{roll.total}</span> : {outputQuantity(roll.quantity)}d{roll.sides} {outputModifier(roll.modifier)} {outputEachDieResult(roll.results)}</li>
+                <>
+                    <div className="leading-none">{roll.name}</div>
+                    <div className="leading-none" key={index}><span className="font-bold">{roll.total}</span> : {outputQuantity(roll.quantity)}d{roll.sides} {outputModifier(roll.modifier)} {outputEachDieResult(roll.results)}</div>
+                </>
             )
         })}
-    </ul>
+    </>
   );
 };

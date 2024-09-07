@@ -1,0 +1,17 @@
+.input-roller-form {
+    position: relative;
+}
+.input-roller-form:hover .input-roller-input-container {
+    display: block;
+}
+
+.input-roller-input-container {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+}
+
+.input-roller-input-container input {
+    display: block;
+}
