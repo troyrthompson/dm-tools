@@ -2,11 +2,16 @@ import { createAppSlice } from "@/lib/createAppSlice";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { mergePreferences, loadPreferences } from "@/lib/persist";
 
+export type Skill = 'Acrobatics' | 'Animal Handling' | 'Arcana' | 'Athletics' | 'Deception' | 'History' | 'Insight' | 'Intimidation' | 'Investigation' | 'Medicine' | 'Nature' | 'Perception' | 'Performance' | 'Persuasion' | 'Religion' | 'Sleight of Hand' | 'Stealth' | 'Survival';
+
 export type CharacterGeneralAttributes = {
     name: string,
     race: string,
     class: string,
+    level: number
 }
+
+export type Skills = Array<Skill>;
 
 export type CharacterAbilityScoresAttributes = {
   strength: number,
@@ -20,8 +25,30 @@ export type CharacterAbilityScoresAttributes = {
 export type Character = {
   id: number,
   general: CharacterGeneralAttributes,
-  abilityScores: CharacterAbilityScoresAttributes
+  abilityScores: CharacterAbilityScoresAttributes,
+  skillProficiencies: Skills,
 };
+
+export const skillList = [
+  'Acrobatics',
+  'Animal Handling',
+  'Arcana',
+  'Athletics',
+  'Deception',
+  'History',
+  'Insight',
+  'Intimidation',
+  'Investigation',
+  'Medicine',
+  'Nature',
+  'Perception',
+  'Performance',
+  'Persuasion',
+  'Religion',
+  'Sleight of Hand',
+  'Stealth',
+  'Survival'
+];
 
 export const defaultCharacter: Character = {
   id: 0,
@@ -29,6 +56,7 @@ export const defaultCharacter: Character = {
     name: 'new name',
     race: 'human',
     class: 'barbarian',
+    level: 1
   },
   abilityScores: {
     strength: 10,
@@ -37,7 +65,11 @@ export const defaultCharacter: Character = {
     intelligence: 10,
     wisdom: 10,
     charisma: 10
-  }
+  },
+  skillProficiencies: [
+    'Acrobatics',
+    'Survival'
+  ],
 };
 
 export function parseCharacterProperties(character: Character) {

@@ -7,6 +7,7 @@ export const defaultCharacters: CharactersSlice = {
             name: 'John',
             race: 'human',
             class: 'warrior',
+            level: 1
         },
         abilityScores: {
             strength: 10,
@@ -15,13 +16,18 @@ export const defaultCharacters: CharactersSlice = {
             intelligence: 16,
             wisdom: 18,
             charisma: 20
-        }
+        },
+        skillProficiencies: [
+            'Acrobatics',
+            'Survival'
+        ]
     },{
         id: 2,
         general: {
             name: 'Jane',
             race: 'elf',
             class: 'mage',
+            level: 2
         },
         abilityScores: {
             strength: 10,
@@ -30,6 +36,10 @@ export const defaultCharacters: CharactersSlice = {
             intelligence: 16,
             wisdom: 18,
             charisma: 20
-        }
+        },
+        skillProficiencies: [
+            'Acrobatics',
+            'Survival'
+        ]
     }],
 };

@@ -38,7 +38,6 @@ export const Char = () => {
     <>
         <ViewCharacterSheet character={character} />
         <Link href={`/character/edit/?id=${characterId}`}>Edit Character</Link>
-        <Roll />
     </>
   );
 };
