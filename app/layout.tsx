@@ -18,9 +18,8 @@ export default function RootLayout({ children }: Props) {
       <html lang="en">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <body>
-          <section className="container mx-auto relative">
+            <section className="container mx-auto relative min-h-screen flex content-between justify-between flex-col">
             <Nav />
-
             <main className="prose lg:prose-xl max-w-none px-4">{children}</main>
 
             <aside className="prose fixed p-3 bottom-0 right-0 bg-white">
