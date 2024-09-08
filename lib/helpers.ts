@@ -1,5 +1,5 @@
-export function getInputValue(input: HTMLInputElement) {
-    if (!input.value) {
+export function getInputValue(input: HTMLInputElement | null) {
+    if (!input || !input.value) {
       return '';
     }
 
