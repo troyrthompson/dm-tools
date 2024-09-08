@@ -37,7 +37,6 @@ export const EditCharacterSheet = ({ characterDataArr, inputRefs }: CharacterShe
                 <div className="flex flex-col">
                     <h2 className="text-2xl mb-2 mt-0">{character[0]}</h2>
                     {character[1].map((data: any, i: number) => {
-                        console.log(character[0],data);
                         return ( 
                             createInput(character[0], data, i)
                         )
