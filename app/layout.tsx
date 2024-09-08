@@ -18,13 +18,13 @@ export default function RootLayout({ children }: Props) {
       <html lang="en">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <body>
-            <aside className="sm:fixed text-center sm:text-left p-3 top-0 left-0 bg-white rounded-xl shadow-lg mb-4">
+            <aside className="z-10 sm:fixed text-center sm:text-left p-3 top-0 left-0 bg-white rounded-xl shadow-lg mb-4">
               <RollList/>
             </aside>
-            <aside className="sm:fixed max-w-none px-4 bottom-0 left-0">
+            <aside className="z-10 sm:fixed max-w-none px-4 bottom-0 left-0">
               <Roll />
             </aside>
-            <section className="container mx-auto relative min-h-screen flex content-between justify-between flex-col">
+            <section className="z-0 container mx-auto relative min-h-screen flex content-between justify-between flex-col">
             <Nav />
             <main className="max-w-none px-4">{children}</main>
             <footer className="max-w-none px-4"></footer>
