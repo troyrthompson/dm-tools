@@ -1,0 +1,14 @@
+.roller-edit-container:hover .roller-edit-buttons-container {
+    display: flex;
+}
+
+.roller-edit-buttons-container {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+
+.roller-edit-buttons-container input {
+    display: block;
+}

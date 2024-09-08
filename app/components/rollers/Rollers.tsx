@@ -13,6 +13,9 @@ import { InputRoller } from "../rollers/InputRoller";
 import { ButtonRoller } from "../rollers/ButtonRoller";
 
 import { Button } from "../elements/Button";
+import { SmallButton } from "../elements/SmallButton";
+
+import './edit-rollers.css';
 
 let rollerId = -1;
 
@@ -108,38 +111,44 @@ export const Rollers = () => {
 
     return (
         <>
-                <form className="flex flex-wrap justify-center" onSubmit={e => { e.preventDefault(); handleSubmit()}}>
-                    <div className="mx-2 mb-4">
-                        <label htmlFor="type">Type</label>
-                        <select className="mx-2 w-42 text-sm h-6 pl-1 border border-gray-300" onChange={handleChange} name="type" id="rollerType" value={formData.type}>
+            <div className="flex flex-wrap justify-center">
+                <form className="flex flex-col flex-wrap justify-center" onSubmit={e => { e.preventDefault(); handleSubmit()}}>
+                    <div className="mb-1">
+                        <label className="block text-md font-bold mb-2" htmlFor="name">Name</label>
+                        <input className="w-52 appearance-none block bg-gray-100 text-gray-700 border border-gray-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" onChange={handleChange} type="text" name="name" value={formData.name} />
+                    </div>
+                    <div className="flex mb-1">
+                        <div className="mr-4">
+                        <label className="block text-md font-bold mb-2" htmlFor="type">Type</label>
+                        <select className="w-24 appearance-none block bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-whiteappearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500appearance-none block bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" onChange={handleChange} name="type" id="rollerType" value={formData.type}>
                             <option value="input">Input</option>
                             <option value="button">Button</option>
                         </select>
+                        </div>
+                        <div>
+                        <label className="block text-md font-bold mb-2" htmlFor="quantity">Dice</label>
+                        <input className="w-24 appearance-none block bg-gray-100 text-gray-700 border border-gray-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" onChange={handleChange} type="number" name="quantity" value={formData.quantity} />
+                        </div>
                     </div>
-                    <div className="mx-2 mb-4">
-                        <label htmlFor="name">Name</label>
-                        <input className="mx-2 w-42 text-sm h-6 pl-1 py-1 border border-gray-300" onChange={handleChange} type="text" name="name" value={formData.name} />
+
+                    <div className="flex mb-1">
+                        <div className="mr-4">
+                            <label className="block text-md font-bold mb-2" htmlFor="sides">Sides</label>
+                            <input className="w-24 appearance-none block bg-gray-100 text-gray-700 border border-gray-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" onChange={handleChange} type="number" name="sides" value={formData.sides} />
+                        </div>
+                        <div className="mb-1">
+                            <label className="block text-md font-bold mb-2" htmlFor="modifier">Modifier</label>
+                            <input className="w-24 appearance-none block bg-gray-100 text-gray-700 border border-gray-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" onChange={handleChange} type="number" name="modifier" value={formData.modifier} />
+                        </div>
                     </div>
-                    <div className="mx-2 mb-4">
-                        <label htmlFor="quantity">Dice</label>
-                        <input className="mx-2 w-12 text-sm h-6 pl-1 py-1 border border-gray-300" onChange={handleChange} type="number" name="quantity" value={formData.quantity} />
-                    </div>
-                    <div className="mx-2 mb-4">
-                        <label htmlFor="sides">Sides</label>
-                        <input className="mx-2 w-12 text-sm h-6 pl-1 py-1 border border-gray-300" onChange={handleChange} type="number" name="sides" value={formData.sides} />
-                    </div>
-                    <div className="mx-2 mb-4">
-                        <label htmlFor="modifier">Modifier</label>
-                        <input className="mx-2 w-12 text-sm h-6 pl-1 py-1 border border-gray-300" onChange={handleChange} type="number" name="modifier" value={formData.modifier} />
-                    </div>
-                    <div className="mx-2 mb-4">
+                    <div className="flex justify-center mb-1">
                         <Button text={formData.buttonText} color="green"></Button>
                     </div>
                 </form>
+            </div>
 
-            <hr/>
             {editRoller ? (
-                <div class="flex flex-wrap justify-center mt-10">
+                <div className="flex flex-wrap justify-center mt-10">
                     <div onClick={() => {deleteCurrentRoller()}}><Button text="Delete Roller" color="red"></Button></div>
                     <div onClick={() => {stopEditing()}}><Button text="Stop Editing Roller" color="purple"></Button></div>
                 </div>
@@ -149,7 +158,7 @@ export const Rollers = () => {
                 
                     {rollers.map((roller, index) => {
                         return (
-                            <div key={index}>
+                            <div className="relative roller-edit-container" key={index}>
                                 {roller.type === 'button' ? (
                                     <>
                                         <ButtonRoller roller={roller} index={index}/>
@@ -159,9 +168,11 @@ export const Rollers = () => {
                                         <InputRoller roller={roller} index={index}/>
                                     </>
                                 )}
-                                 <div className="text-center w-full" onClick={() => {startEditing(index)}}><Button text="Edit" color="purple"></Button></div>
-                                 <div className="text-center w-full" onClick={() => {shiftRollerFront(index)}}><Button text="<" color="purple"></Button></div>
-                                 <div className="text-center w-full" onClick={() => {shiftRollerBack(index)}}><Button text=">" color="purple"></Button></div>
+                                <div className="flex fixed roller-edit-buttons-container">
+                                    <div className="text-center w-full" onClick={() => {shiftRollerFront(index)}}><SmallButton text="<" color="purple" /></div>
+                                    <div className="text-center w-full" onClick={() => {startEditing(index)}}><SmallButton text="Edit" color="purple" /></div>
+                                    <div className="text-center w-full" onClick={() => {shiftRollerBack(index)}}><SmallButton text=">" color="purple" /></div>
+                                </div>
                             </div>
                         )
                         })
