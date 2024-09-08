@@ -52,7 +52,6 @@ export const ViewCharacterSheet = ({ character }) => {
         if (parseInt(str)) {
             return str;
         }
-        console.log(str);
         return str[0].toUpperCase() + str.slice(1);
     }
     
