@@ -2,7 +2,7 @@
 
 type CharacterSheetProps = {
     characterDataArr: any[];
-    inputRefs: React.MutableRefObject<(HTMLInputElement | null)[]>;
+    inputRefs: React.MutableRefObject<(HTMLInputElement | HTMLSelectElement | null)[]>;
 };
 
 import { skillList } from "@/lib/features/characters/charactersSlice";
@@ -43,22 +43,23 @@ export const EditCharacterSheet = ({ characterDataArr, inputRefs }: CharacterShe
             )
         }
     }
-  return (
-    <div className="flex flex-wrap gap-4 justify-center">
-        {characterDataArr.map((character, index) => {
-            return (
-            <div className="p-8 rounded-xl shadow-lg" key={index}>
-                <div className="flex flex-col">
-                    <h2 className="text-2xl mb-2 mt-0">{character[0]}</h2>
-                    {character[1].map((data: any, i: number) => {
-                        return ( 
-                            createInput(character[0], data, i)
-                        )
-                    })}
+
+    return (
+        <div className="flex flex-wrap gap-4 justify-center">
+            {characterDataArr.map((character, index) => {
+                return (
+                <div className="p-8 rounded-xl shadow-lg" key={index}>
+                    <div className="flex flex-col">
+                        <h2 className="text-2xl mb-2 mt-0">{character[0]}</h2>
+                        {character[1].map((data: any, i: number) => {
+                            return ( 
+                                createInput(character[0], data, i)
+                            )
+                        })}
+                    </div>
                 </div>
-            </div>
-            );
-        })}
-    </div>
-  );
+                );
+            })}
+        </div>
+    );
 };
