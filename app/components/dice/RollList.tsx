@@ -8,8 +8,6 @@ export const RollList = () => {
 
     const rolls = useAppSelector(selectRollHistory).slice(-5);
 
-    console.log(rolls);
-
     function outputModifier(modifier: number) {
         if (modifier === 0) {
             return "";
@@ -26,11 +24,17 @@ export const RollList = () => {
             return "";
         }
         
-        return results.map((result, i) => {
-            return (
-                <span className="font-italic" key={i} className="die-result">{i > 0 && ", "}{result}</span>
-            )
-        })
+        return (
+            <>
+            <span>(</span>
+                {results.map((result, i) => {
+                    return (
+                        <span className="font-italic" key={i}>{i > 0 && ", "}{result}</span>
+                    )
+                })}
+            <span>)</span>
+            </>
+     )
     }
 
     function outputQuantity(quantity: number) {
@@ -41,15 +45,28 @@ export const RollList = () => {
         }
     }
 
-  return (
-    <>
-        {rolls.map((roll, index) => {
+    const outputRoll = (rolls, roll, index) => {
+        if (rolls.length - 1 === index) {
             return (
                 <>
                     <div className="leading-none italic">{roll.name}</div>
-                    <div className="leading-none" key={index}><span className="font-bold">{roll.total}</span> : {outputQuantity(roll.quantity)}d{roll.sides} {outputModifier(roll.modifier)} {outputEachDieResult(roll.results)}</div>
+                    <div className="leading-none text-3xl" key={index}><span className="font-bold">{roll.total}</span> : {outputQuantity(roll.quantity)}d{roll.sides} {outputModifier(roll.modifier)} {outputEachDieResult(roll.results)}</div>
                 </>
             )
+        }
+
+        return (
+            <>
+                <div className="leading-none italic">{roll.name}</div>
+                <div className="leading-none" key={index}><span className="font-bold">{roll.total}</span> : {outputQuantity(roll.quantity)}d{roll.sides} {outputModifier(roll.modifier)} {outputEachDieResult(roll.results)}</div>
+            </>
+        )
+    };
+
+  return (
+    <>
+        {rolls.map((roll, index) => {
+            return outputRoll(rolls, roll, index);
         })}
     </>
   );
