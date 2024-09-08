@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { selectRollers, addRollers, updateRoller, deleteRoller, getNextRollerId } from "@/lib/features/rollers/rollersSlice";
+import { selectRollers, addRollers, updateRoller, deleteRoller, getNextRollerId, moveRoller } from "@/lib/features/rollers/rollersSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 
 import type { Dice } from "@/lib/features/dice/diceSlice";
@@ -92,6 +92,20 @@ export const Rollers = () => {
         });
     };
 
+    const shiftRollerFront = (index) => {
+        if (index === 0) {
+            return;
+        }
+        dispatch(moveRoller({fromIndex: index, toIndex: index - 1}));
+    };
+
+    const shiftRollerBack = (index) => {
+        if (index === rollers.length - 1) {
+            return;
+        }
+        dispatch(moveRoller({fromIndex: index, toIndex: index + 1}));
+    };
+
     return (
         <>
                 <form className="flex flex-wrap justify-center" onSubmit={e => { e.preventDefault(); handleSubmit()}}>
@@ -119,15 +133,15 @@ export const Rollers = () => {
                         <input className="mx-2 w-12 text-sm h-6 pl-1 py-1 border border-gray-300" onChange={handleChange} type="number" name="modifier" value={formData.modifier} />
                     </div>
                     <div className="mx-2 mb-4">
-                        <Button text={formData.buttonText}></Button>
+                        <Button text={formData.buttonText} color="green"></Button>
                     </div>
                 </form>
 
             <hr/>
             {editRoller ? (
                 <div class="flex flex-wrap justify-center mt-10">
-                    <div onClick={() => {deleteCurrentRoller()}}><Button text="Delete Roller"></Button></div>
-                    <div onClick={() => {stopEditing()}}><Button text="Stop Editing Roller"></Button></div>
+                    <div onClick={() => {deleteCurrentRoller()}}><Button text="Delete Roller" color="red"></Button></div>
+                    <div onClick={() => {stopEditing()}}><Button text="Stop Editing Roller" color="purple"></Button></div>
                 </div>
             ) : (
                 <>
@@ -139,14 +153,15 @@ export const Rollers = () => {
                                 {roller.type === 'button' ? (
                                     <>
                                         <ButtonRoller roller={roller} index={index}/>
-                                        <button className="text-center w-full" onClick={() => {startEditing(index)}}>Edit</button>
                                     </>
                                 ) : (
                                     <>
                                         <InputRoller roller={roller} index={index}/>
-                                        <button className="text-center w-full" onClick={() => {startEditing(index)}}>Edit</button>
                                     </>
                                 )}
+                                 <div className="text-center w-full" onClick={() => {startEditing(index)}}><Button text="Edit" color="purple"></Button></div>
+                                 <div className="text-center w-full" onClick={() => {shiftRollerFront(index)}}><Button text="<" color="purple"></Button></div>
+                                 <div className="text-center w-full" onClick={() => {shiftRollerBack(index)}}><Button text=">" color="purple"></Button></div>
                             </div>
                         )
                         })

@@ -100,7 +100,6 @@ export const rollersSlice = createAppSlice({
         state.rollers.push(action.payload);
     }),
     updateRoller: create.reducer((state, action: PayloadAction<Roller>) => {
-        console.log(action.payload);
         state.rollers = state.rollers.map((roller) => {
           if (roller.id === action.payload.id) {
             let updatedRoller = {
@@ -111,6 +110,13 @@ export const rollersSlice = createAppSlice({
           }
           return roller;
         });
+      }),
+      moveRoller: create.reducer((state, action: PayloadAction<{ fromIndex: number; toIndex: number }>) => {
+        const newRollers = [...state.rollers];
+        const roller = newRollers[action.payload.fromIndex];
+        newRollers.splice(action.payload.fromIndex, 1);
+        newRollers.splice(action.payload.toIndex, 0, roller);
+        state.rollers = newRollers;
       }),
       deleteRoller: create.reducer((state, action: PayloadAction<Roller>) => {
         state.rollers = state.rollers.filter((roller) => {
@@ -124,6 +130,6 @@ export const rollersSlice = createAppSlice({
   },
 });
 
-export const { addRollers, updateRoller, deleteRoller } = rollersSlice.actions;
+export const { addRollers, updateRoller, deleteRoller, moveRoller } = rollersSlice.actions;
 
 export const { selectRollers, getNextRollerId } = rollersSlice.selectors;
