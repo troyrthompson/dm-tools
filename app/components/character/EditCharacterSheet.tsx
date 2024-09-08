@@ -25,7 +25,10 @@ export const EditCharacterSheet = ({ characterDataArr, inputRefs }: CharacterShe
             )
         } else {
             return (
+                <>
+                <label for={data[0]}>{data[0]}</label>
                 <input className="text-sm h-6 pl-1 py-1 border border-gray-300 mb-1" type={inputType} key={data[0]} id={data[0]} ref={el => inputRefs.current[superIndex++] = el} defaultValue={data[1]} />
+                </>
             )
         }
     }
