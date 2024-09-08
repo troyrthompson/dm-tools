@@ -10,7 +10,7 @@ import type { Roller } from "@/lib/features/rollers/rollersSlice";
 
 import type { Dice } from "@/lib/features/dice/diceSlice";
 
-import { Button } from "../elements/Button";
+import { SmallButton } from "../elements/SmallButton";
 
 import './input-roller.css';
 
@@ -58,7 +58,7 @@ export const InputRoller = ({roller, index}) => {
             <input className="w-12 text-sm h-6 pl-1 py-1 border border-gray-300 mb-1 mx-5" type="number" name={'sides'} defaultValue={roller.dice.sides}/>
             <input className="w-12 text-sm h-6 pl-1 py-1 border border-gray-300 mb-1 mx-5" type="number" name={'modifier'} defaultValue={roller.dice.modifier}/>
         </div>
-        <Button text={`${roller.dice.quantity}d${roller.dice.sides}+${roller.dice.modifier}`} />
+        <SmallButton text={`${roller.dice.quantity}d${roller.dice.sides}+${roller.dice.modifier}`} />
     </form>
   );
 };

@@ -4,7 +4,7 @@ import { recordDiceRoll, rollDice } from "@/lib/features/dice/diceSlice";
 
 import { useAppDispatch } from "@/lib/hooks";
 
-import { Button } from "../elements/Button";
+import { SmallButton } from "../elements/SmallButton";
 
 export const ButtonRoller = ({roller, index}) => {
 
@@ -13,6 +13,6 @@ export const ButtonRoller = ({roller, index}) => {
   return (
     <div key={index} onClick={() => {
         dispatch(recordDiceRoll(rollDice(roller.dice)));
-    }}><Button text={roller.name}/></div>
+    }}><SmallButton text={roller.name}/></div>
   );
 };
