@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 
 import type { Dice } from '@/lib/features/dice/diceSlice';
 import { Button } from '../elements/Button';
+import { SmallButton } from '../elements/SmallButton';
 
 const skills = [
     ['Acrobatics', 'dexterity'],
@@ -90,7 +91,7 @@ export const ViewCharacterSheet = ({ character }) => {
             const skillRoll = getAbilityScoreModifierString(character.abilityScores[skill[1]], bonus);
             const name = skill[0];
             return (
-                <div key={i}><button className="text-white bg-gradient-to-r w-12 from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-2 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-small rounded-xl text-sm px-3 py-1 text-center me-1 mb-1" onClick={() => handleSkillClick(name, skillRollNumber)}>{skillRoll}</button> {name}</div>
+                <div key={i}><div className="inline" onClick={() => handleSkillClick(name, skillRollNumber)}><SmallButton text={skillRoll}></SmallButton></div> {name}</div>
             )
         })
     }
