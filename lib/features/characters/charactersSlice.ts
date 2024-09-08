@@ -4,6 +4,17 @@ import { mergePreferences, loadPreferences } from "@/lib/persist";
 
 export type Skill = 'Acrobatics' | 'Animal Handling' | 'Arcana' | 'Athletics' | 'Deception' | 'History' | 'Insight' | 'Intimidation' | 'Investigation' | 'Medicine' | 'Nature' | 'Perception' | 'Performance' | 'Persuasion' | 'Religion' | 'Sleight of Hand' | 'Stealth' | 'Survival';
 
+export type SavingThrow = 'Strength' | 'Dexterity' | 'Constitution' | 'Intelligence' | 'Wisdom' | 'Charisma';
+
+export const savingThrowList = [
+  'Strength',
+  'Dexterity',
+  'Constitution',
+  'Intelligence',
+  'Wisdom',
+  'Charisma'
+];
+
 export type CharacterGeneralAttributes = {
     name: string,
     race: string,
@@ -14,6 +25,8 @@ export type CharacterGeneralAttributes = {
 }
 
 export type Skills = Array<Skill>;
+
+export type SavingThrows = Array<SavingThrow>;
 
 export type CharacterAbilityScoresAttributes = {
   strength: number,
@@ -29,9 +42,10 @@ export type Character = {
   general: CharacterGeneralAttributes,
   abilityScores: CharacterAbilityScoresAttributes,
   skillProficiencies: Skills,
+  savingThrowProficiencies: SavingThrows
 };
 
-export const skillList = [
+export const skillList: Skills = [
   'Acrobatics',
   'Animal Handling',
   'Arcana',
@@ -50,6 +64,15 @@ export const skillList = [
   'Sleight of Hand',
   'Stealth',
   'Survival'
+];
+
+export const savingThrowProficienciesList: SavingThrows = [
+  'Strength',
+  'Dexterity',
+  'Constitution',
+  'Intelligence',
+  'Wisdom',
+  'Charisma'
 ];
 
 export const defaultCharacter: Character = {
@@ -74,6 +97,10 @@ export const defaultCharacter: Character = {
     'Acrobatics',
     'Survival'
   ],
+  savingThrowProficiencies: [
+    'Strength',
+    'Dexterity'
+  ]
 };
 
 export function parseCharacterProperties(character: Character) {

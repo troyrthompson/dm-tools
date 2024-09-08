@@ -6,6 +6,7 @@ type CharacterSheetProps = {
 };
 
 import { skillList } from "@/lib/features/characters/charactersSlice";
+import { savingThrowProficienciesList } from "@/lib/features/characters/charactersSlice";
 
 export const EditCharacterSheet = ({ characterDataArr, inputRefs }: CharacterSheetProps) => {
     let superIndex = 0;
@@ -23,10 +24,20 @@ export const EditCharacterSheet = ({ characterDataArr, inputRefs }: CharacterShe
                     })}
                 </select>
             )
+        } else if (type === 'savingThrowProficiencies') {
+            return (
+                <select className="text-sm h-8 pl-1 py-1 border border-gray-300 mb-1" key={data[0]} id={data[0]} ref={el => inputRefs.current[superIndex++] = el} defaultValue={data[1]}>
+                    {savingThrowProficienciesList.map((savingThrow, index) => {
+                        return (
+                            <option key={index} value={savingThrow}>{savingThrow}</option>
+                        )
+                    })}
+                </select>
+            )
         } else {
             return (
                 <>
-                <label for={data[0]}>{data[0]}</label>
+                <label htmlFor={data[0]}>{data[0]}</label>
                 <input className="text-sm h-6 pl-1 py-1 border border-gray-300 mb-1" type={inputType} key={data[0]} id={data[0]} ref={el => inputRefs.current[superIndex++] = el} defaultValue={data[1]} />
                 </>
             )

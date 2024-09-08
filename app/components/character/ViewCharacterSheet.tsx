@@ -30,6 +30,8 @@ const skills = [
     ['Survival', 'wisdom']
 ];
 
+import { savingThrowList } from '@/lib/features/characters/charactersSlice';
+
 export const ViewCharacterSheet = ({ character }) => {
     const dispatch = useAppDispatch();
 
@@ -86,6 +88,10 @@ export const ViewCharacterSheet = ({ character }) => {
     function getSkillsBonus(skill: string) {
         return character.skillProficiencies.includes(skill) ? getProficiencyBonus(character.general.level) : 0;
     }
+
+    function getSavingThrowBonus(savingThrow: string) {
+        return character.savingThrowProficiencies.includes(getCapitalizedString(savingThrow)) ? getProficiencyBonus(character.general.level) : 0;
+    }
     
     function buildSkillList() {
         return skills.map((skill, i) => {
@@ -112,16 +118,27 @@ export const ViewCharacterSheet = ({ character }) => {
                 })}
                 <Link className="font-bold block mt-2" href={`/character/edit/?id=${character.id}`}><Button text='Edit Character'></Button></Link>
             </div>
-            <div className="p-8 rounded-xl shadow-lg">
+        </div>
+        <div className="flex flex-wrap gap-4 justify-center">
+            <div>
+                <div className="p-8 rounded-xl shadow-lg">
                 <h2 className="text-2xl mb-2 mt-0">Ability Scores</h2>
                 {Object.entries(character.abilityScores).map((data: any, i: number) => {
                     return (
-                        <div className="flex justify-between" key={`${i}-ability-score`}><button className="text-white bg-gradient-to-r w-12 from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-2 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-small rounded-xl text-sm px-3 py-1 text-center me-1 mb-1" onClick={() => handleAbilityScoreClick(data)}>{getAbilityScoreModifierString(data[1])}</button> <span className="px-4">{getCapitalizedString(data[0])}</span> <span className="font-bold">{data[1]}</span></div>
+                        <div className="flex justify-between" key={`${i}-ability-score`}><div onClick={() => handleAbilityScoreClick(data)}><SmallButton text={getAbilityScoreModifierString(data[1])} /></div> <span className="px-4">{getCapitalizedString(data[0])}</span> <span className="font-bold">{data[1]}</span></div>
                     )
                 })}
+                </div>
+                <div className="p-8 rounded-xl shadow-lg">
+                <h2 className="text-2xl mb-2 mt-0">Saving Throws</h2>
+                {Object.entries(character.abilityScores).map((data: any, i: number) => {
+                    let savingThrowBonus = getSavingThrowBonus(data[0]);
+                    return (
+                        <div className="flex justify-between" key={`${i}-ability-score`}><div onClick={() => handleAbilityScoreClick(data)}><SmallButton text={getAbilityScoreModifierString(data[1], savingThrowBonus)} /></div> <span className="px-4">{getCapitalizedString(data[0])}</span></div>
+                    )
+                })}
+                </div>
             </div>
-        </div>
-        <div className="flex flex-wrap gap-4 justify-center">
             <div className="p-8 rounded-xl shadow-lg">
                 <h2 className="text-2xl mb-2 mt-0">Skills</h2>
                 {buildSkillList()}

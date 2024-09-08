@@ -22,6 +22,10 @@ export const defaultCharacters: CharactersSlice = {
         skillProficiencies: [
             'Acrobatics',
             'Survival'
+        ],
+        savingThrowProficiencies: [
+            'Strength',
+            'Dexterity'
         ]
     },{
         id: 2,
@@ -44,6 +48,10 @@ export const defaultCharacters: CharactersSlice = {
         skillProficiencies: [
             'Acrobatics',
             'Survival'
+        ], 
+        savingThrowProficiencies: [
+            'Intelligence',
+            'Wisdom'
         ]
     }],
 };
