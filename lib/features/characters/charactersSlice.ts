@@ -8,7 +8,9 @@ export type CharacterGeneralAttributes = {
     name: string,
     race: string,
     class: string,
-    level: number
+    level: number,
+    maxHitPoints: number,
+    hitPoints: number,
 }
 
 export type Skills = Array<Skill>;
@@ -56,7 +58,9 @@ export const defaultCharacter: Character = {
     name: 'new name',
     race: 'human',
     class: 'barbarian',
-    level: 1
+    level: 1,
+    maxHitPoints: 20,
+    hitPoints: 20,
   },
   abilityScores: {
     strength: 10,

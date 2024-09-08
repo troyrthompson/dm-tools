@@ -2,14 +2,28 @@
 
 import Link from "next/link";
 
-export const CharacterCard = ({linkUrl, key, name, race, characterClass}) => {
+import { updateCharacter } from "@/lib/features/characters/charactersSlice";
 
+import { useState } from "react";
+
+import { useAppDispatch } from "@/lib/hooks";
+
+export const CharacterCard = ({character}) => {
+  const dispatch = useAppDispatch();
+  const [hitPoints, setHitPoints] = useState(character.general.hitPoints);
+
+  function handleChange(e) {
+    setHitPoints(e.target.value);
+    const updatedCharacter = { ...character, general: { ...character.general, hitPoints: parseInt(e.target.value) }}
+    dispatch(updateCharacter(updatedCharacter));
+  }
   return (
-    <Link href={linkUrl} key={key} className="sm:w-1/12 w-full min-w-32 block w-full-sm bg-white border border-gray-200 rounded shadow dark:bg-gray-800 dark:border-gray-700 no-underline">
+    <div className="sm:w-1/12 w-full min-w-32 block w-full-sm bg-white border border-gray-200 rounded shadow dark:bg-gray-800 dark:border-gray-700 no-underline">
         <div className="flex flex-col items-center pb-3 pt-3">
-            <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{name}</h5>
-            <span className="text-sm text-gray-500 dark:text-gray-400">{race} {characterClass}</span>
+        <Link href={`./character/?id=${character.id}`} key={character.id}><h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{character.general.name}</h5></Link> 
+            <span className="text-sm text-gray-500 dark:text-gray-400">{character.general.race} {character.general.class}</span>
+            <span className="text-md text-gray-700 dark:text-gray-400">HP: <input className="w-12 border border-gray-200" onChange={handleChange} type="number" value={hitPoints}></input></span>
         </div>
-    </Link>    
+    </div>    
   );
 };

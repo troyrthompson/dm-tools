@@ -17,7 +17,7 @@ import type { Character } from "@/lib/features/characters/charactersSlice";
 import { EditCharacterSheet } from "./EditCharacterSheet";
 
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-// import styles from "./Counter.module.css";
+import { Button } from "../elements/Button";
 
 export const AddCharacter = () => {
   const router = useRouter();
@@ -51,13 +51,12 @@ export const AddCharacter = () => {
 
   return (
     <div>
-        <form onSubmit={e => { e.preventDefault(); handleSubmit(); }}>
+        <form className="flex flex-col justify-center align-center" onSubmit={e => { e.preventDefault(); handleSubmit(); }}>
 
           <EditCharacterSheet characterDataArr={formattedCharacterData} inputRefs={inputRefs} />
-          
-          <button type="submit"
-            aria-label="Add Character"
-          >Add Character</button>
+          <div className="flex justify-center mt-8">
+            <Button text="Add Character"></Button>
+          </div>
         </form>
     </div>
   );

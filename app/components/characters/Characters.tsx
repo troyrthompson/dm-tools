@@ -20,14 +20,9 @@ export const Characters = () => {
         <div className="flex flex-wrap gap-2 justify-center">
             {characters.map((character) => {
                 return (
-                    <CharacterCard linkUrl={`./character/?id=${character.id}`} key={character.id} name={character.general.name} race={character.general.race} characterClass={character.general.class} />
+                    <CharacterCard character={character} />
                 )
             })}
-        </div>
-        <div className="flex flex-wrap gap-2 justify-center mt-6 button">
-            <Link href="/character/add">
-                <Button text="Add Character" />
-            </Link>
         </div>
     </>
   );

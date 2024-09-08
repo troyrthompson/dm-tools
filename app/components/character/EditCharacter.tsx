@@ -19,7 +19,8 @@ import { EditCharacterSheet } from './EditCharacterSheet';
 import type { Character } from "@/lib/features/characters/charactersSlice";
 
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-// import styles from "./Counter.module.css";
+
+import { Button } from '../elements/Button';
 
 export const EditCharacter = () => {
   const router = useRouter();
@@ -50,8 +51,12 @@ export const EditCharacter = () => {
   const characterDataArr = parseCharacterProperties(currentCharacter);
 
   function deleteThisCharacter() {
-    dispatch(deleteCharacter(currentCharacter));
-    router.push('/characters');
+    const promptFeedback = prompt('Type "delete" to confirm.');
+
+    if (promptFeedback === 'delete') {
+      dispatch(deleteCharacter(currentCharacter));
+      router.push('/characters');
+    }
   }
 
   function handleSubmit() {
@@ -71,17 +76,21 @@ export const EditCharacter = () => {
     });
   
     dispatch(updateCharacter(characterToUpdate));
+    router.push('/character?id=' + characterToUpdate.id);
   }
 
   return (
     <div>
-        <form onSubmit={e => { e.preventDefault(); handleSubmit(); }}>
+        <form className="flex flex-col justify-center align-center" onSubmit={e => { e.preventDefault(); handleSubmit(); }}>
 
           <EditCharacterSheet characterDataArr={characterDataArr} inputRefs={inputRefs} />
-          
-          <button type="submit">Update Character</button>
+          <div className="flex justify-center mt-8">
+            <Button text="Update Character"></Button>
+          </div>
         </form>
-        <button type="button" onClick={() => { deleteThisCharacter(); }}>Delete Character</button>
+        <div className="flex flex-col justify-center">
+          <div className="flex justify-center mt-12" onClick={() => { deleteThisCharacter(); }}><Button text="Delete Character"></Button></div>
+        </div>
     </div>
   );
 };
