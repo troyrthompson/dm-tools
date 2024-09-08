@@ -20,16 +20,14 @@ export default function RootLayout({ children }: Props) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <body>
             <section className="container mx-auto relative min-h-screen flex content-between justify-between flex-col">
-            <Nav />
-            <main className="max-w-none px-4">{children}</main>
-
-            <aside className="prose fixed p-3 top-0 left-0 bg-white">
+            <aside className="sm:fixed text-center sm:text-left p-3 top-0 left-0 bg-white rounded-xl shadow-lg mb-4">
               <RollList/>
             </aside>
-
-            <aside className="max-w-none px-4 fixed bottom-0 left-0">
+            <aside className="sm:fixed max-w-none px-4 bottom-0 left-0">
             <Roll />
             </aside>
+            <Nav />
+            <main className="max-w-none px-4">{children}</main>
             <footer className="max-w-none px-4"></footer>
           </section>
         </body>
