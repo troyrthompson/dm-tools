@@ -16,8 +16,6 @@ export const Condition = () => {
   const dispatch = useAppDispatch();
   const characters = useAppSelector(selectCharacters);
 
-  console.log(characters[0].conditions);
-
   const updatedCharacter = JSON.parse(JSON.stringify(characters[0]));
 
   updatedCharacter.conditions.blinded = false;
