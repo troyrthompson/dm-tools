@@ -36,9 +36,10 @@ export const defaultCharacters: CharactersSlice = {
             charisma: 10
         },
         skillProficiencies: [
-            'Acrobatics',
-            'Survival'
+            'Athletics',
+            'Intimidation'
         ],
+        notes: '',
         conditions: {
             blinded: true,
             charmed: false,
@@ -74,9 +75,10 @@ export const defaultCharacters: CharactersSlice = {
             charisma: 12
         },
         skillProficiencies: [
-            'Acrobatics',
-            'Survival'
+            'Insight',
+            'Arcana'
         ],
+        notes: '',
         conditions: conditionsList
     }, {
         id: 3,
@@ -97,9 +99,10 @@ export const defaultCharacters: CharactersSlice = {
             charisma: 10
         },
         skillProficiencies: [
-            'Insight',
-            'Animal Handling'
+            'History',
+            'Religion'
         ],
+        notes: '',
         conditions: conditionsList
     }, {
         id: 4,
@@ -119,6 +122,7 @@ export const defaultCharacters: CharactersSlice = {
             wisdom: 10,
             charisma: 14
         },
+        notes: 'Blessing of the Trickster',
         skillProficiencies: [
             'Sleight of Hand',
             'Persuasion'
