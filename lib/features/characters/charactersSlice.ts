@@ -8,7 +8,21 @@ export type characterClass = 'barbarian' | 'bard' | 'cleric' | 'druid' | 'fighte
 
 export type Condition = 'blinded' | 'charmed' | 'deafened' | 'frightened' | 'grappled' | 'incapacitated' | 'invisible' | 'paralyzed' | 'petrified' | 'poisoned' | 'prone' | 'restrained' | 'stunned' | 'unconscious';
 
-// export type ConditionsObject = Object<[Condition, boolean]>;
+export type specialSense = 'blindsight' | 'darkvision' | 'tremorsense' | 'truesight';
+
+export const specialSenses = [
+  'blindsight',
+  'darkvision',
+  'tremorsense',
+  'truesight'
+];
+
+export type SpecialSenses = {
+  blindsight: number,
+  darkvision: number,
+  tremorsense: number,
+  truesight: number
+}
 
 export const conditionsList = {
   blinded: false,
@@ -138,6 +152,7 @@ export type Character = {
   skillProficiencies: Skills,
   notes: string,
   conditions: {},
+  specialSenses: SpecialSenses
 };
 
 export const skillList: Skills = [
@@ -214,7 +229,13 @@ export const defaultCharacter: Character = {
     'Survival'
   ],
   notes: '',
-  conditions: conditionsList
+  conditions: conditionsList,
+  specialSenses: {
+    blindsight: 0,
+    darkvision: 0,
+    tremorsense: 0,
+    truesight: 0
+  }
 };
 
 export function parseCharacterProperties(character: Character) {

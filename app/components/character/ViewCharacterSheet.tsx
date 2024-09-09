@@ -121,6 +121,8 @@ export const ViewCharacterSheet = ({ character }) => {
                 <div><span className="font-bold">{passiveSensesObj.Perception}</span> : Passive Perception</div>
                 <div><span className="font-bold">{passiveSensesObj.Investigation}</span> : Passive Investigation</div>
                 <div><span className="font-bold">{passiveSensesObj.Insight}</span> : Passive Insight</div>
+
+
             </>
         )
     }
@@ -157,6 +159,14 @@ export const ViewCharacterSheet = ({ character }) => {
             <div className="p-8 rounded-xl shadow-lg">
                 <h2 className="text-2xl mb-2 mt-0">Senses</h2>
                 {buildPassiveSenses()}
+                {Object.entries(character.specialSenses).map((data: any, i: number) => {
+                    if (data[1] <= 0) {
+                        return '';
+                    }
+                    return (
+                        <div key={`${i}-specialSenses`}><span className="font-bold">{data[1]}</span> : <span>{data[0]}</span></div>
+                    )
+                })}
             </div>
             <div className="p-8 rounded-xl shadow-lg">
                 <h2 className="text-2xl mb-2 mt-0">Conditions</h2>

@@ -20,6 +20,9 @@ export const PassiveTracker = () => {
 
   const characterPassives = characters.map((character) => {
     const passiveSensesObj = buildPassiveSensesObj(character);
+    Object.entries(character.specialSenses).forEach((sense) => {
+      passiveSensesObj[sense[0]] = sense[1];
+    });
     return {
       name: character.general.name,
       passive: passiveSensesObj,
@@ -50,6 +53,22 @@ export const PassiveTracker = () => {
         if (character.passive.Insight >= sensesValue) {
           applicableCharacters.push(character.name);
         }
+      } else if (sense === 'blindsight') {
+        if (character.passive.blindsight >= sensesValue) {
+          applicableCharacters.push(character.name);
+        }
+      } else if (sense === 'darkvision') {
+        if (character.passive.darkvision >= sensesValue) {
+          applicableCharacters.push(character.name);
+        }
+      } else if (sense === 'tremorsense') {
+        if (character.passive.tremorsense >= sensesValue) {
+          applicableCharacters.push(character.name);
+        }
+      } else if (sense === 'truesight') {
+        if (character.passive.truesight >= sensesValue) {
+          applicableCharacters.push(character.name);
+        }
       }
     });
     setApplicableCharacters(applicableCharacters);
@@ -64,6 +83,10 @@ export const PassiveTracker = () => {
           <option value='Perception'>Perception</option>
           <option value='Investigation'>Investigation</option>
           <option value='Insight'>Insight</option>
+          <option value='blindsight'>Blindsight</option>
+          <option value='darkvision'>Darkvision</option>
+          <option value='tremorsense'>Tremorsense</option>
+          <option value='truesight'>Truesight</option>
         </select>
 
         <div>

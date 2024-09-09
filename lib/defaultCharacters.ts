@@ -55,6 +55,12 @@ export const defaultCharacters: CharactersSlice = {
             restrained: false,
             stunned: false,
             unconscious: false
+        },
+        specialSenses: {
+            blindsight: 30,
+            darkvision: 0,
+            tremorsense: 0,
+            truesight: 0
         }
     },{
         id: 2,
@@ -79,7 +85,13 @@ export const defaultCharacters: CharactersSlice = {
             'Arcana'
         ],
         notes: '',
-        conditions: conditionsList
+        conditions: conditionsList,
+        specialSenses: {
+            blindsight: 0,
+            darkvision: 0,
+            tremorsense: 0,
+            truesight: 0
+        }
     }, {
         id: 3,
         general: {
@@ -103,7 +115,13 @@ export const defaultCharacters: CharactersSlice = {
             'Religion'
         ],
         notes: '',
-        conditions: conditionsList
+        conditions: conditionsList,
+        specialSenses: {
+            blindsight: 0,
+            darkvision: 0,
+            tremorsense: 0,
+            truesight: 0
+        }
     }, {
         id: 4,
         general: {
@@ -127,6 +145,12 @@ export const defaultCharacters: CharactersSlice = {
             'Sleight of Hand',
             'Persuasion'
         ],
-        conditions: conditionsList
+        conditions: conditionsList,
+        specialSenses: {
+            blindsight: 0,
+            darkvision: 60,
+            tremorsense: 0,
+            truesight: 0
+        }
     }],
 };

@@ -192,6 +192,17 @@ export const EditCharacterSheet = ({characterId}) => {
                     <h2 className="text-2xl mb-2 mt-0">Notes</h2>
                     <textarea onChange={handleChange} name={`notes`} value={formData.notes}></textarea>
                 </div>
+                <div className="p-8 rounded-xl shadow-lg">
+                    <h2 className="text-2xl mb-2 mt-0">Special Senses</h2>
+                    {Object.entries(formData.specialSenses).map((data: any, i: number) => {
+                        return (
+                            <div className="flex flex-col">
+                                <label htmlFor={`specialSenses${i}`}>{data[0]}</label>
+                                <input onChange={handleChange} className="text-sm h-6 pl-1 py-1 border border-gray-300 mb-1" type="number" name={`specialSenses.${data[0]}`} key={`specialSenses.${data[0]}`} id={`specialSenses${i}`} value={data[1]} />
+                            </div>
+                        )
+                    })}
+                </div>
             </div>
           <div className="flex justify-center mt-8">
             {(characterId === undefined) ? <Button text="Add Character"></Button> : <Button text="Update Character"></Button>}
