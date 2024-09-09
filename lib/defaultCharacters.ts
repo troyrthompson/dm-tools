@@ -1,5 +1,21 @@
 import { CharactersSlice } from './features/characters/charactersSlice';
 
+export const conditionsList = {
+    blinded: false,
+    charmed: false,
+    deafened: false,
+    frightened: false,
+    grappled: false,
+    incapacitated: false,
+    invisible: false,
+    paralyzed: false,
+    petrified: false,
+    poisoned: false,
+    prone: false,
+    restrained: false,
+    stunned: false,
+    unconscious: false
+};
 export const defaultCharacters: CharactersSlice = {
     characters: [{
         id: 1,
@@ -22,7 +38,23 @@ export const defaultCharacters: CharactersSlice = {
         skillProficiencies: [
             'Acrobatics',
             'Survival'
-        ]
+        ],
+        conditions: {
+            blinded: true,
+            charmed: false,
+            deafened: false,
+            frightened: false,
+            grappled: false,
+            incapacitated: false,
+            invisible: false,
+            paralyzed: false,
+            petrified: false,
+            poisoned: false,
+            prone: false,
+            restrained: false,
+            stunned: false,
+            unconscious: false
+        }
     },{
         id: 2,
         general: {
@@ -44,7 +76,8 @@ export const defaultCharacters: CharactersSlice = {
         skillProficiencies: [
             'Acrobatics',
             'Survival'
-        ]
+        ],
+        conditions: conditionsList
     }, {
         id: 3,
         general: {
@@ -66,7 +99,8 @@ export const defaultCharacters: CharactersSlice = {
         skillProficiencies: [
             'Insight',
             'Animal Handling'
-        ]
+        ],
+        conditions: conditionsList
     }, {
         id: 4,
         general: {
@@ -88,6 +122,7 @@ export const defaultCharacters: CharactersSlice = {
         skillProficiencies: [
             'Sleight of Hand',
             'Persuasion'
-        ]
+        ],
+        conditions: conditionsList
     }],
 };

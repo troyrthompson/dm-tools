@@ -6,6 +6,27 @@ export type Skill = 'Acrobatics' | 'Animal Handling' | 'Arcana' | 'Athletics' | 
 
 export type characterClass = 'barbarian' | 'bard' | 'cleric' | 'druid' | 'fighter' | 'monk' | 'paladin' | 'ranger' | 'rogue' | 'sorcerer' | 'warlock' | 'wizard';
 
+export type Condition = 'blinded' | 'charmed' | 'deafened' | 'frightened' | 'grappled' | 'incapacitated' | 'invisible' | 'paralyzed' | 'petrified' | 'poisoned' | 'prone' | 'restrained' | 'stunned' | 'unconscious';
+
+// export type ConditionsObject = Object<[Condition, boolean]>;
+
+export const conditionsList = {
+  blinded: false,
+  charmed: false,
+  deafened: false,
+  frightened: false,
+  grappled: false,
+  incapacitated: false,
+  invisible: false,
+  paralyzed: false,
+  petrified: false,
+  poisoned: false,
+  prone: false,
+  restrained: false,
+  stunned: false,
+  unconscious: false
+};
+
 export const characterClasseList: Array<characterClass> = [
   'barbarian',
   'bard',
@@ -20,15 +41,6 @@ export const characterClasseList: Array<characterClass> = [
   'warlock',
   'wizard'
 ]
-
-// export type classFeatures = {
-//   classDefinition: classDefinition
-// }
-
-// export type classDefinition = {
-//   savingThrows: Array<SavingThrow>,
-//   skillProficiencies: Array<Skill>
-// }
 
 export const classFeaturesList = {
   barbarian: {
@@ -123,7 +135,8 @@ export type Character = {
   id: number,
   general: CharacterGeneralAttributes,
   abilityScores: CharacterAbilityScoresAttributes,
-  skillProficiencies: Skills
+  skillProficiencies: Skills,
+  conditions: {},
 };
 
 export const skillList: Skills = [
@@ -168,7 +181,8 @@ export const defaultCharacter: Character = {
   skillProficiencies: [
     'Acrobatics',
     'Survival'
-  ]
+  ],
+  conditions: conditionsList
 };
 
 export function parseCharacterProperties(character: Character) {

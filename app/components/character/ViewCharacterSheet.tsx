@@ -125,6 +125,20 @@ export const ViewCharacterSheet = ({ character }) => {
         )
     }
 
+    function showCondition(char) {
+        
+        return Object.entries(char.conditions).map((data: any, i: number) => {
+            console.log(data[1]);
+            if (data[1] === false) {
+                return '';
+            }
+
+            return (
+                <div key={`${i}-general`}>{data[0]}</div>
+            )
+        })
+    }
+
   return (
     <>
         <div className="flex flex-wrap gap-4 justify-center">
@@ -141,6 +155,10 @@ export const ViewCharacterSheet = ({ character }) => {
             <div className="p-8 rounded-xl shadow-lg">
                 <h2 className="text-2xl mb-2 mt-0">Senses</h2>
                 {buildPassiveSenses()}
+            </div>
+            <div className="p-8 rounded-xl shadow-lg">
+                <h2 className="text-2xl mb-2 mt-0">Conditions</h2>
+                {showCondition(character)}
             </div>
         </div>
         <div className="flex flex-wrap gap-4 justify-center">

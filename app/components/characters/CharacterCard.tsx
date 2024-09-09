@@ -23,6 +23,14 @@ export const CharacterCard = ({character}) => {
         <Link className="text-center" href={`./character/?id=${character.id}`} key={character.id}><h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white px-4">{character.general.name}</h5>
             <span className="text-sm text-gray-500 dark:text-gray-400">{character.general.race} {character.general.class}</span></Link> 
             <span className="text-md text-gray-700 dark:text-gray-400">HP: <input className="w-12 border border-gray-200" onChange={handleChange} type="number" value={hitPoints}></input></span>
+            {Object.entries(character.conditions).map((data: any, i: number) => {
+                if (data[1] === false) {
+                    return '';
+                }
+                return (
+                    <div key={`${i}-general`}>{data[0]}</div>
+                )
+            })}
         </div>
     </div>    
   );

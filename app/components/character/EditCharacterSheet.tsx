@@ -24,8 +24,14 @@ export const EditCharacterSheet = ({ characterDataArr, inputRefs }: CharacterShe
                     })}
                 </select>
             )
+        } else if (type === 'conditions') {
+            return (
+                <>
+                <label htmlFor={data[0]}>{data[0]}</label>
+                <input className="text-sm h-6 pl-1 py-1 border border-gray-300 mb-1" type="checkbox" key={data[1]} id={data[1]} ref={el => inputRefs.current[superIndex++] = el} defaultChecked={data[1]} />
+                </>
+            )
         } else if (type === 'general' && data[0] === 'class') {
-            console.log(data[1]);
             return (
                 <>
                 <label htmlFor={data[0]}>{data[0]}</label>
