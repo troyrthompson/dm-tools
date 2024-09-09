@@ -161,6 +161,15 @@ export const skillList: Skills = [
   'Survival'
 ];
 
+export const abilities = [
+  'strength',
+  'dexterity',
+  'constitution',
+  'intelligence',
+  'wisdom',
+  'charisma',
+]
+
 export const skillListAbilities = {
   acrobatics: 'dexterity',
   animalHandling: 'wisdom',
