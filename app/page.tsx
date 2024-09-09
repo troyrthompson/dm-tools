@@ -7,6 +7,8 @@ import { Skills } from "./components/skills/Skills";
 import { Abilities } from "./components/abilities/Abilities";
 import { SavingThrows } from "./components/savingThrows/SavingThrows";
 
+import { Languages } from "./components/languages/Languages";
+
 export default function IndexPage() {
   return (
    <>
@@ -19,6 +21,7 @@ export default function IndexPage() {
     <div className="flex flex-wrap justify-center gap-2">
       <PassiveTracker />
       <Condition />
+      <Languages />
     </div>
    </>
   );
