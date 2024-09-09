@@ -26,11 +26,8 @@ export const PassiveTracker = () => {
     };
   });
 
-  console.log(characterPassives, 'wtf');
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSensesValue(parseInt(e.target.value));
-
     determineApplicableCharacters(sense, parseInt(e.target.value));
   };
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
