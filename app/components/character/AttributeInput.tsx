@@ -3,7 +3,7 @@
 import { useRef, RefObject } from "react";
 
 interface AttributeInputProps {
-    type: string;
+  type: string;
   defaultValue: string;
   inputRef: RefObject<HTMLInputElement>;
 }
