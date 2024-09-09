@@ -3,6 +3,7 @@ import { Characters } from "./components/characters/Characters";
 
 import { PassiveTracker } from "./components/passive/PassiveSensesTracker";
 import { Condition } from "./components/condition/Condition";
+import { Skills } from "./components/skills/Skills";
 
 export default function IndexPage() {
   return (
@@ -13,6 +14,7 @@ export default function IndexPage() {
         <PassiveTracker />
       </div>
       <Condition />
+      <Skills />
     </div>
    </>
   );
