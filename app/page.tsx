@@ -11,12 +11,12 @@ export default function IndexPage() {
   return (
    <>
     <Characters />
-    <div className="flex flex-wrap justify-center">
+    <div className="flex flex-wrap justify-center gap-2">
       <Abilities />
       <SavingThrows />
       <Skills />
     </div>
-    <div className="flex flex-wrap justify-center">
+    <div className="flex flex-wrap justify-center gap-2">
       <PassiveTracker />
       <Condition />
     </div>

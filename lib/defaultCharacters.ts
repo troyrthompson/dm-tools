@@ -61,6 +61,18 @@ export const defaultCharacters: CharactersSlice = {
             darkvision: 0,
             tremorsense: 0,
             truesight: 0
+        },
+        languages: {
+            common: true,
+            commonSignLanguage: false,
+            draconic: false,
+            dwarvish: false,
+            elvish: false,
+            giant: false,
+            gnomish: false,
+            goblin: true,
+            halfling: false,
+            orc: false,
         }
     },{
         id: 2,
@@ -91,6 +103,18 @@ export const defaultCharacters: CharactersSlice = {
             darkvision: 0,
             tremorsense: 0,
             truesight: 0
+        },
+        languages: {
+            common: true,
+            commonSignLanguage: false,
+            draconic: false,
+            dwarvish: false,
+            elvish: true,
+            giant: false,
+            gnomish: false,
+            goblin: false,
+            halfling: false,
+            orc: false,
         }
     }, {
         id: 3,
@@ -121,7 +145,20 @@ export const defaultCharacters: CharactersSlice = {
             darkvision: 0,
             tremorsense: 0,
             truesight: 0
+        },
+        languages: {
+            common: true,
+            commonSignLanguage: false,
+            draconic: false,
+            dwarvish: true,
+            elvish: false,
+            giant: false,
+            gnomish: false,
+            goblin: false,
+            halfling: false,
+            orc: false,
         }
+        
     }, {
         id: 4,
         general: {
@@ -151,6 +188,18 @@ export const defaultCharacters: CharactersSlice = {
             darkvision: 60,
             tremorsense: 0,
             truesight: 0
+        },
+        languages: {
+            common: true,
+            commonSignLanguage: true,
+            draconic: false,
+            dwarvish: false,
+            elvish: false,
+            giant: false,
+            gnomish: false,
+            goblin: false,
+            halfling: false,
+            orc: false,
         }
     }],
 };

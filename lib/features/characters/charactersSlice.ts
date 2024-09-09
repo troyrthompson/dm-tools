@@ -152,7 +152,8 @@ export type Character = {
   skillProficiencies: Skills,
   notes: string,
   conditions: {},
-  specialSenses: SpecialSenses
+  specialSenses: SpecialSenses,
+  languages: {}
 };
 
 export const skillList: Skills = [
@@ -183,7 +184,20 @@ export const abilities = [
   'intelligence',
   'wisdom',
   'charisma',
-]
+];
+
+export const languages = {
+  common: true,
+  commonSignLanguage: false,
+  draconic: false,
+  dwarvish: false,
+  elvish: false,
+  giant: false,
+  gnomish: false,
+  goblin: false,
+  halfling: false,
+  orc: false,
+}
 
 export const skillListAbilities = {
   acrobatics: 'dexterity',
@@ -235,7 +249,8 @@ export const defaultCharacter: Character = {
     darkvision: 0,
     tremorsense: 0,
     truesight: 0
-  }
+  },
+  languages: languages
 };
 
 export function parseCharacterProperties(character: Character) {

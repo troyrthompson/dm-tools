@@ -143,6 +143,17 @@ export const ViewCharacterSheet = ({ character }) => {
          return char.notes;
     }
 
+    function buildLanguagesList(char) {
+        return Object.entries(char.languages).map((data: any, i: number) => {
+            if (data[1] === false) {
+                return '';
+            }
+            return (
+                <div key={`${i}-general`}>{data[0]}</div>
+            )
+        });
+    }
+
   return (
     <>
         <div className="flex flex-wrap gap-4 justify-center">
@@ -175,6 +186,10 @@ export const ViewCharacterSheet = ({ character }) => {
             <div className="p-8 rounded-xl shadow-lg max-w-72">
                 <h2 className="text-2xl mb-2 mt-0">Notes</h2>
                 {showNotes(character)}
+            </div>
+            <div className="p-8 rounded-xl shadow-lg">
+                <h2 className="text-2xl mb-2 mt-0">Skills</h2>
+                {buildLanguagesList(character)}
             </div>
         </div>
         <div className="flex flex-wrap gap-4 justify-center">

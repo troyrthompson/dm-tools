@@ -157,8 +157,7 @@ export const EditCharacterSheet = ({characterId}) => {
                 </div>
 
                 <div className="p-8 rounded-xl shadow-lg">
-                    
-                    <h2 className="text-2xl mb-2 mt-0">Ability Scores</h2>
+                    <h2 className="text-2xl mb-2 mt-0">Conditions</h2>
                     {Object.entries(formData.conditions).map((data: any, i: number) => {
                         return (
                             <div className="text-xs mb-1 flex align-center">
@@ -203,6 +202,19 @@ export const EditCharacterSheet = ({characterId}) => {
                         )
                     })}
                 </div>
+
+                <div className="p-8 rounded-xl shadow-lg">
+                    <h2 className="text-2xl mb-2 mt-0">Conditions</h2>
+                    {Object.entries(formData.languages).map((data: any, i: number) => {
+                        return (
+                            <div className="text-xs mb-1 flex align-center">
+                                <input onChange={handleChange} className="text-sm border border-gray-300 mr-1" type="checkbox" name={`languages.${data[0]}`} key={`languages${data[0]}`} id={`languages${data[0]}`} defaultChecked={formData.languages[data[0]]} />
+                                <label htmlFor={`conditions${data[0]}`}>{data[0]}</label>
+                            </div>
+                        )
+                    })}
+                </div>
+
             </div>
           <div className="flex justify-center mt-8">
             {(characterId === undefined) ? <Button text="Add Character"></Button> : <Button text="Update Character"></Button>}
