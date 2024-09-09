@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Characters } from "./components/characters/Characters";
 
-import { PassiveTracker } from "./components/passive/PassiveSensesTracker";
+import { PassiveTracker } from "./components/senses/Senses";
 import { Condition } from "./components/condition/Condition";
 import { Skills } from "./components/skills/Skills";
 import { Abilities } from "./components/abilities/Abilities";
