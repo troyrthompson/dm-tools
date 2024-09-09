@@ -59,13 +59,14 @@ export const PassiveTracker = () => {
     <div className="flex flex-wrap justify-center mt-6">
       <div className="flex flex-col gap-2 p-6 bg-white border border-gray-200 rounded shadow dark:bg-gray-800 dark:border-gray-700 no-underline">
         <h2 className="block text-md font-bold mb-2">Senses</h2>
-        <input className="w-36 appearance-none block bg-gray-100 text-gray-700 border border-gray-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="number" onChange={handleInputChange} value={sensesValue}/>
-        <select className="w-36 appearance-none block bg-gray-100 text-gray-700 border border-gray-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" onChange={handleSelectChange} value={sense}>
+        <input className="w-32 border border-gray-200 pl-2" type="number" onChange={handleInputChange} value={sensesValue}/>
+        <select className="w-32 border border-gray-200" onChange={handleSelectChange} value={sense}>
           <option value='Perception'>Perception</option>
           <option value='Investigation'>Investigation</option>
           <option value='Insight'>Insight</option>
         </select>
 
+        <div>
         {applicableCharacters.map((character, index) => {
           return (
             <div key={index}>
@@ -73,6 +74,7 @@ export const PassiveTracker = () => {
             </div>
           );
         })}
+        </div>
       </div>
     </div>
   );
