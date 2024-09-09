@@ -15,7 +15,7 @@ export const PassiveTracker = () => {
   const characters = useAppSelector(selectCharacters);
 
   const [applicableCharacters, setApplicableCharacters] = useState<Array<string>>([]);
-  const [sensesValue, setSensesValue] = useState(0);
+  const [sensesValue, setSensesValue] = useState(14);
   const [sense, setSense] = useState('Perception');
 
   const characterPassives = characters.map((character) => {
