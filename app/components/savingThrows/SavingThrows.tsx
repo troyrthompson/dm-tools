@@ -60,7 +60,7 @@ export const SavingThrows = () => {
 }
 
   return (
-    <div className="flex flex-wrap justify-center mt-6">
+    <div className="flex flex-wrap justify-center">
       <div className="flex flex-col gap-2 p-6 bg-white border border-gray-200 rounded shadow dark:bg-gray-800 dark:border-gray-700 no-underline">
         <h2 className="block text-md font-bold mb-2">Saving Throws</h2>
         <select className="w-32 border border-gray-200" onChange={handleSelectChange} value={savingThrows}>

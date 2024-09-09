@@ -29,7 +29,7 @@ export const Condition = () => {
   };
 
   return (
-    <div className="flex flex-wrap justify-center mt-6">
+    <div className="flex flex-wrap justify-center">
       <form className="flex flex-col gap-2 p-6 bg-white border border-gray-200 rounded shadow dark:bg-gray-800 dark:border-gray-700 no-underline" onSubmit={handleSubmit}>
         <label htmlFor="conditionName"><h2 className="block text-md font-bold mb-2">Conditions</h2></label>
         <select className="border border-gray-200" id="conditionName">
