@@ -188,7 +188,7 @@ export const ViewCharacterSheet = ({ character }) => {
                 {showNotes(character)}
             </div>
             <div className="p-8 rounded-xl shadow-lg">
-                <h2 className="text-2xl mb-2 mt-0">Skills</h2>
+                <h2 className="text-2xl mb-2 mt-0">Languages</h2>
                 {buildLanguagesList(character)}
             </div>
         </div>
