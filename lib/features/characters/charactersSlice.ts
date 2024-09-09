@@ -4,29 +4,111 @@ import { mergePreferences, loadPreferences } from "@/lib/persist";
 
 export type Skill = 'Acrobatics' | 'Animal Handling' | 'Arcana' | 'Athletics' | 'Deception' | 'History' | 'Insight' | 'Intimidation' | 'Investigation' | 'Medicine' | 'Nature' | 'Perception' | 'Performance' | 'Persuasion' | 'Religion' | 'Sleight of Hand' | 'Stealth' | 'Survival';
 
-export type SavingThrow = 'Strength' | 'Dexterity' | 'Constitution' | 'Intelligence' | 'Wisdom' | 'Charisma';
+export type characterClass = 'barbarian' | 'bard' | 'cleric' | 'druid' | 'fighter' | 'monk' | 'paladin' | 'ranger' | 'rogue' | 'sorcerer' | 'warlock' | 'wizard';
 
-export const savingThrowList = [
-  'Strength',
-  'Dexterity',
-  'Constitution',
-  'Intelligence',
-  'Wisdom',
-  'Charisma'
-];
+export const characterClasseList: Array<characterClass> = [
+  'barbarian',
+  'bard',
+  'cleric',
+  'druid',
+  'fighter',
+  'monk',
+  'paladin',
+  'ranger',
+  'rogue',
+  'sorcerer',
+  'warlock',
+  'wizard'
+]
+
+// export type classFeatures = {
+//   classDefinition: classDefinition
+// }
+
+// export type classDefinition = {
+//   savingThrows: Array<SavingThrow>,
+//   skillProficiencies: Array<Skill>
+// }
+
+export const classFeaturesList = {
+  barbarian: {
+    savingThrows: ['strength', 'constitution'],
+    skillProficiencies: ['Animal Handling', 'Athletics', 'Intimidation', 'Nature', 'Perception', 'Survival']
+  },
+  bard: {
+    savingThrows: ['dexerity', 'charisma'],
+    skillProficiencies: [
+      'Acrobatics',
+      'Animal Handling',
+      'Arcana',
+      'Athletics',
+      'Deception',
+      'History',
+      'Insight',
+      'Intimidation',
+      'Investigation',
+      'Medicine',
+      'Nature',
+      'Perception',
+      'Performance',
+      'Persuasion',
+      'Religion',
+      'Sleight of Hand',
+      'Stealth',
+      'Survival']
+  },
+  cleric: {
+    savingThrows: ['wisdom', 'charisma'],
+    skillProficiencies: ['History', 'Insight', 'Medicine', 'Persuasion', 'Religion']
+  },
+  druid: {
+    savingThrows: ['intelligence', 'wisdom'],
+    skillProficiencies: ['Arcana', 'Animal Handling', 'Insight', 'Medicine', 'Nature', 'Perception', 'Religion', 'Survival']
+  },
+  fighter: {
+    savingThrows: ['strength', 'constitution'],
+    skillProficiencies: ['Acrobatics', 'Animal Handling', 'Athletics', 'History', 'Insight', 'Intimidation', 'Perception', 'Survival']
+  },
+  monk: {
+    savingThrows: ['strength', 'dexerity'],
+    skillProficiencies: ['Acrobatics', 'Athletics', 'History', 'Insight', 'Religion', 'Stealth']
+  },
+  paladin: {
+    savingThrows: ['wisdom', 'charisma'],
+    skillProficiencies: ['Athletics', 'Insight', 'Intimidation', 'Medicine', 'Persuasion', 'Religion']
+  },
+  ranger: {
+    savingThrows: ['strength', 'dexerity'],
+    skillProficiencies: ['Animal Handling', 'Athletics', 'Insight', 'Investigation', 'Nature', 'Perception', 'Stealth', 'Survival']
+  },
+  rogue: {
+    savingThrows: ['dexerity', 'intelligence'],
+    skillProficiencies: ['Acrobatics', 'Athletics', 'Deception', 'Insight', 'Intimidation', 'Investigation', 'Perception', 'Performance', 'Persuasion', 'Sleight of Hand', 'Stealth']
+  },
+  sorcerer: {
+    savingThrows: ['constitution', 'charisma'],
+    skillProficiencies: ['Arcana', 'Deception', 'Insight', 'Intimidation', 'Persuasion', 'Religion']
+  },
+  warlock: {
+    savingThrows: ['wisdom', 'charisma'],
+    skillProficiencies: ['Arcana', 'Deception', 'History', 'Intimidation', 'Investigation', 'Nature', 'Religion']
+  },
+  wizard: {
+    savingThrows: ['intelligence', 'wisdom'],
+    skillProficiencies: ['Arcana', 'History', 'Insight', 'Investigation', 'Medicine', 'Religion']
+  }
+}
 
 export type CharacterGeneralAttributes = {
     name: string,
     race: string,
-    class: string,
+    class: characterClass,
     level: number,
     maxHitPoints: number,
     hitPoints: number,
 }
 
 export type Skills = Array<Skill>;
-
-export type SavingThrows = Array<SavingThrow>;
 
 export type CharacterAbilityScoresAttributes = {
   strength: number,
@@ -41,8 +123,7 @@ export type Character = {
   id: number,
   general: CharacterGeneralAttributes,
   abilityScores: CharacterAbilityScoresAttributes,
-  skillProficiencies: Skills,
-  savingThrowProficiencies: SavingThrows
+  skillProficiencies: Skills
 };
 
 export const skillList: Skills = [
@@ -66,15 +147,6 @@ export const skillList: Skills = [
   'Survival'
 ];
 
-export const savingThrowProficienciesList: SavingThrows = [
-  'Strength',
-  'Dexterity',
-  'Constitution',
-  'Intelligence',
-  'Wisdom',
-  'Charisma'
-];
-
 export const defaultCharacter: Character = {
   id: 0,
   general: {
@@ -96,10 +168,6 @@ export const defaultCharacter: Character = {
   skillProficiencies: [
     'Acrobatics',
     'Survival'
-  ],
-  savingThrowProficiencies: [
-    'Strength',
-    'Dexterity'
   ]
 };
 

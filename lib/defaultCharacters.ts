@@ -6,7 +6,7 @@ export const defaultCharacters: CharactersSlice = {
         general: {
             name: 'John',
             race: 'human',
-            class: 'warrior',
+            class: 'fighter',
             level: 1,
             maxHitPoints: 24,
             hitPoints: 20,
@@ -22,17 +22,13 @@ export const defaultCharacters: CharactersSlice = {
         skillProficiencies: [
             'Acrobatics',
             'Survival'
-        ],
-        savingThrowProficiencies: [
-            'Strength',
-            'Constitution'
         ]
     },{
         id: 2,
         general: {
             name: 'Jane',
             race: 'elf',
-            class: 'mage',
+            class: 'wizard',
             level: 2,
             maxHitPoints: 24,
             hitPoints: 18,
@@ -48,10 +44,6 @@ export const defaultCharacters: CharactersSlice = {
         skillProficiencies: [
             'Acrobatics',
             'Survival'
-        ], 
-        savingThrowProficiencies: [
-            'Intelligence',
-            'Wisdom'
         ]
     }, {
         id: 3,
@@ -74,10 +66,6 @@ export const defaultCharacters: CharactersSlice = {
         skillProficiencies: [
             'Insight',
             'Animal Handling'
-        ], 
-        savingThrowProficiencies: [
-            'Constitution',
-            'Wisdom'
         ]
     }, {
         id: 4,
@@ -100,10 +88,6 @@ export const defaultCharacters: CharactersSlice = {
         skillProficiencies: [
             'Sleight of Hand',
             'Persuasion'
-        ], 
-        savingThrowProficiencies: [
-            'Dexterity',
-            'Charisma'
         ]
     }],
 };

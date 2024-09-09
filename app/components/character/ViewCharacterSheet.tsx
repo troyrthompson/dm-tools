@@ -14,6 +14,8 @@ import determineAbilityScoreModifier from '@/lib/utils/character/determineAbilit
 import getProficiencyBonus from '@/lib/utils/character/getProficiencyBonus';
 import buildPassiveSensesObj from '@/lib/utils/character/buildPassiveSenseObj';
 
+import { classFeaturesList } from '@/lib/features/characters/charactersSlice';
+
 const skills = [
     ['Acrobatics', 'dexterity'],
     ['Animal Handling', 'wisdom'],
@@ -34,6 +36,8 @@ const skills = [
     ['Stealth', 'dexterity'],
     ['Survival', 'wisdom']
 ];
+
+
 
 export const ViewCharacterSheet = ({ character }) => {
     const dispatch = useAppDispatch();
@@ -69,8 +73,8 @@ export const ViewCharacterSheet = ({ character }) => {
         dispatch(recordDiceRoll(rollDice(dice)));
     }
 
-    function handleSavingThrowClick(data: any) {
-        const modifier = determineAbilityScoreModifier(data[1]);
+    function handleSavingThrowClick(data: any, bonus) {
+        const modifier = determineAbilityScoreModifier(data[1]) + bonus;
         const name = getCapitalizedString(data[0]);
         const dice: Dice = {
             quantity: 1,
@@ -94,7 +98,7 @@ export const ViewCharacterSheet = ({ character }) => {
     }
 
     function getSavingThrowBonus(savingThrow: string) {
-        return character.savingThrowProficiencies.includes(getCapitalizedString(savingThrow)) ? getProficiencyBonus(character.general.level) : 0;
+        return classFeaturesList[character.general.class].savingThrows.includes(savingThrow) ? getProficiencyBonus(character.general.level) : 0;
     }
     
     function buildSkillList() {
@@ -112,13 +116,11 @@ export const ViewCharacterSheet = ({ character }) => {
     const buildPassiveSenses = () => {
         const passiveSensesObj = buildPassiveSensesObj(character);
 
-        console.log(passiveSensesObj);
-
         return (
             <>
-                <div><span className="font-bold">{}</span> : Passive Perception</div>
-                <div><span className="font-bold">{}</span> : Passive Investigation</div>
-                <div><span className="font-bold">{}</span> : Passive Insight</div>
+                <div><span className="font-bold">{passiveSensesObj.Perception}</span> : Passive Perception</div>
+                <div><span className="font-bold">{passiveSensesObj.Investigation}</span> : Passive Investigation</div>
+                <div><span className="font-bold">{passiveSensesObj.Insight}</span> : Passive Insight</div>
             </>
         )
     }
@@ -156,7 +158,7 @@ export const ViewCharacterSheet = ({ character }) => {
                 {Object.entries(character.abilityScores).map((data: any, i: number) => {
                     let savingThrowBonus = getSavingThrowBonus(data[0]);
                     return (
-                        <div className="flex justify-between" key={`${i}-saving-throw`}><div onClick={() => handleSavingThrowClick(data)}><SmallButton text={getAbilityScoreModifierString(data[1], savingThrowBonus)} /></div> <span className="px-4">{getCapitalizedString(data[0])}</span></div>
+                        <div className="flex justify-between" key={`${i}-saving-throw`}><div onClick={() => handleSavingThrowClick(data, savingThrowBonus)}><SmallButton text={getAbilityScoreModifierString(data[1], savingThrowBonus)} /></div> <span className="px-4">{getCapitalizedString(data[0])}</span></div>
                     )
                 })}
                 </div>
