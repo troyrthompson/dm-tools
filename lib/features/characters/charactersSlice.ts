@@ -136,6 +136,7 @@ export type Character = {
   general: CharacterGeneralAttributes,
   abilityScores: CharacterAbilityScoresAttributes,
   skillProficiencies: Skills,
+  notes: string,
   conditions: {},
 };
 
@@ -182,6 +183,7 @@ export const defaultCharacter: Character = {
     'Acrobatics',
     'Survival'
   ],
+  notes: '',
   conditions: conditionsList
 };
 

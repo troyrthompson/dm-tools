@@ -126,9 +126,7 @@ export const ViewCharacterSheet = ({ character }) => {
     }
 
     function showCondition(char) {
-        
         return Object.entries(char.conditions).map((data: any, i: number) => {
-            console.log(data[1]);
             if (data[1] === false) {
                 return '';
             }
@@ -137,6 +135,10 @@ export const ViewCharacterSheet = ({ character }) => {
                 <div key={`${i}-general`}>{data[0]}</div>
             )
         })
+    }
+
+    function showNotes(char) {
+         return char.notes;
     }
 
   return (
@@ -159,6 +161,10 @@ export const ViewCharacterSheet = ({ character }) => {
             <div className="p-8 rounded-xl shadow-lg">
                 <h2 className="text-2xl mb-2 mt-0">Conditions</h2>
                 {showCondition(character)}
+            </div>
+            <div className="p-8 rounded-xl shadow-lg max-w-72">
+                <h2 className="text-2xl mb-2 mt-0">Notes</h2>
+                {showNotes(character)}
             </div>
         </div>
         <div className="flex flex-wrap gap-4 justify-center">
@@ -185,6 +191,7 @@ export const ViewCharacterSheet = ({ character }) => {
                 <h2 className="text-2xl mb-2 mt-0">Skills</h2>
                 {buildSkillList()}
             </div>
+            
         </div>
     
     </>

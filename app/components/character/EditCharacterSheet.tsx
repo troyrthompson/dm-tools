@@ -1,75 +1,208 @@
 "use client";
 
-type CharacterSheetProps = {
-    characterDataArr: any[];
-    inputRefs: React.MutableRefObject<(HTMLInputElement | HTMLSelectElement | null)[]>;
-};
+import { useRouter } from 'next/navigation'
 
-import { skillList } from "@/lib/features/characters/charactersSlice";
-import { characterClasseList } from "@/lib/features/characters/charactersSlice";
+import { useState } from 'react';
 
-export const EditCharacterSheet = ({ characterDataArr, inputRefs }: CharacterSheetProps) => {
-    let superIndex = 0;
+import {
+    selectCharacters,
+    updateCharacter,
+    deleteCharacter,
+    defaultCharacter,
+    classFeaturesList,
+    characterClasseList,
+    getNextCharacterId,
+    addCharacter
+} from "@/lib/features/characters/charactersSlice";
 
-    const createInput = (type: string, data: string | number, i: number) => {
-        let inputType = typeof data[1] === 'string' ? 'text' : 'number';
+import type { Character } from "@/lib/features/characters/charactersSlice";
 
-        if (type === 'skillProficiencies') {
-            return (
-                <select className="text-sm h-8 pl-1 py-1 border border-gray-300 mb-1" key={data[0]} id={data[0]} ref={el => inputRefs.current[superIndex++] = el} defaultValue={data[1]}>
-                    {skillList.map((skill, index) => {
-                        return (
-                            <option key={index} value={skill}>{skill}</option>
-                        )
-                    })}
-                </select>
-            )
-        } else if (type === 'conditions') {
-            return (
-                <>
-                <label htmlFor={data[0]}>{data[0]}</label>
-                <input className="text-sm h-6 pl-1 py-1 border border-gray-300 mb-1" type="checkbox" key={data[1]} id={data[1]} ref={el => inputRefs.current[superIndex++] = el} defaultChecked={data[1]} />
-                </>
-            )
-        } else if (type === 'general' && data[0] === 'class') {
-            return (
-                <>
-                <label htmlFor={data[0]}>{data[0]}</label>
-                <select className="text-sm h-8 pl-1 py-1 border border-gray-300 mb-1" key={data[0]} id={data[0]} ref={el => inputRefs.current[superIndex++] = el} defaultValue={data[1]}>
-                    {characterClasseList.map((characterClass, index) => {
-                        return (
-                            <option key={index} value={characterClass}>{characterClass}</option>
-                        )
-                    })}
-                </select>
-                </>
-            )
-        } else {
-            return (
-                <>
-                <label htmlFor={data[0]}>{data[0]}</label>
-                <input className="text-sm h-6 pl-1 py-1 border border-gray-300 mb-1" type={inputType} key={data[0]} id={data[0]} ref={el => inputRefs.current[superIndex++] = el} defaultValue={data[1]} />
-                </>
-            )
-        }
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+
+import { Button } from '../elements/Button';
+
+export const EditCharacterSheet = ({characterId}) => {
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const characters = useAppSelector(selectCharacters);
+  
+  function findCharacter(id: string | null): Character {
+    const selectedCharacter = {...defaultCharacter};
+
+    if (id === null) {
+      return selectedCharacter;
+    }
+    let result = characters.find(character => character.id === parseInt(id));
+
+    if (result === undefined) {
+      return selectedCharacter;
     }
 
-    return (
+    return result;
+  }
+
+  const newCharacterId: number = useAppSelector(getNextCharacterId);
+
+  const currentCharacter = findCharacter(characterId);
+
+  const [formData, setFormData] = useState(currentCharacter);
+
+  const skillList = classFeaturesList[formData.general.class].skillProficiencies;
+
+  function deleteThisCharacter() {
+    const promptFeedback = prompt('Type "delete" to confirm.');
+
+    if (promptFeedback === 'delete') {
+      dispatch(deleteCharacter(currentCharacter));
+      router.push('/characters');
+    }
+  }
+
+  function handleSubmit(e) {
+    if (characterId === undefined) {
+        const characterToUpdate: Character = formData;
+        characterToUpdate.id = newCharacterId;
+        dispatch(addCharacter(characterToUpdate));
+        router.push('/characters');
+    } else {
+        const characterToUpdate: Character = formData;
+        dispatch(updateCharacter(characterToUpdate));
+        router.push('/character?id=' + characterToUpdate.id);
+    }
+  }
+
+  function handleChange(e) {
+    let { name, value } = e.target;
+    let [parent, key] = name.split('.');
+
+    if (e.target.type === 'number') {
+      value = parseInt(value);
+    } else if (e.target.type === 'checkbox') {
+      value = e.target.checked;
+    }
+
+    if (parent === 'skillProficiencies') {
+      key = parseInt(key);
+      const updatedSkills = formData.skillProficiencies.map((item, i) => {
+        return i === key ? value : item
+      });
+      setFormData(prevState => ({
+        ...prevState,
+        [parent]: updatedSkills
+      }));
+    } else if (parent === 'notes') {
+        setFormData(prevState => ({
+            ...prevState,
+            [parent]: value
+        }));
+    } else {
+      setFormData(prevState => ({
+        ...prevState,
+        [parent]: {
+          ...prevState[parent],
+          [key]: value
+        }
+      }));
+    }
+  }
+
+  const outputGeneralInputs = (generalData: any) => {
+      return Object.entries(generalData).map((data: any, i: number) => {
+          let inputType = typeof data[1] === 'string' ? 'text' : 'number';
+          if (data[0] === 'class') {
+              return (
+                  <div className="flex flex-col">
+                      <label htmlFor={`general${data[0]}`}>{data[0]}</label>
+                      <select onChange={handleChange} className="text-sm h-8 pl-1 py-1 border border-gray-300 mb-1" name={`general.${data[0]}`} key={`general${data[0]}`} id={`general${data[0]}`} value={data[1]}>
+                          {characterClasseList.map((characterClass, index) => {
+                              return (
+                                  <option key={index} value={characterClass}>{characterClass}</option>
+                              )
+                          })}
+                      </select>
+                  </div>
+              )
+          } else {
+              return (
+                  <div className="flex flex-col">
+                      <label htmlFor={`general${data[0]}`}>{data[0]}</label>
+                      <input onChange={handleChange} className="text-sm h-6 pl-1 py-1 border border-gray-300 mb-1" type={inputType} name={`general.${data[0]}`} key={`general${data[0]}`} id={`general${data[0]}`} value={data[1]} />
+                  </div>
+              )   
+          }          
+      });
+  }
+
+  return (
+    <div>
+        <form className="flex flex-col justify-center align-center" onSubmit={e => { e.preventDefault(); handleSubmit(e); }}>
+
         <div className="flex flex-wrap gap-4 justify-center">
-            {characterDataArr.map((character, index) => {
-                return (
-                <div className="p-8 rounded-xl shadow-lg" key={index}>
-                    <div className="flex flex-col">
-                        <h2 className="text-2xl mb-2 mt-0">{character[0]}</h2>
-                        {character[1].map((data: any, i: number) => {
-                            return ( 
-                                createInput(character[0], data, i)
-                            )
-                        })}
-                    </div>
+                <div className="p-8 rounded-xl shadow-lg">
+                    <h2 className="text-2xl mb-2 mt-0">General</h2>
+                    {outputGeneralInputs(formData.general)}
                 </div>
-                );
-            })}
-        </div>
-    );
+
+                <div className="p-8 rounded-xl shadow-lg">
+                    
+                    <h2 className="text-2xl mb-2 mt-0">Ability Scores</h2>
+                    {Object.entries(formData.abilityScores).map((data: any, i: number) => {
+                        return (
+                            <div className="flex flex-col">
+                                <label htmlFor={`abilityScore${data[0]}`}>{data[0]}</label>
+                                <input onChange={handleChange} className="text-sm h-6 pl-1 py-1 border border-gray-300 mb-1" name={`abilityScores.${data[0]}`} type="number" key={`abilityScore${data[0]}`} id={`abilityScore${data[0]}`} value={data[1]} />
+                            </div>
+                        )
+                    })}
+                </div>
+
+                <div className="p-8 rounded-xl shadow-lg">
+                    
+                    <h2 className="text-2xl mb-2 mt-0">Ability Scores</h2>
+                    {Object.entries(formData.conditions).map((data: any, i: number) => {
+                        return (
+                            <div className="text-xs mb-1 flex align-center">
+                                <input onChange={handleChange} className="text-sm border border-gray-300 mr-1" type="checkbox" name={`conditions.${data[0]}`} key={`conditions${data[0]}`} id={`conditions${data[0]}`} defaultChecked={formData.conditions[data[0]]} />
+                                <label htmlFor={`conditions${data[0]}`}>{data[0]}</label>
+                            </div>
+                        )
+                    })}
+                </div>
+            </div>
+
+            <div className="flex flex-wrap gap-4 justify-center">
+                <div className="p-8 rounded-xl shadow-lg">
+                    <h2 className="text-2xl mb-2 mt-0">Skill Proficiencies</h2>
+                    {formData.skillProficiencies.map((data: any, i: number) => {
+                        return (
+                            <div>
+                                <select onChange={handleChange} className="text-sm h-8 pl-1 py-1 border border-gray-300 mb-1" name={`skillProficiencies.${i}`} key={`skillProficiencies${i}`} id={`skillProficienciesdata${i}`}  value={data}>
+                                {skillList.map((skill, index) => {
+                                    return (
+                                        <option key={index} value={skill}>{skill}</option>
+                                    )
+                                })}
+                                </select>
+                            </div>
+                        )
+                    })}
+                </div>
+
+                <div className="p-8 rounded-xl shadow-lg">
+                    <h2 className="text-2xl mb-2 mt-0">Notes</h2>
+                    <textarea onChange={handleChange} name={`notes`} value={formData.notes}></textarea>
+                </div>
+            </div>
+          <div className="flex justify-center mt-8">
+            {(characterId === undefined) ? <Button text="Add Character"></Button> : <Button text="Update Character"></Button>}
+          </div>
+        </form>
+        {(characterId === undefined) ? <div></div> : (
+            <div className="flex flex-col justify-center">
+                <div className="flex justify-center mt-12" onClick={() => { deleteThisCharacter(); }}><Button text="Delete Character"></Button></div>
+             </div>
+        )}
+
+    </div>
+  );
 };
