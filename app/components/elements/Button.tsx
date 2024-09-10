@@ -1,5 +1,3 @@
-"use client";
-
 export const Button = ({text, color = "blue"}) => {
   const buttonClasses = (color) => {
     switch (color) {

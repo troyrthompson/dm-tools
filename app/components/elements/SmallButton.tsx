@@ -1,5 +1,3 @@
-"use client";
-
 export const SmallButton = ({text, color = "blue"}) => {
   const buttonClasses = (color) => {
     switch (color) {
