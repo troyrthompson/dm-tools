@@ -3,9 +3,7 @@
 import { useAppSelector } from "@/lib/hooks";
 
 import { selectRollers } from "@/lib/features/rollers/rollersSlice";
-
 import { InputRoller } from "../rollers/InputRoller";
-
 import { ButtonRoller } from "../rollers/ButtonRoller";
 
 export const Roll = () => {

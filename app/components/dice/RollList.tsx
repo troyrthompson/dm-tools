@@ -1,8 +1,10 @@
 "use client";
 
+import { useAppSelector } from "@/lib/hooks";
+
 import { selectRollHistory } from "@/lib/features/dice/diceSlice";
 
-import { useAppSelector } from "@/lib/hooks";
+import getModifierString from "@/lib/utils/getModifierString";
 
 export const RollList = () => {
 
@@ -12,10 +14,8 @@ export const RollList = () => {
         if (modifier === 0) {
             return "";
         }
-        return modifier < 0 ? (
-            <span>{modifier}</span>
-        ) : (
-            <span>+{modifier}</span>
+        return (
+            <span>{getModifierString(modifier)}</span>
         )
     }
 
