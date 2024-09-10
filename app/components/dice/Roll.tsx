@@ -12,9 +12,9 @@ export const Roll = () => {
         <div className="flex flex-wrap justify-center content-center">
             {rollers.map((roller, i) => {
                 return roller.type === 'input' ? (
-                    <InputRoller roller={roller} index={i}/>
+                    <InputRoller key={`${roller.name}-${i}`} roller={roller} index={i}/>
                 ) : (
-                    <ButtonRoller roller={roller} index={i}/>
+                    <ButtonRoller key={`${roller.name}-${i}`} roller={roller} index={i}/>
                 );
             })}
         </div>

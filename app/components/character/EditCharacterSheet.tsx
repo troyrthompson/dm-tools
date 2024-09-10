@@ -115,7 +115,7 @@ export const EditCharacterSheet = ({characterId}: EditCharacterSheetProps) => {
           let inputType = typeof data[1] === 'string' ? 'text' : 'number';
           if (data[0] === 'class') {
               return (
-                  <div className="flex flex-col">
+                  <div key={i} className="flex flex-col">
                       <label htmlFor={`general${data[0]}`}>{capitalizeString(data[0])}</label>
                       <select onChange={handleChange} className="text-sm h-8 pl-1 py-1 border border-gray-300 mb-1" name={`general.${data[0]}`} key={`general${data[0]}`} id={`general${data[0]}`} value={data[1]}>
                           {characterClasseList.map((characterClass, index) => {
@@ -149,7 +149,7 @@ export const EditCharacterSheet = ({characterId}: EditCharacterSheetProps) => {
                 <CharacterAttributeContainer title="Ability Scores">
                     {Object.entries(formData.abilityScores).map((data: any, i: number) => {
                         return (
-                            <div className="flex flex-col">
+                            <div key={i} className="flex flex-col">
                                 <label htmlFor={`abilityScore${data[0]}`}>{capitalizeString(data[0])}</label>
                                 <input onChange={handleChange} className="text-sm h-6 pl-1 py-1 border border-gray-300 mb-1" name={`abilityScores.${data[0]}`} type="number" key={`abilityScore${data[0]}`} id={`abilityScore${data[0]}`} value={data[1]} />
                             </div>
@@ -160,7 +160,7 @@ export const EditCharacterSheet = ({characterId}: EditCharacterSheetProps) => {
                 <CharacterAttributeContainer title="Conditions">
                     {Object.entries(formData.conditions).map((data: any, i: number) => {
                         return (
-                            <div className="text-xs mb-1 flex align-center">
+                            <div key={i} className="text-xs mb-1 flex align-center">
                                 <input onChange={handleChange} className="text-sm border border-gray-300 mr-1" type="checkbox" name={`conditions.${data[0]}`} key={`conditions${data[0]}`} id={`conditions${data[0]}`} defaultChecked={formData.conditions[data[0]]} />
                                 <label htmlFor={`conditions${data[0]}`}>{capitalizeString(data[0])}</label>
                             </div>
@@ -173,7 +173,7 @@ export const EditCharacterSheet = ({characterId}: EditCharacterSheetProps) => {
                 <CharacterAttributeContainer title="Skill Proficiencies">
                     {formData.skillProficiencies.map((data: any, i: number) => {
                         return (
-                            <div>
+                            <div key={i}>
                                 <select onChange={handleChange} className="text-sm h-8 pl-1 py-1 border border-gray-300 mb-1" name={`skillProficiencies.${i}`} key={`skillProficiencies${i}`} id={`skillProficienciesdata${i}`}  value={data}>
                                 {skillList.map((skill, index) => {
                                     return (
@@ -188,7 +188,7 @@ export const EditCharacterSheet = ({characterId}: EditCharacterSheetProps) => {
                 <CharacterAttributeContainer title="Special Senses">
                     {Object.entries(formData.specialSenses).map((data: any, i: number) => {
                         return (
-                            <div className="flex flex-col">
+                            <div key={i} className="flex flex-col">
                                 <label htmlFor={`specialSenses${i}`}>{capitalizeString(data[0])}</label>
                                 <input onChange={handleChange} className="text-sm h-6 pl-1 py-1 border border-gray-300 mb-1" type="number" name={`specialSenses.${data[0]}`} key={`specialSenses.${data[0]}`} id={`specialSenses${i}`} value={data[1]} />
                             </div>
@@ -199,7 +199,7 @@ export const EditCharacterSheet = ({characterId}: EditCharacterSheetProps) => {
                 <CharacterAttributeContainer title="Languages">
                     {Object.entries(formData.languages).map((data: any, i: number) => {
                         return (
-                            <div className="text-xs mb-1 flex align-center">
+                            <div key={i} className="text-xs mb-1 flex align-center">
                                 <input onChange={handleChange} className="text-sm border border-gray-300 mr-1" type="checkbox" name={`languages.${data[0]}`} key={`languages${data[0]}`} id={`languages${data[0]}`} defaultChecked={formData.languages[data[0]]} />
                                 <label htmlFor={`languages${data[0]}`}>{capitalizeString(data[0])}</label>
                             </div>
