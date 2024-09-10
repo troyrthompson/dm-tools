@@ -1,11 +1,9 @@
 "use client";
 
 import Link from "next/link";
-
-import { updateCharacter } from "@/lib/features/characters/charactersSlice";
-
 import { useState } from "react";
 
+import { updateCharacter } from "@/lib/features/characters/charactersSlice";
 import { useAppDispatch } from "@/lib/hooks";
 
 export const CharacterCard = ({character}) => {
@@ -18,7 +16,7 @@ export const CharacterCard = ({character}) => {
     dispatch(updateCharacter(updatedCharacter));
   }
 
-  function handleNotesChange(e) {
+  function handleNotesBlur(e) {
     const updatedCharacter = { ...character, notes: e.target.textContent }
     dispatch(updateCharacter(updatedCharacter));
   }
@@ -36,7 +34,7 @@ export const CharacterCard = ({character}) => {
                     <div key={`${i}-general`}>{data[0]}</div>
                 )
             })}
-            <span onBlur={handleNotesChange} contentEditable className="text-xs border border-gray-300 text-gray-400 w-28 resize-none mt-2">{character.notes}</span>
+            <span onBlur={handleNotesBlur} contentEditable className="text-xs border border-gray-300 text-gray-400 w-28 resize-none mt-2">{character.notes}</span>
         </div>
     </div>    
   );

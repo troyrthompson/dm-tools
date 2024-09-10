@@ -5,7 +5,7 @@ import { selectCharacterById } from "@/lib/features/characters/charactersSlice";
 import { ViewCharacterSheet } from './ViewCharacterSheet';
 import { useAppSelector } from "@/lib/hooks";
 
-export const Char = () => {
+export const ViewCharacter = () => {
   const searchParams = useSearchParams();
   const characterId = searchParams.get('id');
 
@@ -20,8 +20,6 @@ export const Char = () => {
   }
 
   return (
-    <>
-        <ViewCharacterSheet character={character} />
-    </>
+    <ViewCharacterSheet character={character} />
   );
 };

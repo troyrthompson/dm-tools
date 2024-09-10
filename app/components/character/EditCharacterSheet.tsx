@@ -1,7 +1,6 @@
 "use client";
 
 import { useRouter } from 'next/navigation'
-
 import { useState } from 'react';
 
 import {
@@ -15,35 +14,38 @@ import {
     addCharacter
 } from "@/lib/features/characters/charactersSlice";
 
-import type { Character } from "@/lib/features/characters/charactersSlice";
-
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 
-import { Button } from '../elements/Button';
+import type { Character } from "@/lib/features/characters/charactersSlice";
 
-export const EditCharacterSheet = ({characterId}) => {
+import { Button } from '../elements/Button';
+import { current } from '@reduxjs/toolkit';
+
+interface EditCharacterSheetProps {
+    characterId?: string;
+}
+
+
+// Using EditCharacterSheet with an id will edit a specific character
+// Using EditCharacterSheet without an id will create a form to add a new character
+export const EditCharacterSheet = ({characterId}: EditCharacterSheetProps) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const characters = useAppSelector(selectCharacters);
-  
-  function findCharacter(id: string | null): Character {
-    const selectedCharacter = {...defaultCharacter};
 
-    if (id === null) {
-      return selectedCharacter;
+  let currentCharacter: Character | undefined;
+  let newCharacterId: number | undefined;
+
+  if (characterId) {
+    currentCharacter = characters.find(character => character.id === parseInt(characterId));
+
+    if(currentCharacter === undefined) {
+        return <div>Invalid Character</div>;
     }
-    let result = characters.find(character => character.id === parseInt(id));
-
-    if (result === undefined) {
-      return selectedCharacter;
-    }
-
-    return result;
+  } else {
+    currentCharacter = defaultCharacter;
+    newCharacterId = useAppSelector(getNextCharacterId);
   }
-
-  const newCharacterId: number = useAppSelector(getNextCharacterId);
-
-  const currentCharacter = findCharacter(characterId);
 
   const [formData, setFormData] = useState(currentCharacter);
 
@@ -52,14 +54,14 @@ export const EditCharacterSheet = ({characterId}) => {
   function deleteThisCharacter() {
     const promptFeedback = prompt('Type "delete" to confirm.');
 
-    if (promptFeedback === 'delete') {
+    if (promptFeedback === 'delete' && currentCharacter) {
       dispatch(deleteCharacter(currentCharacter));
       router.push('/characters');
     }
   }
 
-  function handleSubmit(e) {
-    if (characterId === undefined) {
+  function handleSubmit() {
+    if (characterId === undefined && newCharacterId) {
         const characterToUpdate: Character = formData;
         characterToUpdate.id = newCharacterId;
         dispatch(addCharacter(characterToUpdate));
@@ -137,14 +139,13 @@ export const EditCharacterSheet = ({characterId}) => {
     <div>
         <form className="flex flex-col justify-center align-center" onSubmit={e => { e.preventDefault(); handleSubmit(e); }}>
 
-        <div className="flex flex-wrap gap-4 justify-center">
+            <div className="flex flex-wrap gap-4 justify-center">
                 <div className="p-8 rounded-xl shadow-lg">
                     <h2 className="text-2xl mb-2 mt-0">General</h2>
                     {outputGeneralInputs(formData.general)}
                 </div>
 
                 <div className="p-8 rounded-xl shadow-lg">
-                    
                     <h2 className="text-2xl mb-2 mt-0">Ability Scores</h2>
                     {Object.entries(formData.abilityScores).map((data: any, i: number) => {
                         return (
@@ -214,13 +215,13 @@ export const EditCharacterSheet = ({characterId}) => {
                         )
                     })}
                 </div>
-
             </div>
-          <div className="flex justify-center mt-8">
-            {(characterId === undefined) ? <Button text="Add Character"></Button> : <Button text="Update Character"></Button>}
-          </div>
+
+            <div className="flex justify-center mt-8">
+                {(characterId === undefined) ? <Button text="Add Character"></Button> : <Button text="Update Character"></Button>}
+            </div>
         </form>
-        {(characterId === undefined) ? <div></div> : (
+        {(characterId === undefined) ? '' : (
             <div className="flex flex-col justify-center">
                 <div className="flex justify-center mt-12" onClick={() => { deleteThisCharacter(); }}><Button text="Delete Character"></Button></div>
              </div>

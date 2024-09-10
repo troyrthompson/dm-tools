@@ -1,9 +1,7 @@
-import { Char } from "../components/character/ViewCharacter";
+import { ViewCharacter } from "../components/character/ViewCharacter";
 
 export default function CharacterPage() {
   return (
-    <>
-      <Char />
-    </>
+    <ViewCharacter />
   );
 }
