@@ -10,12 +10,15 @@ import { useAppSelector } from "@/lib/hooks";
 
 import buildPassiveSensesObj from '@/lib/utils/character/buildPassiveSenseObj';
 
+import { Widget } from "../elements/Widget";
+import { WidgetSelect } from "../elements/WidgetSelect";
+
 export const PassiveTracker = () => {
   const characters = useAppSelector(selectCharacters);
 
   const [applicableCharacters, setApplicableCharacters] = useState<Array<string>>([]);
   const [sensesValue, setSensesValue] = useState(14);
-  const [sense, setSense] = useState('Perception');
+  const [sense, setSense] = useState('Choose Sense');
 
   const characterPassives = characters.map((character) => {
     const passiveSensesObj = buildPassiveSensesObj(character);
@@ -48,11 +51,10 @@ export const PassiveTracker = () => {
   }
 
   return (
-    <div className="flex flex-wrap justify-center">
-      <div className="flex flex-col gap-2 p-6 bg-white border border-gray-200 rounded shadow dark:bg-gray-800 dark:border-gray-700 no-underline">
-        <h2 className="block text-md font-bold mb-2">Senses</h2>
-        <input className="w-32 border border-gray-200 pl-2" type="number" onChange={handleInputChange} value={sensesValue}/>
-        <select className="w-32 border border-gray-200" onChange={handleSelectChange} value={sense}>
+    <Widget title="Senses">
+        <div>
+        <WidgetSelect onChangeHandler={handleSelectChange} value={sense}>
+          <option hidden value=''>Options</option>
           <option value='Perception'>Perception</option>
           <option value='Investigation'>Investigation</option>
           <option value='Insight'>Insight</option>
@@ -60,18 +62,19 @@ export const PassiveTracker = () => {
           <option value='darkvision'>Darkvision</option>
           <option value='tremorsense'>Tremorsense</option>
           <option value='truesight'>Truesight</option>
-        </select>
+        </WidgetSelect>
+        <input className="w-14 bg-gray-50 border border-l-0 border-gray-300 text-gray-900 text-sm leading-normal rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="number" onChange={handleInputChange} value={sensesValue}/>
+        </div>
 
         <div>
         {applicableCharacters.map((character, index) => {
           return (
             <div key={index}>
-              <div>{character}</div>
+              {character}
             </div>
           );
         })}
         </div>
-      </div>
-    </div>
+    </Widget>
   );
 };

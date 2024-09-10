@@ -20,6 +20,9 @@ import determineAbilityScoreModifier from "@/lib/utils/character/determineAbilit
 
 import { SmallButton } from "../elements/SmallButton";
 
+import { Widget } from "../elements/Widget";
+import { WidgetSelect } from "../elements/WidgetSelect";
+
 export const Skills = () => {
 
     const dispatch = useAppDispatch();
@@ -27,7 +30,7 @@ export const Skills = () => {
   const characters = useAppSelector(selectCharacters);
 
   const [applicableCharacters, setApplicableCharacters] = useState([]);
-  const [skill, setSkill] = useState('Arcana');
+  const [skill, setSkill] = useState('Options');
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSkill(e.target.value);
@@ -70,10 +73,9 @@ export const Skills = () => {
 }
 
   return (
-    <div className="flex flex-wrap justify-center">
-      <div className="flex flex-col gap-2 p-6 bg-white border border-gray-200 rounded shadow dark:bg-gray-800 dark:border-gray-700 no-underline">
-        <h2 className="block text-md font-bold mb-2">Skills</h2>
-        <select className="w-32 border border-gray-200" onChange={handleSelectChange} value={skill}>
+    <Widget title="Skills">
+        <WidgetSelect onChangeHandler={handleSelectChange} value={skill}>
+            <option hidden value="">Options</option>
             {skillList.map((skillItem, i) => {
                 return (
                     <option key={i} value={skillItem}>
@@ -81,18 +83,17 @@ export const Skills = () => {
                     </option>
                 );
             })}
-        </select>
+        </WidgetSelect>
 
         <div>
-        {applicableCharacters.map((character, index) => {
-          return (
-            <div key={index}>
-              <div><span onClick={(e) => {handleSkillClick(character.skill)}}><SmallButton text={character.skill > 0 ? `+${character.skill}` : `${character.skill}`} /></span> {character.character}</div>
-            </div>
-          );
-        })}
+          {applicableCharacters.map((character, index) => {
+            return (
+              <div key={index}>
+                <div><span onClick={(e) => {handleSkillClick(character.skill)}}><SmallButton text={character.skill > 0 ? `+${character.skill}` : `${character.skill}`} /></span> {character.character}</div>
+              </div>
+            );
+          })}
         </div>
-      </div>
-    </div>
+    </Widget>
   );
 };

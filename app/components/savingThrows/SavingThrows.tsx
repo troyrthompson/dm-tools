@@ -16,15 +16,19 @@ import type { Dice } from "@/lib/features/dice/diceSlice";
 
 import determineAbilityScoreModifier from "@/lib/utils/character/determineAbilityScoreModifier";
 import getProficiencyBonus from "@/lib/utils/character/getProficiencyBonus";
+import capitalizeString from "@/lib/utils/capitalizeString";
 
 import { SmallButton } from "../elements/SmallButton";
+
+import { Widget } from "../elements/Widget";
+import { WidgetSelect } from "../elements/WidgetSelect";
 
 export const SavingThrows = () => {
   const dispatch = useAppDispatch();
   const characters = useAppSelector(selectCharacters);
 
   const [applicableCharacters, setApplicableCharacters] = useState(Array<{character: string, ability: number}>);
-  const [savingThrows, setSavingThrows] = useState('strength');
+  const [savingThrows, setSavingThrows] = useState('Options');
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSavingThrows(e.target.value);
@@ -59,29 +63,27 @@ export const SavingThrows = () => {
 }
 
   return (
-    <div className="flex flex-wrap justify-center">
-      <div className="flex flex-col gap-2 p-6 bg-white border border-gray-200 rounded shadow dark:bg-gray-800 dark:border-gray-700 no-underline">
-        <h2 className="block text-md font-bold mb-2">Saving Throws</h2>
-        <select className="w-32 border border-gray-200" onChange={handleSelectChange} value={savingThrows}>
+    <Widget title="Saving Throws">
+        <WidgetSelect onChangeHandler={handleSelectChange} value={savingThrows}>
+            <option hidden value="">Options</option>
             {abilities.map((abilityItem, i) => {
                 return (
                     <option key={i} value={abilityItem}>
-                    {abilityItem}
+                      {capitalizeString(abilityItem)}
                     </option>
                 );
             })}
-        </select>
+        </WidgetSelect>
 
         <div>
-        {applicableCharacters.map((character, index) => {
-          return (
-            <div key={index}>
-              <div><span onClick={(e) => {handleSkillClick(character.ability)}}><SmallButton text={character.ability > 0 ? `+${character.ability}` : `${character.ability}`} /></span> {character.character}</div>
-            </div>
-          );
-        })}
+          {applicableCharacters.map((character, index) => {
+            return (
+              <div key={index}>
+                <div><span onClick={(e) => {handleSkillClick(character.ability)}}><SmallButton text={character.ability > 0 ? `+${character.ability}` : `${character.ability}`} /></span> {character.character}</div>
+              </div>
+            );
+          })}
         </div>
-      </div>
-    </div>
+    </Widget>
   );
 };

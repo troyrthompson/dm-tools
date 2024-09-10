@@ -13,6 +13,12 @@ import type { Dice } from "@/lib/features/dice/diceSlice";
 
 import { SmallButton } from "../elements/SmallButton";
 
+import { Widget } from "../elements/Widget";
+import { WidgetSelect } from "../elements/WidgetSelect";
+
+import capitalizeString from "@/lib/utils/capitalizeString";
+import getModifierString from "@/lib/utils/getModifierString";
+
 export const Abilities = () => {
   const dispatch = useAppDispatch();
   const characters = useAppSelector(selectCharacters);
@@ -43,25 +49,24 @@ export const Abilities = () => {
     const dice: Dice = {
         quantity: 1,
         sides: 20,
-        modifier: abilityRollNumber,
+        modifier: parseInt(abilityRollNumber),
         name: `${ability} Check`
     }
     dispatch(recordDiceRoll(rollDice(dice)));
 }
 
   return (
-    <div className="flex flex-wrap justify-center">
-      <div className="flex flex-col gap-2 p-6 bg-white border border-gray-200 rounded shadow dark:bg-gray-800 dark:border-gray-700 no-underline">
-        <h2 className="block text-md font-bold mb-2">Abilities</h2>
-        <select className="w-32 border border-gray-200" onChange={handleSelectChange} value={ability}>
+    <Widget title="Abilities">
+        <WidgetSelect onChangeHandler={handleSelectChange} value={ability}>
+            <option hidden value="">Options</option>
             {abilities.map((abilityItem, i) => {
                 return (
                     <option key={i} value={abilityItem}>
-                      {abilityItem}
+                      {capitalizeString(abilityItem)}
                     </option>
                 );
             })}
-        </select>
+        </WidgetSelect>
 
         <div>
         {applicableCharacters.map((character, index) => {
@@ -69,7 +74,7 @@ export const Abilities = () => {
             <div key={index}>
               <div>
                 <span onClick={(e) => {handleSkillClick(character.ability)}}>
-                  <SmallButton text={character.ability > 0 ? `+${character.ability}` : `${character.ability}`} />
+                  <SmallButton text={getModifierString(character.ability)} />
                 </span>
                 {character.character}
               </div>
@@ -77,7 +82,6 @@ export const Abilities = () => {
           );
         })}
         </div>
-      </div>
-    </div>
+    </Widget>
   );
 };

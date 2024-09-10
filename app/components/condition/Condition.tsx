@@ -6,6 +6,10 @@ import { selectCharacters, updateCharacter,conditionsList } from "@/lib/features
 
 import { SmallButton } from "../elements/SmallButton";
 
+import capitalizeString from "@/lib/utils/capitalizeString";
+
+import { Widget } from "../elements/Widget";
+
 export const Condition = () => {
   const dispatch = useAppDispatch();
   const characters = useAppSelector(selectCharacters);
@@ -22,19 +26,18 @@ export const Condition = () => {
   };
 
   return (
-    <div className="flex flex-wrap justify-center">
-      <form className="flex flex-col gap-2 p-6 bg-white border border-gray-200 rounded shadow dark:bg-gray-800 dark:border-gray-700 no-underline" onSubmit={handleSubmit}>
-        <label htmlFor="conditionName"><h2 className="block text-md font-bold mb-2">Conditions</h2></label>
-        <select className="border border-gray-200" id="conditionName">
+    <Widget title="Conditions">
+      <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
+        <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="conditionName">
           {Object.keys(conditionsList).map((condition, i) => {
             return (
               <option key={i} value={condition}>
-                {condition}
+                {capitalizeString(condition)}
               </option>
             );
           })}
         </select>
-        <select className="border border-gray-200" id="characterId">
+        <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="characterId">
           {characters.map((character, i) => {
             return (
               <option key={i} value={character.id}>
@@ -43,8 +46,10 @@ export const Condition = () => {
             );
           })}
         </select>
-        <SmallButton text="Update Condition" />
+        <div className="mt-2">
+          <SmallButton text="Update" />
+        </div>
       </form>
-   </div>
+    </Widget>
   );
 };
