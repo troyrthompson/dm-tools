@@ -1,17 +1,16 @@
 "use client";
 
+import { useState } from "react";
+
 import {
   selectCharacters,
 } from "@/lib/features/characters/charactersSlice";
 
 import { useAppSelector } from "@/lib/hooks";
 
-import { useState } from "react";
-
 import buildPassiveSensesObj from '@/lib/utils/character/buildPassiveSenseObj';
 
 export const PassiveTracker = () => {
-
   const characters = useAppSelector(selectCharacters);
 
   const [applicableCharacters, setApplicableCharacters] = useState<Array<string>>([]);
@@ -41,34 +40,8 @@ export const PassiveTracker = () => {
   function determineApplicableCharacters(sense: string, sensesValue: number) {
     const applicableCharacters: Array<string> = [];
     characterPassives.forEach((character) => {
-      if (sense === 'Perception') {
-        if (character.passive.Perception >= sensesValue) {
-          applicableCharacters.push(character.name);
-        }
-      } else if (sense === 'Investigation') {
-        if (character.passive.Investigation >= sensesValue) {
-          applicableCharacters.push(character.name);
-        }
-      } else if (sense === 'Insight') {
-        if (character.passive.Insight >= sensesValue) {
-          applicableCharacters.push(character.name);
-        }
-      } else if (sense === 'blindsight') {
-        if (character.passive.blindsight >= sensesValue) {
-          applicableCharacters.push(character.name);
-        }
-      } else if (sense === 'darkvision') {
-        if (character.passive.darkvision >= sensesValue) {
-          applicableCharacters.push(character.name);
-        }
-      } else if (sense === 'tremorsense') {
-        if (character.passive.tremorsense >= sensesValue) {
-          applicableCharacters.push(character.name);
-        }
-      } else if (sense === 'truesight') {
-        if (character.passive.truesight >= sensesValue) {
-          applicableCharacters.push(character.name);
-        }
+      if (character.passive[sense] >= sensesValue) {
+        applicableCharacters.push(character.name);
       }
     });
     setApplicableCharacters(applicableCharacters);
