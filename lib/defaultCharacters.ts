@@ -1,5 +1,3 @@
-import { CharactersSlice } from './features/characters/charactersSlice';
-
 export const conditionsList = {
     blinded: false,
     charmed: false,
