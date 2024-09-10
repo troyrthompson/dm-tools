@@ -5,7 +5,6 @@ import { useAppSelector, useAppDispatch } from "@/lib/hooks";
 import { selectCharacters, updateCharacter,conditionsList } from "@/lib/features/characters/charactersSlice";
 
 import { SmallButton } from "../elements/SmallButton";
-import { current } from "@reduxjs/toolkit";
 
 export const Condition = () => {
   const dispatch = useAppDispatch();
