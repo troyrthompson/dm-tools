@@ -57,7 +57,7 @@ export const Abilities = () => {
             {abilities.map((abilityItem, i) => {
                 return (
                     <option key={i} value={abilityItem}>
-                    {abilityItem}
+                      {abilityItem}
                     </option>
                 );
             })}
@@ -67,7 +67,12 @@ export const Abilities = () => {
         {applicableCharacters.map((character, index) => {
           return (
             <div key={index}>
-              <div><span onClick={(e) => {handleSkillClick(character.ability)}}><SmallButton text={character.ability > 0 ? `+${character.ability}` : `${character.ability}`} /></span> {character.character}</div>
+              <div>
+                <span onClick={(e) => {handleSkillClick(character.ability)}}>
+                  <SmallButton text={character.ability > 0 ? `+${character.ability}` : `${character.ability}`} />
+                </span>
+                {character.character}
+              </div>
             </div>
           );
         })}
