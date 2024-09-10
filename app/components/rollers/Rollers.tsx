@@ -114,31 +114,31 @@ export const Rollers = () => {
             <div className="flex flex-wrap justify-center">
                 <form className="flex flex-col flex-wrap justify-center" onSubmit={e => { e.preventDefault(); handleSubmit()}}>
                     <div className="mb-1">
-                        <label className="block text-md font-bold mb-2" htmlFor="name">Name</label>
-                        <input className="w-52 appearance-none block bg-gray-100 text-gray-700 border border-gray-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" onChange={handleChange} type="text" name="name" value={formData.name} />
+                        <label className="block text-md font-semibold mb-2" htmlFor="name">Name</label>
+                        <input className="w-52 appearance-none block bg-white text-gray-700 border border-gray-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" onChange={handleChange} type="text" name="name" value={formData.name} />
                     </div>
                     <div className="flex mb-1">
                         <div className="mr-4">
-                        <label className="block text-md font-bold mb-2" htmlFor="type">Type</label>
-                        <select className="w-24 appearance-none block bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-whiteappearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500appearance-none block bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" onChange={handleChange} name="type" id="rollerType" value={formData.type}>
+                        <label className="block text-md font-semibold mb-2" htmlFor="type">Type</label>
+                        <select className="w-24 block bg-white text-gray-700 border border-gray-200 rounded py-3 px-2 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" onChange={handleChange} name="type" id="rollerType" value={formData.type}>
                             <option value="input">Input</option>
                             <option value="button">Button</option>
                         </select>
                         </div>
                         <div>
-                        <label className="block text-md font-bold mb-2" htmlFor="quantity">Dice</label>
-                        <input className="w-24 appearance-none block bg-gray-100 text-gray-700 border border-gray-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" onChange={handleChange} type="number" name="quantity" value={formData.quantity} />
+                        <label className="block text-md font-semibold mb-2" htmlFor="quantity">Dice</label>
+                        <input className="w-24 appearance-none block bg-white text-gray-700 border border-gray-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" onChange={handleChange} type="number" name="quantity" value={formData.quantity} />
                         </div>
                     </div>
 
                     <div className="flex mb-1">
                         <div className="mr-4">
-                            <label className="block text-md font-bold mb-2" htmlFor="sides">Sides</label>
-                            <input className="w-24 appearance-none block bg-gray-100 text-gray-700 border border-gray-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" onChange={handleChange} type="number" name="sides" value={formData.sides} />
+                            <label className="block text-md font-semibold mb-2" htmlFor="sides">Sides</label>
+                            <input className="w-24 appearance-none block bg-white text-gray-700 border border-gray-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" onChange={handleChange} type="number" name="sides" value={formData.sides} />
                         </div>
                         <div className="mb-1">
-                            <label className="block text-md font-bold mb-2" htmlFor="modifier">Modifier</label>
-                            <input className="w-24 appearance-none block bg-gray-100 text-gray-700 border border-gray-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" onChange={handleChange} type="number" name="modifier" value={formData.modifier} />
+                            <label className="block text-md font-semibold mb-2" htmlFor="modifier">Modifier</label>
+                            <input className="w-24 appearance-none block bg-white text-gray-700 border border-gray-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" onChange={handleChange} type="number" name="modifier" value={formData.modifier} />
                         </div>
                     </div>
                     <div className="flex justify-center mb-1">
