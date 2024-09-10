@@ -6,6 +6,8 @@ import { selectRollHistory } from "@/lib/features/dice/diceSlice";
 
 import getModifierString from "@/lib/utils/getModifierString";
 
+import capitalizeString from "@/lib/utils/capitalizeString";
+
 export const RollList = () => {
 
     const rolls = useAppSelector(selectRollHistory).slice(-5);
@@ -49,7 +51,7 @@ export const RollList = () => {
         if (rolls.length - 1 === index) {
             return (
                 <>
-                    <div className="leading-none italic">{roll.name}</div>
+                    <div className="leading-none italic pt-2">{capitalizeString(roll.name)}</div>
                     <div className="leading-none text-3xl" key={index}><span className="font-bold">{roll.total}</span> : {outputQuantity(roll.quantity)}d{roll.sides} {outputModifier(roll.modifier)} {outputEachDieResult(roll.results)}</div>
                 </>
             )
@@ -57,7 +59,7 @@ export const RollList = () => {
 
         return (
             <>
-                <div className="leading-none italic">{roll.name}</div>
+                <div className="leading-none italic">{capitalizeString(roll.name)}</div>
                 <div className="leading-none" key={index}><span className="font-bold">{roll.total}</span> : {outputQuantity(roll.quantity)}d{roll.sides} {outputModifier(roll.modifier)} {outputEachDieResult(roll.results)}</div>
             </>
         )
@@ -65,9 +67,15 @@ export const RollList = () => {
 
   return (
     <>
-        {rolls.map((roll, index) => {
-            return outputRoll(rolls, roll, index);
-        })}
+        {rolls.length === 0 ? (
+            ''
+        ) : (
+            <div className="text-center min-w-24 min-h-12 sm:text-left p-3 bg-white rounded-xl shadow-lg mb-4">
+                {rolls.map((roll, index) => {
+                    return outputRoll(rolls, roll, index);
+                })}
+            </div>
+        )}
     </>
   );
 };
