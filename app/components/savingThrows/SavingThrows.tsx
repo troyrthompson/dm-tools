@@ -1,30 +1,29 @@
 "use client";
 
+import { useState } from "react";
+
 import {
   selectCharacters,
+  abilities, 
+  classFeaturesList
 } from "@/lib/features/characters/charactersSlice";
-
-import type { Dice } from "@/lib/features/dice/diceSlice";
 
 import { useAppSelector, useAppDispatch } from "@/lib/hooks";
 
 import { recordDiceRoll, rollDice } from "@/lib/features/dice/diceSlice";
 
-import determineAbilityScoreModifier from "@/lib/utils/character/determineAbilityScoreModifier";
+import type { Dice } from "@/lib/features/dice/diceSlice";
 
+import determineAbilityScoreModifier from "@/lib/utils/character/determineAbilityScoreModifier";
 import getProficiencyBonus from "@/lib/utils/character/getProficiencyBonus";
 
-import { useState } from "react";
-
 import { SmallButton } from "../elements/SmallButton";
-
-import { abilities, classFeaturesList } from "@/lib/features/characters/charactersSlice";
 
 export const SavingThrows = () => {
   const dispatch = useAppDispatch();
   const characters = useAppSelector(selectCharacters);
 
-  const [applicableCharacters, setApplicableCharacters] = useState([]);
+  const [applicableCharacters, setApplicableCharacters] = useState(Array<{character: string, ability: number}>);
   const [savingThrows, setSavingThrows] = useState('strength');
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
