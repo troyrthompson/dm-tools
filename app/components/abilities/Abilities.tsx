@@ -1,29 +1,24 @@
 "use client";
 
-import {
-  selectCharacters,
-} from "@/lib/features/characters/charactersSlice";
+import { useState } from "react";
+
+import { selectCharacters } from "@/lib/features/characters/charactersSlice";
+
+import { useAppSelector, useAppDispatch } from "@/lib/hooks";
+import { recordDiceRoll, rollDice } from "@/lib/features/dice/diceSlice";
+import determineAbilityScoreModifier from "@/lib/utils/character/determineAbilityScoreModifier";
+import { abilities } from "@/lib/features/characters/charactersSlice";
 
 import type { Dice } from "@/lib/features/dice/diceSlice";
 
-import { useAppSelector, useAppDispatch } from "@/lib/hooks";
-
-import { recordDiceRoll, rollDice } from "@/lib/features/dice/diceSlice";
-
-import determineAbilityScoreModifier from "@/lib/utils/character/determineAbilityScoreModifier";
-
-import { useState } from "react";
-
 import { SmallButton } from "../elements/SmallButton";
-
-import { abilities, classFeaturesList } from "@/lib/features/characters/charactersSlice";
 
 export const Abilities = () => {
   const dispatch = useAppDispatch();
   const characters = useAppSelector(selectCharacters);
 
-  const [applicableCharacters, setApplicableCharacters] = useState([]);
-  const [ability, setAbility] = useState('strength');
+  const [applicableCharacters, setApplicableCharacters] = useState(Array<{character: string, ability: number}>);
+  const [ability, setAbility] = useState('');
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setAbility(e.target.value);
