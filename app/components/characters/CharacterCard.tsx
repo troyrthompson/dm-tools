@@ -36,7 +36,7 @@ export const CharacterCard = ({character}) => {
                     <span className="text-xs text-gray-500" key={`${i}-general`}>{capitalizeString(data[0])}</span>
                 )
             })}
-            <span onBlur={handleNotesBlur} suppressContentEditableWarning="true" contentEditable className="text-xs align-item-end border border-gray-300 text-gray-500 w-28 resize-none mt-2">{character.notes}</span>
+            <span onBlur={handleNotesBlur} suppressContentEditableWarning={true} contentEditable className="text-xs align-item-end border border-gray-300 text-gray-500 w-28 resize-none mt-2">{character.notes}</span>
         </div>
     </div>    
   );
