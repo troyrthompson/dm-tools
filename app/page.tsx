@@ -9,10 +9,13 @@ import { SavingThrows } from "./components/savingThrows/SavingThrows";
 
 import { Languages } from "./components/languages/Languages";
 
+import NoSSRWrapper from "./components/dynamicWrapper";
+
 export default function IndexPage() {
   return (
    <>
-    <Characters />
+    <NoSSRWrapper>
+      <Characters />
     <div className="flex flex-wrap justify-center gap-2 mt-6">
       <Abilities />
       <SavingThrows />
@@ -23,10 +26,11 @@ export default function IndexPage() {
       <Condition />
       <Languages />
     </div>
+    </NoSSRWrapper>
    </>
   );
 }
 
-export const metadata: Metadata = {
-  title: "Redux Toolkit",
-};
+// export const metadata: Metadata = {
+//   title: "Redux Toolkit",
+// };

@@ -8,6 +8,8 @@ import { RollList } from "./components/dice/RollList";
 import "./styles/globals.css";
 import { Roll } from "./components/dice/Roll";
 
+import NoSSRWrapper from "./components/dynamicWrapper";
+
 interface Props {
   readonly children: ReactNode;
 }
@@ -22,7 +24,9 @@ export default function RootLayout({ children }: Props) {
               <RollList/>
             </aside>
             <aside className="z-10 sm:fixed max-w-none px-3 py-2 bottom-0 left-0">
-              <Roll />
+              <NoSSRWrapper>
+                <Roll />
+              </NoSSRWrapper>
             </aside>
             <section className="z-0 container mx-auto relative min-h-screen flex content-between justify-between flex-col">
             <Nav />
