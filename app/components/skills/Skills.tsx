@@ -1,22 +1,22 @@
 "use client";
 
+import { useState } from "react";
+
+import { useAppSelector, useAppDispatch } from "@/lib/hooks";
+
 import {
   selectCharacters,
+  skillList, 
+  skillListAbilities
 } from "@/lib/features/characters/charactersSlice";
 
 import type { Dice } from "@/lib/features/dice/diceSlice";
-
-import { useAppSelector, useAppDispatch } from "@/lib/hooks";
 
 import getProficiencyBonus from "@/lib/utils/character/getProficiencyBonus";
 
 import { recordDiceRoll, rollDice } from "@/lib/features/dice/diceSlice";
 
 import determineAbilityScoreModifier from "@/lib/utils/character/determineAbilityScoreModifier";
-
-import { useState } from "react";
-
-import { skillList, skillListAbilities } from "@/lib/features/characters/charactersSlice";
 
 import { SmallButton } from "../elements/SmallButton";
 
