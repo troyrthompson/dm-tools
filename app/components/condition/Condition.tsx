@@ -1,29 +1,23 @@
 "use client";
 
-import {
-  selectCharacters,
-} from "@/lib/features/characters/charactersSlice";
-
 import { useAppSelector, useAppDispatch } from "@/lib/hooks";
 
-import { updateCharacter } from "@/lib/features/characters/charactersSlice";
+import { selectCharacters, updateCharacter,conditionsList } from "@/lib/features/characters/charactersSlice";
 
 import { SmallButton } from "../elements/SmallButton";
-
-import { conditionsList } from "@/lib/features/characters/charactersSlice";
+import { current } from "@reduxjs/toolkit";
 
 export const Condition = () => {
   const dispatch = useAppDispatch();
   const characters = useAppSelector(selectCharacters);
 
-  const updatedCharacter = JSON.parse(JSON.stringify(characters[0]));
-
-  updatedCharacter.conditions.blinded = false;
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    const char = characters.find((character) => character.id === parseInt(e.target.elements.characterId.value));
-    const updatedCharacter = JSON.parse(JSON.stringify(char));
+    const currentCharacter = characters.find((character) => character.id === parseInt(e.target.elements.characterId.value));
+    if (!currentCharacter) {
+      return;
+    }
+    const updatedCharacter = JSON.parse(JSON.stringify(currentCharacter));
     updatedCharacter.conditions[e.target.elements.conditionName.value] = !updatedCharacter.conditions[e.target.elements.conditionName.value];
     dispatch(updateCharacter(updatedCharacter));
   };
