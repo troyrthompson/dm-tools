@@ -11,6 +11,7 @@ import type { Dice } from '@/lib/features/dice/diceSlice';
 
 import { Button } from '../elements/Button';
 import { SmallButton } from '../elements/SmallButton';
+import { CharacterAttributeContainer } from '../elements/CharacterAttributeContainer';
 
 import getSkillsBonus from '@/lib/utils/character/getSkillsBonus';
 import determineAbilityScoreModifier from '@/lib/utils/character/determineAbilityScoreModifier';
@@ -18,27 +19,7 @@ import getProficiencyBonus from '@/lib/utils/character/getProficiencyBonus';
 import buildPassiveSensesObj from '@/lib/utils/character/buildPassiveSenseObj';
 import capitalizeString from '@/lib/utils/capitalizeString';
 
-const skills = [
-    ['Acrobatics', 'dexterity'],
-    ['Animal Handling', 'wisdom'],
-    ['Arcana', 'intelligence'],
-    ['Athletics', 'strength'],
-    ['Deception', 'charisma'],
-    ['History', 'intelligence'],
-    ['Insight', 'wisdom'],
-    ['Intimidation', 'charisma'],
-    ['Investigation', 'intelligence'],
-    ['Medicine', 'wisdom'],
-    ['Nature', 'intelligence'],
-    ['Perception', 'wisdom'],
-    ['Performance', 'charisma'],
-    ['Persuasion', 'charisma'],
-    ['Religion', 'intelligence'],
-    ['Sleight of Hand', 'dexterity'],
-    ['Stealth', 'dexterity'],
-    ['Survival', 'wisdom']
-];
-
+import { skillListAbilities } from '@/lib/features/characters/charactersSlice';
 
 
 export const ViewCharacterSheet = ({ character }) => {
@@ -94,13 +75,13 @@ export const ViewCharacterSheet = ({ character }) => {
     }
     
     function buildSkillList() {
-        return skills.map((skill, i) => {
+        return Object.entries(skillListAbilities).map((skill, i) => {
             const bonus = getSkillsBonus(skill[0], character);
             const skillRollNumber = determineAbilityScoreModifier(character.abilityScores[skill[1]], bonus);
             const skillRoll = getAbilityScoreModifierString(character.abilityScores[skill[1]], bonus);
             const name = skill[0];
             return (
-                <div key={i}><div className="inline" onClick={() => handleSkillClick(name, skillRollNumber)}><SmallButton text={skillRoll}></SmallButton></div> {name}</div>
+                <div key={i}><div className="inline" onClick={() => handleSkillClick(name, skillRollNumber)}><SmallButton text={skillRoll}></SmallButton></div> <span className="pl-3">{capitalizeString(name)}</span></div>
             )
         })
     }
@@ -110,9 +91,9 @@ export const ViewCharacterSheet = ({ character }) => {
 
         return (
             <>
-                <div><span className="font-bold">{passiveSensesObj.Perception}</span> : Passive Perception</div>
-                <div><span className="font-bold">{passiveSensesObj.Investigation}</span> : Passive Investigation</div>
-                <div><span className="font-bold">{passiveSensesObj.Insight}</span> : Passive Insight</div>
+                <div><span className="font-bold inline-block min-w-6 text-right">{passiveSensesObj.Perception}</span> : Passive Perception</div>
+                <div><span className="font-bold inline-block min-w-6 text-right">{passiveSensesObj.Investigation}</span> : Passive Investigation</div>
+                <div><span className="font-bold inline-block min-w-6 text-right">{passiveSensesObj.Insight}</span> : Passive Insight</div>
 
 
             </>
@@ -126,7 +107,7 @@ export const ViewCharacterSheet = ({ character }) => {
             }
 
             return (
-                <div key={`${i}-general`}>{data[0]}</div>
+                <div key={`${i}-general`}>{capitalizeString(data[0])}</div>
             )
         })
     }
@@ -141,7 +122,7 @@ export const ViewCharacterSheet = ({ character }) => {
                 return '';
             }
             return (
-                <div key={`${i}-general`}>{data[0]}</div>
+                <div key={`${i}-general`}>{capitalizeString(data[0])}</div>
             )
         });
     }
@@ -149,65 +130,58 @@ export const ViewCharacterSheet = ({ character }) => {
   return (
     <>
         <div className="flex flex-wrap gap-4 justify-center">
-            <div className="p-8 rounded-xl shadow-lg">
-                
-                <h2 className="text-2xl mb-2 mt-0">General</h2>
+            <CharacterAttributeContainer title="General">
                 {Object.entries(character.general).map((data: any, i: number) => {
                     return (
                     <div key={`${i}-general`}>{capitalizeString(data[0])}: <span className="font-bold">{capitalizeString(data[1])}</span></div>
                     )
                 })}
                 <Link className="font-bold block mt-2" href={`/character/edit/?id=${character.id}`}><Button text='Edit Character'></Button></Link>
-            </div>
-            <div className="p-8 rounded-xl shadow-lg">
-                <h2 className="text-2xl mb-2 mt-0">Senses</h2>
+            </CharacterAttributeContainer>
+            <CharacterAttributeContainer title="Senses">
                 {buildPassiveSenses()}
                 {Object.entries(character.specialSenses).map((data: any, i: number) => {
                     if (data[1] <= 0) {
                         return '';
                     }
                     return (
-                        <div key={`${i}-specialSenses`}><span className="font-bold">{data[1]}</span> : <span>{data[0]}</span></div>
+                        <div key={`${i}-specialSenses`}><span className="font-bold inline-block min-w-6 text-right">{data[1]}</span> : <span>{capitalizeString(data[0])}</span></div>
                     )
                 })}
-            </div>
-            <div className="p-8 rounded-xl shadow-lg">
-                <h2 className="text-2xl mb-2 mt-0">Conditions</h2>
+            </CharacterAttributeContainer>
+            <CharacterAttributeContainer title="Conditions">
                 {showCondition(character)}
-            </div>
-            <div className="p-8 rounded-xl shadow-lg max-w-72">
-                <h2 className="text-2xl mb-2 mt-0">Notes</h2>
-                {showNotes(character)}
-            </div>
-            <div className="p-8 rounded-xl shadow-lg">
-                <h2 className="text-2xl mb-2 mt-0">Languages</h2>
+            </CharacterAttributeContainer>
+            <CharacterAttributeContainer title="Languages">
                 {buildLanguagesList(character)}
-            </div>
+            </CharacterAttributeContainer>
+            <CharacterAttributeContainer title="Notes">
+                {showNotes(character)}
+            </CharacterAttributeContainer>
         </div>
-        <div className="flex flex-wrap gap-4 justify-center">
+        <div className="flex flex-wrap gap-4 justify-center my-4">
             <div>
-                <div className="p-8 rounded-xl shadow-lg">
-                <h2 className="text-2xl mb-2 mt-0">Ability Scores</h2>
-                {Object.entries(character.abilityScores).map((data: any, i: number) => {
-                    return (
-                        <div className="flex justify-between" key={`${i}-ability-score`}><div onClick={() => handleAbilityScoreClick(data)}><SmallButton text={getAbilityScoreModifierString(data[1])} /></div> <span className="px-4">{capitalizeString(data[0])}</span> <span className="font-bold">{data[1]}</span></div>
-                    )
-                })}
-                </div>
-                <div className="p-8 rounded-xl shadow-lg">
-                <h2 className="text-2xl mb-2 mt-0">Saving Throws</h2>
-                {Object.entries(character.abilityScores).map((data: any, i: number) => {
-                    let savingThrowBonus = getSavingThrowBonus(data[0]);
-                    return (
-                        <div className="flex justify-between" key={`${i}-saving-throw`}><div onClick={() => handleSavingThrowClick(data, savingThrowBonus)}><SmallButton text={getAbilityScoreModifierString(data[1], savingThrowBonus)} /></div> <span className="px-4">{capitalizeString(data[0])}</span></div>
-                    )
-                })}
+                <CharacterAttributeContainer title="Ability Scores">
+                    {Object.entries(character.abilityScores).map((data: any, i: number) => {
+                        return (
+                            <div className="flex gap-2" key={`${i}-ability-score`}><div onClick={() => handleAbilityScoreClick(data)}><SmallButton text={getAbilityScoreModifierString(data[1])} /></div> <span className="font-bold min-w-6 text-right">{data[1]}</span><span className="px-2">{capitalizeString(data[0])}</span></div>
+                        )
+                    })}
+                </CharacterAttributeContainer>
+                <div className="mt-4">
+                    <CharacterAttributeContainer title="Saving Throws">
+                        {Object.entries(character.abilityScores).map((data: any, i: number) => {
+                            let savingThrowBonus = getSavingThrowBonus(data[0]);
+                            return (
+                                <div className="flex" key={`${i}-saving-throw`}><div onClick={() => handleSavingThrowClick(data, savingThrowBonus)}><SmallButton text={getAbilityScoreModifierString(data[1], savingThrowBonus)} /></div> <span className="pl-3">{capitalizeString(data[0])}</span></div>
+                            )
+                        })}
+                    </CharacterAttributeContainer>
                 </div>
             </div>
-            <div className="p-8 rounded-xl shadow-lg">
-                <h2 className="text-2xl mb-2 mt-0">Skills</h2>
+            <CharacterAttributeContainer title="Skills">
                 {buildSkillList()}
-            </div>
+            </CharacterAttributeContainer>
             
         </div>
     
