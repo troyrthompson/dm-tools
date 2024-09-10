@@ -2,10 +2,13 @@
 
 import Link from 'next/link';
 
+import { useAppDispatch } from '@/lib/hooks';
+
+import { classFeaturesList } from '@/lib/features/characters/charactersSlice';
 import { recordDiceRoll, rollDice } from '@/lib/features/dice/diceSlice';
-import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 
 import type { Dice } from '@/lib/features/dice/diceSlice';
+
 import { Button } from '../elements/Button';
 import { SmallButton } from '../elements/SmallButton';
 
@@ -13,8 +16,7 @@ import getSkillsBonus from '@/lib/utils/character/getSkillsBonus';
 import determineAbilityScoreModifier from '@/lib/utils/character/determineAbilityScoreModifier';
 import getProficiencyBonus from '@/lib/utils/character/getProficiencyBonus';
 import buildPassiveSensesObj from '@/lib/utils/character/buildPassiveSenseObj';
-
-import { classFeaturesList } from '@/lib/features/characters/charactersSlice';
+import capitalizeString from '@/lib/utils/capitalizeString';
 
 const skills = [
     ['Acrobatics', 'dexterity'],
@@ -49,20 +51,10 @@ export const ViewCharacterSheet = ({ character }) => {
         }
         return `${modifier}`;
     }
-
-    function getCapitalizedString(str: string) {
-        if (!str) {
-            return '';
-        }
-        if (parseInt(str)) {
-            return str;
-        }
-        return str[0].toUpperCase() + str.slice(1);
-    }
     
     function handleAbilityScoreClick(data: any) {
         const modifier = determineAbilityScoreModifier(data[1]);
-        const name = getCapitalizedString(data[0]);
+        const name = capitalizeString(data[0]);
         const dice: Dice = {
             quantity: 1,
             sides: 20,
@@ -75,7 +67,7 @@ export const ViewCharacterSheet = ({ character }) => {
 
     function handleSavingThrowClick(data: any, bonus) {
         const modifier = determineAbilityScoreModifier(data[1]) + bonus;
-        const name = getCapitalizedString(data[0]);
+        const name = capitalizeString(data[0]);
         const dice: Dice = {
             quantity: 1,
             sides: 20,
@@ -162,7 +154,7 @@ export const ViewCharacterSheet = ({ character }) => {
                 <h2 className="text-2xl mb-2 mt-0">General</h2>
                 {Object.entries(character.general).map((data: any, i: number) => {
                     return (
-                    <div key={`${i}-general`}>{getCapitalizedString(data[0])}: <span className="font-bold">{getCapitalizedString(data[1])}</span></div>
+                    <div key={`${i}-general`}>{capitalizeString(data[0])}: <span className="font-bold">{capitalizeString(data[1])}</span></div>
                     )
                 })}
                 <Link className="font-bold block mt-2" href={`/character/edit/?id=${character.id}`}><Button text='Edit Character'></Button></Link>
@@ -198,7 +190,7 @@ export const ViewCharacterSheet = ({ character }) => {
                 <h2 className="text-2xl mb-2 mt-0">Ability Scores</h2>
                 {Object.entries(character.abilityScores).map((data: any, i: number) => {
                     return (
-                        <div className="flex justify-between" key={`${i}-ability-score`}><div onClick={() => handleAbilityScoreClick(data)}><SmallButton text={getAbilityScoreModifierString(data[1])} /></div> <span className="px-4">{getCapitalizedString(data[0])}</span> <span className="font-bold">{data[1]}</span></div>
+                        <div className="flex justify-between" key={`${i}-ability-score`}><div onClick={() => handleAbilityScoreClick(data)}><SmallButton text={getAbilityScoreModifierString(data[1])} /></div> <span className="px-4">{capitalizeString(data[0])}</span> <span className="font-bold">{data[1]}</span></div>
                     )
                 })}
                 </div>
@@ -207,7 +199,7 @@ export const ViewCharacterSheet = ({ character }) => {
                 {Object.entries(character.abilityScores).map((data: any, i: number) => {
                     let savingThrowBonus = getSavingThrowBonus(data[0]);
                     return (
-                        <div className="flex justify-between" key={`${i}-saving-throw`}><div onClick={() => handleSavingThrowClick(data, savingThrowBonus)}><SmallButton text={getAbilityScoreModifierString(data[1], savingThrowBonus)} /></div> <span className="px-4">{getCapitalizedString(data[0])}</span></div>
+                        <div className="flex justify-between" key={`${i}-saving-throw`}><div onClick={() => handleSavingThrowClick(data, savingThrowBonus)}><SmallButton text={getAbilityScoreModifierString(data[1], savingThrowBonus)} /></div> <span className="px-4">{capitalizeString(data[0])}</span></div>
                     )
                 })}
                 </div>
