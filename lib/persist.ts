@@ -35,5 +35,8 @@ export function loadPreferences() {
             return defaultCharacters;
         }
     }
-    return null;
+    return {
+        rollers: [],
+        characters: []
+    };
 }
