@@ -137,7 +137,7 @@ export const EditCharacterSheet = ({characterId}: EditCharacterSheetProps) => {
 
   return (
     <div>
-        <form className="flex flex-col justify-center align-center" onSubmit={e => { e.preventDefault(); handleSubmit(e); }}>
+        <form className="flex flex-col justify-center align-center" onSubmit={e => { e.preventDefault(); handleSubmit(); }}>
 
             <div className="flex flex-wrap gap-4 justify-center">
                 <div className="p-8 rounded-xl shadow-lg">
