@@ -288,17 +288,17 @@ export const charactersSlice = createAppSlice({
   reducers: (create) => ({
     addCharacter: create.reducer((state, action: PayloadAction<Character>) => {
       state.characters.push(action.payload);
-      // mergePreferences({
-      //   "characters": state.characters
-      // });
+      mergePreferences({
+        "characters": state.characters
+      });
     }),
     deleteCharacter: create.reducer((state, action: PayloadAction<Character>) => {
       state.characters = state.characters.filter((character) => {
         return character.id !== action.payload.id;
       });
-      // mergePreferences({
-      //   "characters": state.characters
-      // });
+      mergePreferences({
+        "characters": state.characters
+      });
     }),
     updateCharacter: create.reducer((state, action: PayloadAction<Character>) => {
       state.characters = state.characters.map((character) => {
@@ -311,9 +311,9 @@ export const charactersSlice = createAppSlice({
         }
         return character;
       });
-      // mergePreferences({
-      //   "characters": state.characters
-      // });
+      mergePreferences({
+        "characters": state.characters
+      });
     }),
   }),
   selectors: {

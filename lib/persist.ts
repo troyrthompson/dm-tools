@@ -20,20 +20,20 @@ export function mergePreferences(data: any) {
 }
 
 export function loadPreferences() {
-    return defaultCharacters;
-    // let ls: any = {};
-    // if (typeof localStorage !== 'undefined') {
-    //     try {
-    //         let appData = JSON.parse(localStorage.getItem("dnd_app_data") || "");
-    //         if (!appData) {
-    //             mergePreferences(defaultCharacters);
-    //             return defaultCharacters;
-    //         }
-    //         return appData;
-    //     } catch (e) {
-    //         mergePreferences(defaultCharacters);
-    //         return defaultCharacters;
-    //     }
-    // }
-    // return null;
+    // return defaultCharacters;
+    let ls: any = {};
+    if (typeof localStorage !== 'undefined') {
+        try {
+            let appData = JSON.parse(localStorage.getItem("dnd_app_data") || "");
+            if (!appData) {
+                mergePreferences(defaultCharacters);
+                return defaultCharacters;
+            }
+            return appData;
+        } catch (e) {
+            mergePreferences(defaultCharacters);
+            return defaultCharacters;
+        }
+    }
+    return null;
 }
