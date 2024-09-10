@@ -11,6 +11,7 @@ import {
 } from "@/lib/features/characters/charactersSlice";
 
 import type { Dice } from "@/lib/features/dice/diceSlice";
+import type { Skill, Character } from "@/lib/features/characters/charactersSlice";
 
 import getProficiencyBonus from "@/lib/utils/character/getProficiencyBonus";
 
@@ -28,13 +29,12 @@ export const Skills = () => {
     const dispatch = useAppDispatch();
 
   const characters = useAppSelector(selectCharacters);
-
-  const [applicableCharacters, setApplicableCharacters] = useState([]);
+  const [applicableCharacters, setApplicableCharacters] = useState<Array<{character: string, skill: number}>>([]);
   const [skill, setSkill] = useState('Options');
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSkill(e.target.value);
-    determineApplicableCharacters(e.target.value);
+    determineApplicableCharacters(e.target.value as Skill);
   };
 
   function camelize(str) {
@@ -43,7 +43,7 @@ export const Skills = () => {
     }).replace(/\s+/g, '');
   }
 
-  function determineApplicableCharacters(skill: string) {
+  function determineApplicableCharacters(skill: Skill) {
     const camelizedSkill = camelize(skill);
     const characterList = characters.map((character) => {
         const ability = skillListAbilities[camelizedSkill];
@@ -62,7 +62,7 @@ export const Skills = () => {
     setApplicableCharacters(characterList);
   }
 
-  function handleSkillClick(skillRollNumber) {
+  function handleSkillClick(skillRollNumber: number) {
     const dice: Dice = {
         quantity: 1,
         sides: 20,
