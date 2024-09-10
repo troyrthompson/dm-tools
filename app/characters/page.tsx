@@ -8,7 +8,7 @@ export default function CharactersPage() {
       <Characters />
       <div className="flex flex-wrap gap-2 justify-center mt-6 button">
           <Link href="/character/add">
-              <Button text="Add Character" />
+              <Button text="Add Character" color="green" />
           </Link>
       </div>
     </>
