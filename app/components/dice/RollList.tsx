@@ -50,18 +50,18 @@ export const RollList = () => {
     const outputRoll = (rolls, roll, index) => {
         if (rolls.length - 1 === index) {
             return (
-                <>
+                <div key={index}>
                     <div className="leading-none italic pt-2">{capitalizeString(roll.name)}</div>
                     <div className="leading-none text-3xl" key={index}><span className="font-bold">{roll.total}</span> : {outputQuantity(roll.quantity)}d{roll.sides} {outputModifier(roll.modifier)} {outputEachDieResult(roll.results)}</div>
-                </>
+                </div>
             )
         }
 
         return (
-            <>
+            <div key={index}>
                 <div className="leading-none italic">{capitalizeString(roll.name)}</div>
                 <div className="leading-none" key={index}><span className="font-bold">{roll.total}</span> : {outputQuantity(roll.quantity)}d{roll.sides} {outputModifier(roll.modifier)} {outputEachDieResult(roll.results)}</div>
-            </>
+            </div>
         )
     };
 
