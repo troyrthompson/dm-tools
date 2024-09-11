@@ -13,7 +13,7 @@ import { buildPassiveSensesObj } from '@/lib/utils/characterUtils';
 import { Widget } from "../elements/Widget";
 import { WidgetSelect } from "../elements/WidgetSelect";
 
-export const PassiveTracker = () => {
+export const Senses = () => {
   const characters = useAppSelector(selectCharacters);
 
   const [applicableCharacters, setApplicableCharacters] = useState<Array<string>>([]);

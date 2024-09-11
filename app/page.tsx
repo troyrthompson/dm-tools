@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Characters } from "./components/characters/Characters";
 
-import { PassiveTracker } from "./components/senses/Senses";
+import { Senses } from "./components/senses/Senses";
 import { Condition } from "./components/condition/Condition";
 import { Skills } from "./components/skills/Skills";
 import { Abilities } from "./components/abilities/Abilities";
@@ -22,7 +22,7 @@ export default function IndexPage() {
       <Skills />
     </div>
     <div className="flex flex-wrap justify-center gap-2 mt-2">
-      <PassiveTracker />
+      <Senses />
       <Condition />
       <Languages />
     </div>
