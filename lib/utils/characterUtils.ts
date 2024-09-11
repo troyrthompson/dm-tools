@@ -1,11 +1,16 @@
-import getSkillsBonus from './getSkillsBonus';
-import determineAbilityScoreModifier from './determineAbilityScoreModifier';
+export const getSkillsBonus = ((skill: string, char) => {
+    return (char.skillProficiencies.includes(skill) ? getProficiencyBonus(char.general.level) : 0);
+});
 
-// import type { Character } from ;
+export const getProficiencyBonus = ((level: number) => {
+    return Math.ceil(level / 4) + 1;
+});
 
+export const determineAbilityScoreModifier = ((score: string, bonus = 0) => {
+    return Math.floor((parseInt(score) - 10) / 2) + bonus;
+});
 
-const buildPassiveSensesObj = ((char) => {
-    console.log('char', char);
+export const buildPassiveSensesObj = ((char) => {
     const perceptionBonus = getSkillsBonus('Perception', char);
     const investigationBonus = getSkillsBonus('Investigation', char);
     const insightBonus = getSkillsBonus('Insight', char);
@@ -18,5 +23,3 @@ const buildPassiveSensesObj = ((char) => {
 
     return passiveSensesObj;
 });
-
-export default buildPassiveSensesObj;

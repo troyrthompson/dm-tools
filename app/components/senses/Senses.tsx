@@ -8,7 +8,7 @@ import {
 
 import { useAppSelector } from "@/lib/hooks";
 
-import buildPassiveSensesObj from '@/lib/utils/character/buildPassiveSenseObj';
+import { buildPassiveSensesObj } from '@/lib/utils/characterUtils';
 
 import { Widget } from "../elements/Widget";
 import { WidgetSelect } from "../elements/WidgetSelect";

@@ -7,16 +7,19 @@ import {
     selectCharacters,
     updateCharacter,
     deleteCharacter,
-    defaultCharacter,
-    classFeaturesList,
-    characterClasseList,
     getNextCharacterId,
     addCharacter
 } from "@/lib/features/characters/charactersSlice";
 
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import {
+    defaultCharacter,
+    classFeaturesList,
+    characterClasseList,
+} from "@/lib/data/characterData";
 
-import type { Character } from "@/lib/features/characters/charactersSlice";
+import type { Character } from "@/lib/types/character";
+
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 
 import { Button } from '../elements/Button';
 import { CharacterAttributeContainer } from '../elements/CharacterAttributeContainer';

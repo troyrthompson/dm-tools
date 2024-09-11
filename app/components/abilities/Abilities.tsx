@@ -6,8 +6,8 @@ import { selectCharacters } from "@/lib/features/characters/charactersSlice";
 
 import { useAppSelector, useAppDispatch } from "@/lib/hooks";
 import { recordDiceRoll, rollDice } from "@/lib/features/dice/diceSlice";
-import determineAbilityScoreModifier from "@/lib/utils/character/determineAbilityScoreModifier";
-import { abilities } from "@/lib/features/characters/charactersSlice";
+import { determineAbilityScoreModifier } from "@/lib/utils/characterUtils";
+import { abilities } from "@/lib/data/characterData";
 
 import type { Dice } from "@/lib/features/dice/diceSlice";
 

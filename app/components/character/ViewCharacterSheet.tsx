@@ -4,7 +4,11 @@ import Link from 'next/link';
 
 import { useAppDispatch } from '@/lib/hooks';
 
-import { classFeaturesList } from '@/lib/features/characters/charactersSlice';
+import { 
+    classFeaturesList,
+    skillListAbilities
+} from '@/lib/data/characterData';
+
 import { recordDiceRoll, rollDice } from '@/lib/features/dice/diceSlice';
 
 import type { Dice } from '@/lib/features/dice/diceSlice';
@@ -13,14 +17,14 @@ import { Button } from '../elements/Button';
 import { SmallButton } from '../elements/SmallButton';
 import { CharacterAttributeContainer } from '../elements/CharacterAttributeContainer';
 
-import getSkillsBonus from '@/lib/utils/character/getSkillsBonus';
-import determineAbilityScoreModifier from '@/lib/utils/character/determineAbilityScoreModifier';
-import getProficiencyBonus from '@/lib/utils/character/getProficiencyBonus';
-import buildPassiveSensesObj from '@/lib/utils/character/buildPassiveSenseObj';
+import { 
+    getSkillsBonus,
+    determineAbilityScoreModifier,
+    getProficiencyBonus,
+    buildPassiveSensesObj
+ } from '@/lib/utils/characterUtils';
+
 import capitalizeString from '@/lib/utils/capitalizeString';
-
-import { skillListAbilities } from '@/lib/features/characters/charactersSlice';
-
 
 export const ViewCharacterSheet = ({ character }) => {
     const dispatch = useAppDispatch();

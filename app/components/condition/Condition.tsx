@@ -2,7 +2,9 @@
 
 import { useAppSelector, useAppDispatch } from "@/lib/hooks";
 
-import { selectCharacters, updateCharacter,conditionsList } from "@/lib/features/characters/charactersSlice";
+import { selectCharacters, updateCharacter } from "@/lib/features/characters/charactersSlice";
+
+import { conditionsList } from "@/lib/data/characterData";
 
 import { SmallButton } from "../elements/SmallButton";
 

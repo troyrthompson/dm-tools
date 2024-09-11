@@ -4,9 +4,17 @@ import { useState } from "react";
 
 import {
   selectCharacters,
-  abilities, 
-  classFeaturesList
 } from "@/lib/features/characters/charactersSlice";
+
+import {
+  abilities, 
+  classFeaturesList,
+} from "@/lib/data/characterData";
+
+import {
+  determineAbilityScoreModifier,
+  getProficiencyBonus,
+} from "@/lib/utils/characterUtils";
 
 import { useAppSelector, useAppDispatch } from "@/lib/hooks";
 
@@ -14,8 +22,6 @@ import { recordDiceRoll, rollDice } from "@/lib/features/dice/diceSlice";
 
 import type { Dice } from "@/lib/features/dice/diceSlice";
 
-import determineAbilityScoreModifier from "@/lib/utils/character/determineAbilityScoreModifier";
-import getProficiencyBonus from "@/lib/utils/character/getProficiencyBonus";
 import capitalizeString from "@/lib/utils/capitalizeString";
 
 import { SmallButton } from "../elements/SmallButton";

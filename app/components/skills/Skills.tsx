@@ -6,18 +6,23 @@ import { useAppSelector, useAppDispatch } from "@/lib/hooks";
 
 import {
   selectCharacters,
-  skillList, 
-  skillListAbilities
 } from "@/lib/features/characters/charactersSlice";
 
-import type { Dice } from "@/lib/features/dice/diceSlice";
-import type { Skill, Character } from "@/lib/features/characters/charactersSlice";
+import {
+  skillList, 
+  skillListAbilities
+} from "@/lib/data/characterData";
 
-import getProficiencyBonus from "@/lib/utils/character/getProficiencyBonus";
+import type { Skill, Character } from "@/lib/types/character";
+
+import { 
+  getProficiencyBonus,
+  determineAbilityScoreModifier,
+} from "@/lib/utils/characterUtils";
+
+import type { Dice } from "@/lib/features/dice/diceSlice";
 
 import { recordDiceRoll, rollDice } from "@/lib/features/dice/diceSlice";
-
-import determineAbilityScoreModifier from "@/lib/utils/character/determineAbilityScoreModifier";
 
 import { SmallButton } from "../elements/SmallButton";
 
