@@ -7,13 +7,11 @@ import { useAppSelector, useAppDispatch } from "@/lib/hooks";
 import {
   selectCharacters,
 } from "@/lib/features/characters/charactersSlice";
-
 import {
   skillList, 
   skillListAbilities
 } from "@/lib/data/characterData";
-
-import type { Skill, Character } from "@/lib/types/character";
+import type { Skill } from "@/lib/types/character";
 
 import { 
   getProficiencyBonus,
@@ -25,7 +23,6 @@ import { rollDice } from "@/lib/utils/diceUtils";
 import type { Dice } from "@/lib/types/dice";
 
 import { SmallButton } from "../elements/SmallButton";
-
 import { Widget } from "../elements/Widget";
 import { WidgetSelect } from "../elements/WidgetSelect";
 
