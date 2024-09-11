@@ -35,12 +35,13 @@ export const Senses = () => {
     setSensesValue(parseInt(e.target.value));
     determineApplicableCharacters(sense, parseInt(e.target.value));
   };
+
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSense(e.target.value);
     determineApplicableCharacters(e.target.value, sensesValue);
   };
 
-  function determineApplicableCharacters(sense: string, sensesValue: number) {
+  function determineApplicableCharacters(sense: string, sensesValue: number): void {
     const applicableCharacters: Array<string> = [];
     characterPassives.forEach((character) => {
       if (character.passive[sense] >= sensesValue) {
