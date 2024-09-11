@@ -1,8 +1,11 @@
 import getSkillsBonus from './getSkillsBonus';
 import determineAbilityScoreModifier from './determineAbilityScoreModifier';
 
+// import type { Character } from ;
+
 
 const buildPassiveSensesObj = ((char) => {
+    console.log('char', char);
     const perceptionBonus = getSkillsBonus('Perception', char);
     const investigationBonus = getSkillsBonus('Investigation', char);
     const insightBonus = getSkillsBonus('Insight', char);
