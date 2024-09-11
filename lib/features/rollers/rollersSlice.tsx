@@ -1,23 +1,13 @@
 import { createAppSlice } from "@/lib/createAppSlice";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-import { Dice } from "@/lib/features/dice/diceSlice";
-
 import { mergePreferences, loadPreferences } from "@/lib/persist";
+
+import type { Roller } from "@/lib/types/rollers";
 
 export interface RollersSlice {
     rollers: Array<Roller>;
 }
-
-export type RollerType = 'button' | 'input';
-
-export type Roller = {
-    id: number,
-  name: string,
-  type: RollerType,
-  dice: Dice,
-};
-
 
 let initialState: RollersSlice = loadPreferences();
 

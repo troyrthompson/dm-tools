@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 
 import type { Dice } from "@/lib/types/dice";
 
-import type { Roller, RollerType } from "@/lib/features/rollers/rollersSlice";
+import type { Roller, RollerType } from "@/lib/types/rollers";
 
 import { InputRoller } from "../rollers/InputRoller";
 import { ButtonRoller } from "../rollers/ButtonRoller";

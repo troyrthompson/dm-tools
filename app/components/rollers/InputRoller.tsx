@@ -8,7 +8,7 @@ import { useAppDispatch } from "@/lib/hooks";
 
 import { updateRoller } from "@/lib/features/rollers/rollersSlice";
 
-import type { Roller } from "@/lib/features/rollers/rollersSlice";
+import type { Roller } from "@/lib/types/rollers";
 
 import type { Dice } from "@/lib/types/dice";
 
