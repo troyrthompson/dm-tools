@@ -1,4 +1,4 @@
-import { defaultCharacters } from "./defaultCharacters";
+import { defaultCharacters } from '@/lib/data/characterData';
 
 export function mergePreferences(data: any) {
     if (typeof localStorage !== 'undefined') {
