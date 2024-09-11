@@ -20,21 +20,26 @@ import { WidgetSelect } from "../elements/WidgetSelect";
 import capitalizeString from "@/lib/utils/capitalizeString";
 import getModifierString from "@/lib/utils/getModifierString";
 
+import type { Ability } from "@/lib/types/character";
+
+type AbilityOptons = Ability | '';
+
 export const Abilities = () => {
   const dispatch = useAppDispatch();
   const characters = useAppSelector(selectCharacters);
 
   const [applicableCharacters, setApplicableCharacters] = useState(Array<{character: string, ability: number}>);
-  const [ability, setAbility] = useState('');
+  const [ability, setAbility] = useState<AbilityOptons>('');
 
-  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setAbility(e.target.value);
-    determineApplicableCharacters(e.target.value);
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
+    const ability = e.target.value as Ability;
+    setAbility(ability);
+    determineApplicableCharacters(ability);
   };
 
-  function determineApplicableCharacters(abilityName: string) {
+  function determineApplicableCharacters(abilityName: Ability) {
     const characterList = characters.map((character) => {
-        let abilityRoll = determineAbilityScoreModifier(character.abilityScores[abilityName]);
+        let abilityRoll = determineAbilityScoreModifier(character.abilityScores[abilityName as keyof Ability]);
         return {
             character: character.general.name,
             ability: abilityRoll
