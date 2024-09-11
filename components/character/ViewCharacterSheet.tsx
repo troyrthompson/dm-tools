@@ -28,6 +28,8 @@ import {
 
 import capitalizeString from '@/lib/utils/capitalizeString';
 
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
+
 export const ViewCharacterSheet = ({ character }) => {
     const dispatch = useAppDispatch();
 
@@ -138,8 +140,16 @@ export const ViewCharacterSheet = ({ character }) => {
         <div className="flex flex-wrap gap-4 justify-center">
             <CharacterAttributeContainer title="General">
                 {Object.entries(character.general).map((data: any, i: number) => {
+                    if (data[0] === 'class') {
+                        return (
+                            <Link href={`/class/?name=${data[1]}`}>
+                                <div key={`${i}-general`}>{capitalizeString(data[0])}: <span className="font-bold">{capitalizeString(data[1])}</span></div>
+                            </Link>
+                        );
+                    }
+
                     return (
-                    <div key={`${i}-general`}>{capitalizeString(data[0])}: <span className="font-bold">{capitalizeString(data[1])}</span></div>
+                        <div key={`${i}-general`}>{capitalizeString(data[0])}: <span className="font-bold">{capitalizeString(data[1])}</span></div>
                     )
                 })}
                 <Link className="font-bold block mt-2" href={`/character/edit/?id=${character.id}`}><Button text='Edit Character'></Button></Link>
