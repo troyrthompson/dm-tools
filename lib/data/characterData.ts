@@ -160,7 +160,7 @@ export const languages: Languages = {
     orc: false,
 };
   
-export const skillListAbilities = {
+export const skillListAbilities: Record<string, Ability> = {
     acrobatics: 'dexterity',
     animalHandling: 'wisdom',
     arcana: 'intelligence',
