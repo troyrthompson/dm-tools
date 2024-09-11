@@ -5,7 +5,7 @@ import { useState } from "react";
 import { selectRollers, addRollers, updateRoller, deleteRoller, getNextRollerId, moveRoller } from "@/lib/features/rollers/rollersSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 
-import type { Dice } from "@/lib/features/dice/diceSlice";
+import type { Dice } from "@/lib/types/dice";
 
 import type { Roller, RollerType } from "@/lib/features/rollers/rollersSlice";
 
@@ -19,17 +19,19 @@ import './edit-rollers.css';
 
 let rollerId = -1;
 
+const defaultValues = {
+    type: 'input',
+    name: 'New Roller',
+    buttonText: 'Add Roller',
+    quantity: 1,
+    sides: 20,
+    modifier: 0,
+}
+
 export const Rollers = () => {
-    const defaultValues = {
-        type: 'input',
-        name: 'New Roller',
-        buttonText: 'Add Roller',
-        quantity: 1,
-        sides: 20,
-        modifier: 0,
-    }
-    const [editRoller, setEditRoller] = useState(false);
     const dispatch = useAppDispatch();
+
+    const [editRoller, setEditRoller] = useState(false);
     const rollers = useAppSelector(selectRollers);
     const [formData, setFormData] = useState(defaultValues);
     const nextRollerId = useAppSelector(getNextRollerId);
