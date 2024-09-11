@@ -22,6 +22,8 @@ import { recordDiceRoll } from "@/lib/features/dice/diceSlice";
 import { rollDice } from "@/lib/utils/diceUtils";
 import type { Dice } from "@/lib/types/dice";
 
+import type { Ability } from "@/lib/types/character";
+
 import capitalizeString from "@/lib/utils/capitalizeString";
 
 import { SmallButton } from "../elements/SmallButton";
@@ -29,21 +31,34 @@ import { SmallButton } from "../elements/SmallButton";
 import { Widget } from "../elements/Widget";
 import { WidgetSelect } from "../elements/WidgetSelect";
 
+type AbilityOption = Ability | 'Options';
+
 export const SavingThrows = () => {
   const dispatch = useAppDispatch();
   const characters = useAppSelector(selectCharacters);
 
   const [applicableCharacters, setApplicableCharacters] = useState(Array<{character: string, ability: number}>);
-  const [savingThrows, setSavingThrows] = useState('Options');
+  const [savingThrows, setSavingThrows] = useState<AbilityOption>('Options');
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSavingThrows(e.target.value);
-    determineApplicableCharacters(e.target.value);
+    const abilityName = e.target.value as Ability;
+    setSavingThrows(abilityName);
+    determineApplicableCharacters(abilityName);
   };
 
-  function determineApplicableCharacters(abilityName: string) {
+  function handleSkillClick(abilityRollNumber: number) {
+    const dice: Dice = {
+        quantity: 1,
+        sides: 20,
+        modifier: abilityRollNumber,
+        name: `${savingThrows} Saving Throw`
+    }
+    dispatch(recordDiceRoll(rollDice(dice)));
+  }
+
+  function determineApplicableCharacters(abilityName: Ability): void {
     const characterList = characters.map((character) => {
-        let abilityRoll = determineAbilityScoreModifier(character.abilityScores[abilityName]);
+        let abilityRoll = determineAbilityScoreModifier(character.abilityScores[abilityName as keyof Ability]);
         let modifier;
         classFeaturesList[character.general.class].savingThrows.includes(abilityName) ? modifier = getProficiencyBonus(character.general.level) : modifier = 0;
         
@@ -57,16 +72,6 @@ export const SavingThrows = () => {
 
     setApplicableCharacters(characterList);
   }
-
-  function handleSkillClick(abilityRollNumber) {
-    const dice: Dice = {
-        quantity: 1,
-        sides: 20,
-        modifier: abilityRollNumber,
-        name: `${savingThrows} Saving Throw`
-    }
-    dispatch(recordDiceRoll(rollDice(dice)));
-}
 
   return (
     <Widget title="Saving Throws">
