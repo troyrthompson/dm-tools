@@ -1,4 +1,4 @@
-import { AddCharacter } from "../../components/character/AddCharacter";
+import { AddCharacter } from "@/components/character/AddCharacter";
 
 export default function CharacterPage() {
   return (

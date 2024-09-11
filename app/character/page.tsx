@@ -1,4 +1,4 @@
-import { ViewCharacter } from "../components/character/ViewCharacter";
+import { ViewCharacter } from "@/components/character/ViewCharacter";
 import { Suspense } from 'react';
 
 export default function CharacterPage() {

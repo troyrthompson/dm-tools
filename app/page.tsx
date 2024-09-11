@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
-import { Characters } from "./components/characters/Characters";
+import { Characters } from "@/components/characters/Characters";
 
-import { Senses } from "./components/senses/Senses";
-import { Condition } from "./components/condition/Condition";
-import { Skills } from "./components/skills/Skills";
-import { Abilities } from "./components/abilities/Abilities";
-import { SavingThrows } from "./components/savingThrows/SavingThrows";
+import { Senses } from "@/components/senses/Senses";
+import { Condition } from "@/components/condition/Condition";
+import { Skills } from "@/components/skills/Skills";
+import { Abilities } from "@/components/abilities/Abilities";
+import { SavingThrows } from "@/components/savingThrows/SavingThrows";
 
-import { Languages } from "./components/languages/Languages";
+import { Languages } from "@/components/languages/Languages";
 
-import NoSSRWrapper from "./components/dynamicWrapper";
+import NoSSRWrapper from "@/components/dynamicWrapper";
 
 export default function IndexPage() {
   return (

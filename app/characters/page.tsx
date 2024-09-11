@@ -1,6 +1,6 @@
-import { Characters } from "../components/characters/Characters";
+import { Characters } from "@/components/characters/Characters";
 import Link from "next/link";
-import { Button } from "../components/elements/Button";
+import { Button } from "@/components/elements/Button";
 
 export default function CharactersPage() {
   return (

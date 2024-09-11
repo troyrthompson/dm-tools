@@ -1,14 +1,14 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
 import { StoreProvider } from "./StoreProvider";
-import { Nav } from "./components/Nav";
+import { Nav } from "@/components/Nav";
 
-import { RollList } from "./components/dice/RollList";
+import { RollList } from "@/components/dice/RollList";
 
 import "./styles/globals.css";
-import { Roll } from "./components/dice/Roll";
+import { Roll } from "@/components/dice/Roll";
 
-import NoSSRWrapper from "./components/dynamicWrapper";
+import NoSSRWrapper from "@/components/dynamicWrapper";
 
 interface Props {
   readonly children: ReactNode;
