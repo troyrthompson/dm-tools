@@ -26,29 +26,31 @@ import { SmallButton } from "../elements/SmallButton";
 import { Widget } from "../elements/Widget";
 import { WidgetSelect } from "../elements/WidgetSelect";
 
-export const Skills = () => {
+type SkillOption = Skill | 'Options';
 
-    const dispatch = useAppDispatch();
+export const Skills = () => {
+  const dispatch = useAppDispatch();
 
   const characters = useAppSelector(selectCharacters);
   const [applicableCharacters, setApplicableCharacters] = useState<Array<{character: string, skill: number}>>([]);
-  const [skill, setSkill] = useState('Options');
+  const [skill, setSkill] = useState<SkillOption>('Options');
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSkill(e.target.value);
-    determineApplicableCharacters(e.target.value as Skill);
+    const value = e.target.value as Skill;
+    setSkill(value);
+    determineApplicableCharacters(value);
   };
 
-  function camelize(str) {
+  function camelize(str:string): string {
     return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
       return index === 0 ? word.toLowerCase() : word.toUpperCase();
     }).replace(/\s+/g, '');
   }
 
-  function determineApplicableCharacters(skill: Skill) {
+  function determineApplicableCharacters(skill: Skill): void {
     const camelizedSkill = camelize(skill);
     const characterList = characters.map((character) => {
-        const ability = skillListAbilities[camelizedSkill];
+        const ability: string = skillListAbilities[camelizedSkill];
         let skillRoll = determineAbilityScoreModifier(character.abilityScores[ability]);
         if (character.skillProficiencies.includes(skill)) {
             skillRoll += getProficiencyBonus(character.general.level);
@@ -64,7 +66,7 @@ export const Skills = () => {
     setApplicableCharacters(characterList);
   }
 
-  function handleSkillClick(skillRollNumber: number) {
+  function handleSkillClick(skillRollNumber: number): void {
     const dice: Dice = {
         quantity: 1,
         sides: 20,
