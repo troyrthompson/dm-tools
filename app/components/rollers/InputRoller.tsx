@@ -1,6 +1,8 @@
 "use client";
 
-import { recordDiceRoll, rollDice } from "@/lib/features/dice/diceSlice";
+import { recordDiceRoll } from "@/lib/features/dice/diceSlice";
+
+import { rollDice } from "@/lib/utils/diceUtils";
 
 import { useAppDispatch } from "@/lib/hooks";
 
@@ -8,7 +10,7 @@ import { updateRoller } from "@/lib/features/rollers/rollersSlice";
 
 import type { Roller } from "@/lib/features/rollers/rollersSlice";
 
-import type { Dice } from "@/lib/features/dice/diceSlice";
+import type { Dice } from "@/lib/types/dice";
 
 import { SmallButton } from "../elements/SmallButton";
 

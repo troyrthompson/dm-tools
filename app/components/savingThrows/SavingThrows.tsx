@@ -18,9 +18,9 @@ import {
 
 import { useAppSelector, useAppDispatch } from "@/lib/hooks";
 
-import { recordDiceRoll, rollDice } from "@/lib/features/dice/diceSlice";
-
-import type { Dice } from "@/lib/features/dice/diceSlice";
+import { recordDiceRoll } from "@/lib/features/dice/diceSlice";
+import { rollDice } from "@/lib/utils/diceUtils";
+import type { Dice } from "@/lib/types/dice";
 
 import capitalizeString from "@/lib/utils/capitalizeString";
 

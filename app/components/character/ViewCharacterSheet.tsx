@@ -9,9 +9,11 @@ import {
     skillListAbilities
 } from '@/lib/data/characterData';
 
-import { recordDiceRoll, rollDice } from '@/lib/features/dice/diceSlice';
+import { recordDiceRoll } from '@/lib/features/dice/diceSlice';
 
-import type { Dice } from '@/lib/features/dice/diceSlice';
+import { rollDice } from '@/lib/utils/diceUtils';
+
+import type { Dice } from '@/lib/types/dice';
 
 import { Button } from '../elements/Button';
 import { SmallButton } from '../elements/SmallButton';

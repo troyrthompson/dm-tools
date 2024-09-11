@@ -1,6 +1,8 @@
 "use client";
 
-import { recordDiceRoll, rollDice } from "@/lib/features/dice/diceSlice";
+import { recordDiceRoll } from "@/lib/features/dice/diceSlice";
+
+import { rollDice } from "@/lib/utils/diceUtils";
 
 import { useAppDispatch } from "@/lib/hooks";
 

@@ -5,11 +5,12 @@ import { useState } from "react";
 import { selectCharacters } from "@/lib/features/characters/charactersSlice";
 
 import { useAppSelector, useAppDispatch } from "@/lib/hooks";
-import { recordDiceRoll, rollDice } from "@/lib/features/dice/diceSlice";
+import { recordDiceRoll } from "@/lib/features/dice/diceSlice";
+import { rollDice } from "@/lib/utils/diceUtils";
 import { determineAbilityScoreModifier } from "@/lib/utils/characterUtils";
 import { abilities } from "@/lib/data/characterData";
 
-import type { Dice } from "@/lib/features/dice/diceSlice";
+import type { Dice } from "@/lib/types/dice";
 
 import { SmallButton } from "../elements/SmallButton";
 
