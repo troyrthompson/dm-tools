@@ -16,6 +16,8 @@ import {
   getProficiencyBonus,
 } from "@/lib/utils/characterUtils";
 
+import getModifierString from "@/lib/utils/getModifierString";
+
 import { useAppSelector, useAppDispatch } from "@/lib/hooks";
 
 import { recordDiceRoll } from "@/lib/features/dice/diceSlice";
@@ -90,7 +92,7 @@ export const SavingThrows = () => {
           {applicableCharacters.map((character, index) => {
             return (
               <div key={index}>
-                <div><span onClick={(e) => {handleSkillClick(character.ability)}}><SmallButton text={character.ability > 0 ? `+${character.ability}` : `${character.ability}`} /></span> {character.character}</div>
+                <div><span onClick={(e) => {handleSkillClick(character.ability)}}><SmallButton text={getModifierString(character.ability)} /></span> {character.character}</div>
               </div>
             );
           })}
