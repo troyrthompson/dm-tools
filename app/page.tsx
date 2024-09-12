@@ -13,7 +13,7 @@ import { Languages } from "@/components/languages/Languages";
 
 import NoSSRWrapper from "@/components/dynamicWrapper";
 
-import { selectWidgetRows } from "@/lib/features/widgetRows/widgetRowsSlice";
+import { selectWidgets } from "@/lib/features/widgets/widgetsSlice";
 
 const componentMapping = {
   Characters,
@@ -27,18 +27,18 @@ const componentMapping = {
 
 export default function IndexPage() {
 
-  const rows = useAppSelector(selectWidgetRows);
+  const rows = useAppSelector(selectWidgets);
 
-  console.log(rows, "rows");
   return (
    <>
     <NoSSRWrapper>
+      <Characters />
     {rows.map((row, i) => {
-      console.log(row, "row")
       return (
         <div className="flex flex-wrap justify-center gap-2 mt-6">
           {row.map((component, j) => {
-            const Component = componentMapping[component];
+            const componentName = component.split("-")[0];
+            const Component = componentMapping[componentName];
             return (
               < Component />
             )
@@ -50,7 +50,3 @@ export default function IndexPage() {
    </>
   );
 }
-
-// export const metadata: Metadata = {
-//   title: "Redux Toolkit",
-// };

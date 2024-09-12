@@ -1,39 +1,32 @@
 "use client";
 
-import { Characters } from "@/components/characters/Characters";
-
 import { useAppSelector, useAppDispatch } from "@/lib/hooks";
-
-import { Senses } from "@/components/senses/Senses";
-import { Condition } from "@/components/condition/Condition";
-import { Skills } from "@/components/skills/Skills";
-import { Abilities } from "@/components/abilities/Abilities";
-import { SavingThrows } from "@/components/savingThrows/SavingThrows";
-
-import { Languages } from "@/components/languages/Languages";
 
 import NoSSRWrapper from "@/components/dynamicWrapper";
 
-import { selectWidgetRows, updateWidgetRows } from "@/lib/features/widgetRows/widgetRowsSlice";
+import { selectWidgets, updateWidgets } from "@/lib/features/widgets/widgetsSlice";
 
-import Row from "@/components/layout/row";
+import WidgetRow from "@/components/layout/widgetRow";
+
+import type { WidgetRowType } from "@/lib/features/widgets/widgetsSlice";
+
 
 export default function IndexPage() {
-  const rows = useAppSelector(selectWidgetRows);
+  const widgets = useAppSelector(selectWidgets);
 
   const dispatch = useAppDispatch();
 
   function changeHandler(data, position) {
-    let updatedRows = [...rows];
-    updatedRows[position] = data;
-    dispatch(updateWidgetRows(updatedRows));
+    const updatedWidgets: WidgetRowType = [...widgets];
+    updatedWidgets[position] = data;
+    dispatch(updateWidgets(updatedWidgets));
   }
 
   return (
     <NoSSRWrapper>
-      {rows.map((row, i) => {
+      {widgets.map((widget, i) => {
         return (
-          <Row data={row} position={i} changeHandler={changeHandler}/>
+          <WidgetRow key={i} data={widget} position={i} changeHandler={changeHandler}/>
         )
       })}
    </NoSSRWrapper>

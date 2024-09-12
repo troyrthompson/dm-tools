@@ -3,11 +3,11 @@ import { combineSlices, configureStore } from "@reduxjs/toolkit";
 import { charactersSlice } from "./features/characters/charactersSlice";
 import { diceSlice } from "./features/dice/diceSlice";
 import { rollersSlice } from "./features/rollers/rollersSlice";
-import { widgetRowsSlice } from "./features/widgetRows/widgetRowsSlice";
+import { widgetsSlice } from "./features/widgets/widgetsSlice";
 
 // `combineSlices` automatically combines the reducers using
 // their `reducerPath`s, therefore we no longer need to call `combineReducers`.
-const rootReducer = combineSlices(charactersSlice, diceSlice, rollersSlice, widgetRowsSlice);
+const rootReducer = combineSlices(charactersSlice, diceSlice, rollersSlice, widgetsSlice);
 // Infer the `RootState` type from the root reducer
 export type RootState = ReturnType<typeof rootReducer>;
 

@@ -214,6 +214,11 @@ export const defaultCharacter: Character = {
     languages: languages
 };
 
+const defaultWidgets = [
+    ["Senses", "Condition", "Languages"],
+    ["Skills", "Abilities", "SavingThrows"],
+]
+
 const characters: Array<Character> = [
     {
         id: 1,
@@ -465,5 +470,6 @@ export const defaultCharacters = {
             }
         }
     ],
-    characters: characters
+    characters: characters,
+    widgets: defaultWidgets
 };

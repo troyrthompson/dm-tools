@@ -17,7 +17,7 @@ export function SortableWidget({id, children}) {
   };
   
   return (
-    <div className="bg-white p-4" ref={setNodeRef} style={style} {...attributes} {...listeners}>
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
       {children}
     </div>
   );
