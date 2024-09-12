@@ -37,6 +37,7 @@ export function loadPreferences() {
     }
     return {
         rollers: [],
-        characters: []
+        characters: [],
+        widgets: [],
     };
 }
