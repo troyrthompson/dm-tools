@@ -28,8 +28,6 @@ import {
 
 import capitalizeString from '@/lib/utils/capitalizeString';
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
-
 export const ViewCharacterSheet = ({ character }) => {
     const dispatch = useAppDispatch();
 
