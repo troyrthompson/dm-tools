@@ -140,9 +140,9 @@ export const ViewCharacterSheet = ({ character }) => {
                 {Object.entries(character.general).map((data: any, i: number) => {
                     if (data[0] === 'class') {
                         return (
-                            <Link href={`/class/?name=${data[1]}`}>
+                            <a target="_blank" href={`https://www.dndbeyond.com/classes/${data[1]}`}>
                                 <div key={`${i}-general`}>{capitalizeString(data[0])}: <span className="font-bold">{capitalizeString(data[1])}</span></div>
-                            </Link>
+                            </a>
                         );
                     }
 
