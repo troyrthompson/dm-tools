@@ -1,8 +1,6 @@
 import { createAppSlice } from "@/lib/createAppSlice";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-import { mergePreferences, loadPreferences } from "@/lib/persist";
-
 import { defaultCharacters } from "@/lib/data/defaultData";
 
 import type { Roller } from "@/lib/types/rollers";

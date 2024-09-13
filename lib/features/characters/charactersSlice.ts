@@ -1,6 +1,5 @@
 import { createAppSlice } from "@/lib/createAppSlice";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { mergePreferences, loadPreferences } from "@/lib/persist";
 import type { Character } from "@/lib/types/character";
 
 import { defaultCharacters } from "@/lib/data/defaultData";
