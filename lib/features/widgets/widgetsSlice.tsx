@@ -19,7 +19,7 @@ export const widgetsSlice = createAppSlice({
   name: 'widgets',
   initialState,
   reducers: (create) => ({
-    updateWidgets: create.reducer((state, action: PayloadAction<WidgetRowType>) => {
+    updateWidgets: create.reducer((state, action: PayloadAction<Array<WidgetRowType>>) => {
         state.widgets = action.payload;
     },
   )}),
