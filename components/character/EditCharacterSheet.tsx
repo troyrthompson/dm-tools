@@ -131,7 +131,7 @@ export const EditCharacterSheet = ({characterId}: EditCharacterSheetProps) => {
               )
           } else {
               return (
-                  <div className="flex flex-col">
+                  <div key={i} className="flex flex-col">
                       <label htmlFor={`general${data[0]}`}>{capitalizeString(data[0])}</label>
                       <input onChange={handleChange} className="text-sm h-6 pl-1 py-1 border border-gray-300 mb-1" type={inputType} name={`general.${data[0]}`} key={`general${data[0]}`} id={`general${data[0]}`} value={data[1]} />
                   </div>
