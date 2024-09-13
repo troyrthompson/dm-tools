@@ -24,7 +24,9 @@ export const StoreProvider = ({ children }: Props) => {
       // we use debounce to save the state once each 800ms
       // for better performances in case multiple changes occur in a short time
       debounce(() => {
-        saveState(storeRef.current.getState());
+        if (storeRef.current) {
+          saveState(storeRef.current.getState());
+        }
       }, 800)
     );
   }
