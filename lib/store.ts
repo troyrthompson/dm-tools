@@ -4,6 +4,7 @@ import { charactersSlice } from "./features/characters/charactersSlice";
 import { diceSlice } from "./features/dice/diceSlice";
 import { rollersSlice } from "./features/rollers/rollersSlice";
 import { widgetsSlice } from "./features/widgets/widgetsSlice";
+import { loadState } from "./browserStorage";
 
 // `combineSlices` automatically combines the reducers using
 // their `reducerPath`s, therefore we no longer need to call `combineReducers`.
@@ -18,6 +19,7 @@ export type RootState = ReturnType<typeof rootReducer>;
 export const makeStore = () => {
   return configureStore({
     reducer: rootReducer,
+    preloadedState: loadState(),
     // Adding the api middleware enables caching, invalidation, polling,
     // and other useful features of `rtk-query`.
     // middleware: (getDefaultMiddleware) => {

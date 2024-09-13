@@ -3,13 +3,17 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 import { mergePreferences, loadPreferences } from "@/lib/persist";
 
+import { defaultCharacters } from "@/lib/data/defaultData";
+
 import type { Roller } from "@/lib/types/rollers";
 
 export interface RollersSlice {
     rollers: Array<Roller>;
 }
 
-let initialState: RollersSlice = loadPreferences();
+let initialState: RollersSlice = {
+  rollers: defaultCharacters.rollers,
+}
 
 export const rollersSlice = createAppSlice({
   name: 'roller',
@@ -17,9 +21,6 @@ export const rollersSlice = createAppSlice({
   reducers: (create) => ({
     addRollers: create.reducer((state, action: PayloadAction<Roller>) => {
         state.rollers.push(action.payload);
-        mergePreferences({
-          "rollers": state.rollers
-        });
     }),
     updateRoller: create.reducer((state, action: PayloadAction<Roller>) => {
         state.rollers = state.rollers.map((roller) => {
@@ -32,9 +33,6 @@ export const rollersSlice = createAppSlice({
           }
           return roller;
         });
-        mergePreferences({
-          "rollers": state.rollers
-        });
       }),
       moveRoller: create.reducer((state, action: PayloadAction<{ fromIndex: number; toIndex: number }>) => {
         const newRollers = [...state.rollers];
@@ -42,16 +40,10 @@ export const rollersSlice = createAppSlice({
         newRollers.splice(action.payload.fromIndex, 1);
         newRollers.splice(action.payload.toIndex, 0, roller);
         state.rollers = newRollers;
-        mergePreferences({
-          "rollers": state.rollers
-        });
       }),
       deleteRoller: create.reducer((state, action: PayloadAction<Roller>) => {
         state.rollers = state.rollers.filter((roller) => {
           return roller.id !== action.payload.id;
-        });
-        mergePreferences({
-          "rollers": state.rollers
         });
       }),
   }),

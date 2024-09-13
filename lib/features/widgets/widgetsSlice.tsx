@@ -1,9 +1,11 @@
 import { createAppSlice } from "@/lib/createAppSlice";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-import { mergePreferences, loadPreferences } from "@/lib/persist";
+import { defaultCharacters } from "@/lib/data/defaultData";
 
-const initialState = loadPreferences();
+const initialState = {
+  widgets: defaultCharacters.widgets,
+};
 
 export type Widget = 'Senses' |'Condition' | 'Languages' | 'Skills' | 'Abilities' | 'SavingThrows';
 
@@ -19,9 +21,6 @@ export const widgetsSlice = createAppSlice({
   reducers: (create) => ({
     updateWidgets: create.reducer((state, action: PayloadAction<WidgetRowType>) => {
         state.widgets = action.payload;
-        mergePreferences({
-          "widgets": state.widgets
-        });
     },
   )}),
   selectors: {

@@ -3,11 +3,15 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { mergePreferences, loadPreferences } from "@/lib/persist";
 import type { Character } from "@/lib/types/character";
 
+import { defaultCharacters } from "@/lib/data/defaultData";
+
 export interface CharactersSlice {
   characters: Array<Character>;
 }
 
-const initialState: CharactersSlice = loadPreferences();
+const initialState: CharactersSlice = {
+  characters: defaultCharacters.characters,
+};
   
 export const charactersSlice = createAppSlice({
   name: 'characters',
@@ -15,16 +19,10 @@ export const charactersSlice = createAppSlice({
   reducers: (create) => ({
     addCharacter: create.reducer((state, action: PayloadAction<Character>) => {
       state.characters.push(action.payload);
-      mergePreferences({
-        "characters": state.characters
-      });
     }),
     deleteCharacter: create.reducer((state, action: PayloadAction<Character>) => {
       state.characters = state.characters.filter((character) => {
         return character.id !== action.payload.id;
-      });
-      mergePreferences({
-        "characters": state.characters
       });
     }),
     updateCharacter: create.reducer((state, action: PayloadAction<Character>) => {
@@ -37,9 +35,6 @@ export const charactersSlice = createAppSlice({
           return updatedCharacter;
         }
         return character;
-      });
-      mergePreferences({
-        "characters": state.characters
       });
     }),
   }),
