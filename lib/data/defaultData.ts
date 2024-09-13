@@ -1,6 +1,8 @@
 import type { Character } from "@/lib/types/character";
 import { conditionsList } from "./characterData";
 
+import type { Roller } from "../types/rollers";
+
 const defaultWidgets = [
     ["Senses", "Condition", "Languages"],
     ["Skills", "Abilities", "SavingThrows"],
@@ -184,80 +186,82 @@ const characters: Array<Character> = [
     }
 ];
 
+const defaultRollers: Array<Roller> = [
+    {
+        id: 0,
+        name: 'input1',
+        type: 'input',
+        dice: {
+            quantity: 1,
+            sides: 20,
+            modifier: 0
+        }
+    },
+    {
+        id: 1,
+        name: 'd20',
+        type: 'button',
+        dice: {
+            quantity: 1,
+            sides: 20,
+            modifier: 0
+        }
+    },
+    {
+        id: 2,
+        name: 'd12',
+        type: 'button',
+        dice: {
+            quantity: 1,
+            sides: 12,
+            modifier: 0
+        }
+    },
+    {
+        id: 3,
+        name: 'd10',
+        type: 'button',
+        dice: {
+            quantity: 1,
+            sides: 10,
+            modifier: 0
+        }
+    },
+    {
+        id: 4,
+        name: 'd8',
+        type: 'button',
+        dice: {
+            quantity: 1,
+            sides: 8,
+            modifier: 0
+        }
+    },
+    {
+        id: 5,
+        name: 'd6',
+        type: 'button',
+        dice: {
+            quantity: 1,
+            sides: 6,
+            modifier: 0
+        }
+    },
+    {
+        id: 6,
+        name: 'd4',
+        type: 'button',
+        dice: {
+            quantity: 1,
+            sides: 4,
+            modifier: 0
+        }
+    }
+];
+
 
 export const defaultCharacters = {
-    rollers: [
-        {
-            id: 0,
-            name: 'input1',
-            type: 'input',
-            dice: {
-                quantity: 1,
-                sides: 20,
-                modifier: 0
-            }
-        },
-        {
-            id: 1,
-            name: 'd20',
-            type: 'button',
-            dice: {
-                quantity: 1,
-                sides: 20,
-                modifier: 0
-            }
-        },
-        {
-            id: 2,
-            name: 'd12',
-            type: 'button',
-            dice: {
-                quantity: 1,
-                sides: 12,
-                modifier: 0
-            }
-        },
-        {
-            id: 3,
-            name: 'd10',
-            type: 'button',
-            dice: {
-                quantity: 1,
-                sides: 10,
-                modifier: 0
-            }
-        },
-        {
-            id: 4,
-            name: 'd8',
-            type: 'button',
-            dice: {
-                quantity: 1,
-                sides: 8,
-                modifier: 0
-            }
-        },
-        {
-            id: 5,
-            name: 'd6',
-            type: 'button',
-            dice: {
-                quantity: 1,
-                sides: 6,
-                modifier: 0
-            }
-        },
-        {
-            id: 6,
-            name: 'd4',
-            type: 'button',
-            dice: {
-                quantity: 1,
-                sides: 4,
-                modifier: 0
-            }
-        }
-    ],
+    rollers: defaultRollers,
     characters: characters,
     widgets: defaultWidgets
 };
